@@ -23,5 +23,13 @@ body {
      padding:20px;
      margin-left: 60px;
   }
+  .btn{
+     
+      margin-top: 10px;
+  }
 
- 
+  .modal-close{
+    color:white;
+  }
+  
+  
