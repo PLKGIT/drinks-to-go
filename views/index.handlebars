@@ -1,33 +1,85 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+<div class="container">
+  {{!-- <nav class = "nav-extended">
+    <div class="nav-wrapper">
+      <div class="brand-logo center">Coffee Express</a>
+      </div>
+      </div>
+      </nav> --}}
+
+  <div class="row">
+    <div class="col-8 offset-2">
+      <h1>{{msg}}</h1>
+      <h2>To Coffee Express!!</h2>
+      <h5>Please Login to Order</h5>
+    </div>
+    <div class="login">
+      <div class="row">
+
+        <div class="col s5">
+          <div class="card white">
+            <div class="card-content black-text">
+              <span class="card-title">Login for returning Customers</span>
+              <div class="input-field">
+                <input id="email" type="email" class="validate">
+                <label for="email">Enter your Email</label>
+              </div>
+
+              <button class="btn brown waves-effect" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+              </button>
+
+              <div id="new-customer">
+                <!-- Modal Trigger -->
+                <button data-target="modal1" class="btn brown modal-trigger">New Customer Sign Up</button>
+
+
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal">
+                  <div class="modal-content">
+                    <h4>New Customer Sign Up</h4>
+                    <div class="input-field">
+                      <input id="name" type="text" class="validate">
+                      <label for="name">Name</label>
+                    </div>
+                    <div class="input-field">
+                      <input id="email" type="email" class="validate">
+                      <label for="email">Enter your Email</label>
+                    </div>
+
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <a href="#!" class="modal-close brown waves-effect btn-flat">submit</a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
+        </div>
+
+        <div class="col s5">
+          <div class="card white">
+            <div class="card-content black-text">
+              <span class="card-title">Login for Guest </span>
+              <div class="input-field">
+                <input id="name" type="text" class="validate">
+                <label for="name">Name</label>
+              </div>
+
+              <button class="btn brown waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
           </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
+        </div>
+
       </div>
     </div>
   </div>
-</div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="/js/index.js"></script>

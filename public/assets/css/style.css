@@ -1,0 +1,35 @@
+body { 
+    background: url("../img/smile.jpg") no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+   
+  }
+
+  h1,h2{
+      
+      color:white;
+      text-align: center;
+      font-family: 'Lobster', cursive;
+      font-weight: bolder;
+  }
+
+  h5{
+      color:black;
+      text-align: center;
+      font-family: 'Lobster', cursive;
+  }
+  .login{
+     padding:20px;
+     margin-left: 60px;
+  }
+  .btn{
+     
+      margin-top: 10px;
+  }
+
+  .modal-close{
+    color:white;
+  }
+  
+  
