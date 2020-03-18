@@ -1,21 +1,24 @@
 {
   "development": {
-    "username": "root",
-    "password": "root",
-    "database": "drinkstogo_db",
-    "host": "localhost",
+    "username": "vchsywlhov3dgzlf",
+    "password": "yj0zfow54kjz66rt",
+    "database": "bbk0phd05y8qzfwo",
+    "host": "qbhol6k6vexd5qjs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "root",
-    "database": "testdb",
-    "host": "localhost",
+    "username": "vchsywlhov3dgzlf",
+    "password": "yj0zfow54kjz66rt",
+    "database": "bbk0phd05y8qzfwo",
+    "host": "qbhol6k6vexd5qjs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql",
     "logging": false
   },
   "production": {
-    "use_env_variable": "JAWSDB_URL",
+    "username": "vchsywlhov3dgzlf",
+    "password": "yj0zfow54kjz66rt",
+    "database": "bbk0phd05y8qzfwo",
+    "host": "qbhol6k6vexd5qjs.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }

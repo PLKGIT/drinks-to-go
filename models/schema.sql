@@ -53,7 +53,7 @@ CREATE TABLE orderItems (
 );
 
 
-/* Spotify Request Queue*/
+/* Song Request Queue*/
 
 CREATE TABLE songs (
     sid INT NOT NULL AUTO_INCREMENT,
