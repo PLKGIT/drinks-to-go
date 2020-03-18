@@ -1,5 +1,5 @@
 // ******************************************************************************************************
-//drinks_controller.js [Controllers]
+// drinks_controller.js [Controllers]
 // ******************************************************************************************************
 
 var express = require("express");
@@ -12,14 +12,12 @@ router.get("/", function (req, res) {
     var customerObj = {
       customers: data
     };
-    console.log(customerObj);
-    console.log("---Data---");
-    console.log(data);
-    console.log("------");
+    // console.log(customerObj);
+    // console.log("---Data---");
+    // console.log(data);
+    // console.log("------");
     res.render("index", {customers:data});
   });
 
 });
-
-
 module.exports = router;

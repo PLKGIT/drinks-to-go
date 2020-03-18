@@ -3,33 +3,30 @@ body {
     background-size: cover;
     height: 100%;
     overflow: hidden;
-   
-  }
+}
 
-  h1,h2{
-      
+h1, h2 {
       color:white;
       text-align: center;
       font-family: 'Lobster', cursive;
       font-weight: bolder;
-  }
+}
 
-  h5{
-      color:black;
+h5 {
+      color:white;
       text-align: center;
       font-family: 'Lobster', cursive;
-  }
-  .login{
+}
+
+.login {
      padding:20px;
      margin-left: 60px;
-  }
-  .btn{
-     
-      margin-top: 10px;
-  }
+}
 
-  .modal-close{
+.btn {
+      margin-top: 10px;
+}
+
+.modal-close{
     color:white;
-  }
-  
-  
+}
