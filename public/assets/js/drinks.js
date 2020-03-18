@@ -3,12 +3,15 @@
 // ******************************************************************************************************
 
 // Global Variables
-// ***********************************************
+// ------------------------------------------
+// ------------------------------------------
 
-// Form
+// Form Variables
+// ------------------------------------------
 var errCheck = false;
 
-// User Data
+// User and Order Variables
+// ------------------------------------------
 var custName;
 var custEmail;
 var custID;
@@ -16,8 +19,32 @@ var orderId;
 var orderName;
 var orderDate;
 
+// Cart Variables
+// ------------------------------------------
+var cartArray=[];
+var itemCounter=0;
+// Include contents of orderId in Cart Array
+var itemProdId=1;
+var itemStatus="pending";
+var itemPrice=0;
+var itemSize;
+var itemNo=1;
+var itemQty=1;
+
+// Song Variables
+// ------------------------------------------
+var songArray=[];
+var songName;
+var songUrl;
+var songStatus="pending";
+var songArtist;
+// Include contents of custId in Song Array
+
+
 // Logic
-// ***********************************************
+// ------------------------------------------
+// ------------------------------------------
+// ------------------------------------------
 
 $( document ).ready(function() {
 
@@ -132,18 +159,25 @@ $( document ).ready(function() {
     
 // Order Login in menu.handlebars
 // ------------------------------------------
+// ------------------------------------------
 
-// Name of Code Block
+// Add to Cart from Order History or Menu
 // ------------------------------------------
 // Completed: 03/__/2020 by: _____
 // Tested: 03/__/2020 by: _____
 // ------------------------------------------
 
+// Can this be done by populating data in a form?  Need to think about the UI
+// Push data to cartArray
+// Display array contents on div
+// Submit takes you to submit order page
+
 
 // Submit Order Logic in checkout.handlebars
 // ------------------------------------------
+// ------------------------------------------
 
-// Name of Code Block
+// Review and Submit Order
 // ------------------------------------------
 // Completed: 03/__/2020 by: _____
 // Tested: 03/__/2020 by: _____
@@ -152,8 +186,9 @@ $( document ).ready(function() {
 
 // Spotify Logic in checkout.handlebars
 // ------------------------------------------
+// ------------------------------------------
 
-// Name of Code Block
+// Select and Store Data from Spotify
 // ------------------------------------------
 // Completed: 03/__/2020 by: _____
 // Tested: 03/__/2020 by: _____
@@ -161,6 +196,7 @@ $( document ).ready(function() {
 
 
 // Employee Logic in employee.handlebars
+// ------------------------------------------
 // ------------------------------------------
 
 // Name of Code Block
