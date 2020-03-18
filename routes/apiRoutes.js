@@ -65,14 +65,14 @@ module.exports = function (app) {
       });
   });
 
-  app.post("/api/song", function (req, res) {
+  app.post("/api/songs", function (req, res) {
     db.Song.create(req.body).then(function (data) {
       res.json(data);
     });
   });
 
 
-  app.put("/api/spotify", function (req, res) {
+  app.put("/api/song", function (req, res) {
     db.Spotify.update(req.body,
       {
         where: {
