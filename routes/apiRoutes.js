@@ -29,11 +29,9 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/api/song", function (req, res) {
+  app.get("/api/songs", function (req, res) {
     db.Song.findAll({}).then(function (data) {
       res.json(data);
-      console.log("---Spotify Should Be Here----");
-      console.log(data);
     });
   });
 
