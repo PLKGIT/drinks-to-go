@@ -1,10 +1,11 @@
 /* Customers */
-INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `email`) VALUES ('Guest', 'guest@drinkstogo.com');
-INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `email`) VALUES ('Pam', 'esq.kelly@gmail.com');
-INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `email`) VALUES ('Sonal', 'sonalp13@gmail.com');
-INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `email`) VALUES ('Hebah', 'hebah.memon@gmail.com');
-INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `email`) VALUES ('Nida', 'nidasmemon@gmail.com');
-INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `email`) VALUES ('Jyochsna', 'jyochsnagongal@gmail.com');
+INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `cust_email`) VALUES ('Guest', 'guest@drinkstogo.com');
+INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `cust_email`) VALUES ('Store', 'store@drinkstogo.com');
+INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `cust_email`) VALUES ('Sonal', 'sonalp13@gmail.com');
+INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `cust_email`) VALUES ('Hebah', 'hebah.memon@gmail.com');
+INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `cust_email`) VALUES ('Nida', 'nidasmemon@gmail.com');
+INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `cust_email`) VALUES ('Jyochsna', 'jyochsnagongal@gmail.com');
+INSERT INTO `drinkstogo_db`.`customers` (`cust_name`, `cust_email`) VALUES ('Pam', 'esq.kelly@gmail.com');
 
 /* Products */
 INSERT INTO `drinkstogo_db`.`products` (`prod_name`, `type`, `temp`, `size`, `price`) VALUES ('Iced Coffee', 'Coffee', 'Cold','Small','2.65');

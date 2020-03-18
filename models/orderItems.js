@@ -26,7 +26,7 @@ module.exports = function (sequelize, Sequelize) {
       allowNull: false
     },
     size: {
-      type: Sequelize.STRING(5),
+      type: Sequelize.STRING(10),
       allowNull: false
     },
     item_no: {

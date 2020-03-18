@@ -10,11 +10,19 @@ module.exports = function (sequelize, Sequelize) {
       autoIncrement: true,
       allowNull: false
     },
+    cid: {
+      type: Sequelize.INTEGER(11),
+      allowNull: false
+    },
     song_name: {
       type: Sequelize.STRING(255),
       allowNull: false
     },
     song_url: {
+      type: Sequelize.STRING(255),
+      allowNull: false
+    },
+    artist: {
       type: Sequelize.STRING(255),
       allowNull: false
     },
