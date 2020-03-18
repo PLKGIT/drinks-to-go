@@ -3,20 +3,54 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+    db.Customer.findAll({}).then(function(data) {
       res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
+        customer: data
       });
+      console.log(data);
     });
   });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.render("example", {
-        example: dbExample
+  app.get("/menu", function(req, res) {
+    db.Product.findAll({}).then(function(data) {
+      res.render("menu", {
+        product: data,
+        order: data,
+        orderitem
       });
+      console.log(data);
+    });
+  });
+
+
+  app.get("/checkout", function(req, res) {
+    db.Order.findAll({}).then(function(data) {
+      res.render("checkout", {
+        order: data
+      });
+      console.log(data);
+    });
+  });
+
+  app.get("/status", function(req, res) {
+    db.OrderItem.findAll({}).then(function(data) {
+      res.render("status", {
+        order: data,
+        orderitem: data,
+        song: data
+      });
+      console.log(data);
+    });
+  });
+
+  app.get("/employee", function(req, res) {
+    db.Spotify.findAll({}).then(function(data) {
+      res.render("employee", {
+        order: data,
+        orderitem: data,
+        song: data
+      });
+      console.log(data);
     });
   });
 
