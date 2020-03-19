@@ -1,8 +1,8 @@
 body { 
-    background: url("../img/smile.jpg") no-repeat center center fixed;
+    background: url("../img/smile.jpg") no-repeat center fixed;
     background-size: cover;
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 h1, h2 {
