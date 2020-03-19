@@ -48,6 +48,9 @@ var songArtist;
 
 $( document ).ready(function() {
 
+// Logic for index.handlebars Modal
+    $('.modal').modal();
+
 // User Login in index.handlebars
 // ------------------------------------------
 // ------------------------------------------
@@ -136,6 +139,10 @@ $( document ).ready(function() {
 // ------------------------------------------
     // Form, on submit
         // Validate form
+            // Make sure the name input is not blank
+                // If error, set errCheck = true
+            // Make sure the name input does not include numbers
+                // If error, set errCheck = true
             // Make sure the email address is not blank
                 // If error, set errCheck = true
             // Make sure the email address is in a valid format
