@@ -1,8 +1,25 @@
+* {
+      box-sizing: border-box;
+}
+
 body { 
-    background: url("../img/smile.jpg") no-repeat center fixed;
+    background: url("../img/coffeebackground.png") no-repeat fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    height: 100%;
-    /* overflow: hidden; */
+    color: rgb(58, 37, 37);
+}
+
+.footer-copyright {
+      padding: 10px;
+      text-align: center;
+}
+
+#index {
+      background: url("../img/smile.jpg") no-repeat center fixed;
+      background-size: cover;
+      padding: 20px 20px 80px 20px;
 }
 
 h1, h2 {
