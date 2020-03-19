@@ -72,7 +72,7 @@ module.exports = function (app) {
   });
 
 
-  app.put("/api/song", function (req, res) {
+  app.put("/api/songs", function (req, res) {
     db.Spotify.update(req.body,
       {
         where: {

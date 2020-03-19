@@ -1,10 +1,180 @@
 <!-- Menu / Order Page -->
 <div class="container">
-
+    <div class="row">
+        <div class="col s12">
+            <div class="card white">
+                <div class="card-content black-text">
+                    <span class="card-title">Welcome!</span>
+                    <div id="profile">
+                        <p>Name</p>
+                        <p>Email Address</p>
+                    </div>
+                    <br>
+                    <p>User should be able to edit their name, but not email address.</p>
+                    <p>Data pulled from Customers table with cid. Plus icons add items to Cart Array and display array
+                        items
+                        in a table in the Cart div below. Clear icons remove items from Cart Array and refresh cart.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col s6">
+            <div class="card white">
+                <div class="card-content black-text">
+                    <span class="card-title">Order History</span>
+                    <div id="history">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Product</th>
+                                    <th>Size</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>03/14/2020</td>
+                                    <td>Mocha</td>
+                                    <td>Small</td>
+                                    <td>3.25</td>
+                                    <td>1</td>
+                                    <td><i class="small material-icons">add_box</i></td>
+                                </tr>
+                                <tr>
+                                    <td>03/15/2020</td>
+                                    <td>Mocha</td>
+                                    <td>Small</td>
+                                    <td>3.25</td>
+                                    <td>1</td>
+                                    <td><i class="small material-icons">add_box</i></td>
+                                </tr>
+                                <tr>
+                                    <td>03/16/2020</td>
+                                    <td>Mocha</td>
+                                    <td>Large</td>
+                                    <td>4.00</td>
+                                    <td>1</td>
+                                    <td><i class="small material-icons">add_box</i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <p>Data pulled from Orders, OrderItems, and Product tables based on (cid)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col s6">
+            <div class="card white">
+                <div class="card-content black-text">
+                    <span class="card-title">Menu</span>
+                    <div id="menu">
+
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Size</th>
+                                    <th>Price</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Mocha</td>
+                                    <td>Small</td>
+                                    <td>3.25</td>
+                                    <td><i class="small material-icons">add_box</i></td>
+                                </tr>
+                                <tr>
+                                    <td>Mocha</td>
+                                    <td>Large</td>
+                                    <td>4.00</td>
+                                    <td><i class="small material-icons">add_box</i></td>
+                                </tr>
+                                <tr>
+                                    <td>Hot Chocolate</td>
+                                    <td>Small</td>
+                                    <td>2.00</td>
+                                    <td><i class="small material-icons">add_box</i></td>
+                                </tr>
+                                <tr>
+                                    <td>Hot Chocolate</td>
+                                    <td>Large</td>
+                                    <td>2.30</td>
+                                    <td><i class="small material-icons">add_box</i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <p>Data pulled from Products table (pid)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <div class="card white">
+                <div class="card-content black-text">
+                    <span class="card-title">Cart</span>
+                    <div id="cart">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Product</th>
+                                    <th>Size</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mocha</td>
+                                    <td>Small</td>
+                                    <td>3.25</td>
+                                    <td>1</td>
+                                    <td><i class="small material-icons">clear</i></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Mocha</td>
+                                    <td>large</td>
+                                    <td>4.00</td>
+                                    <td>1</td>
+                                    <td><i class="small material-icons">clear</i></td>
+                                </tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <p><a class="brown darken-4 btn-small">Submit Order <i
+                                class="material-icons right">add_shopping_cart</i></a></p>
+
+                    <p>Data pulled from Cart Array. If nothing in array, display "Please Add to Cart"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container"></div>
 <!-- jQuery JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- System JavaScript -->
-<script src="/js/index.js"></script>
 <!-- Team JavaScript -->
 <script src="/assets/js/drinks.js"></script>

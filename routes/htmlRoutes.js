@@ -1,57 +1,56 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Load index page
   app.get("/", function(req, res) {
-    db.Customer.findAll({}).then(function(data) {
-      res.render("index", {
-        customer: data
-      });
-      console.log(data);
-    });
+    res.render("index");
+    // db.Customer.findAll({}).then(function(data) {
+    //   res.render("index", {
+    //     // customers: data
+    //   });
+    // });
   });
 
   app.get("/menu", function(req, res) {
-    db.Product.findAll({}).then(function(data) {
-      res.render("menu", {
-        product: data,
-        order: data,
-        orderitem
-      });
-      console.log(data);
-    });
+    res.render("menu");
+    // db.Product.findAll({}).then(function(data) {
+      // res.render("menu", {
+      //   products: data,
+      //   orders: data,
+      //   orderitems:data
+      // });
+    // });
   });
 
 
   app.get("/checkout", function(req, res) {
-    db.Order.findAll({}).then(function(data) {
-      res.render("checkout", {
-        order: data
-      });
-      console.log(data);
-    });
+    res.render("checkout");
+    // db.Order.findAll({}).then(function(data) {
+      // res.render("checkout", {
+      //   order: data
+      // });
+    // });
   });
 
   app.get("/status", function(req, res) {
-    db.OrderItem.findAll({}).then(function(data) {
-      res.render("status", {
-        order: data,
-        orderitem: data,
-        song: data
-      });
-      console.log(data);
-    });
+    res.render("status");
+    // db.OrderItem.findAll({}).then(function(data) {
+      // res.render("status", {
+      //   orders: data,
+      //   orderitems: data,
+      //   song: data
+      // });
+    // });
   });
 
   app.get("/employee", function(req, res) {
-    db.Spotify.findAll({}).then(function(data) {
-      res.render("employee", {
-        order: data,
-        orderitem: data,
-        song: data
-      });
-      console.log(data);
-    });
+    res.render("employee");
+    // db.Song.findAll({}).then(function(data) {
+      // res.render("employee", {
+      //   orders: data,
+      //   orderitems: data,
+      //   song: data
+      // });
+    // });
   });
 
   // Render 404 page for any unmatched routes
