@@ -3,12 +3,12 @@
 }
 
 body { 
-    background: url("../img/coffeebackground.png") no-repeat fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: rgb(58, 37, 37);
+      background: url("../img/coffeebackground.png") no-repeat fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      color: rgb(58, 37, 37);
 }
 
 .footer-copyright {
@@ -29,21 +29,76 @@ h1, h2 {
       font-weight: bolder;
 }
 
+h3 {
+      color:  rgb(105, 60, 60);
+      font-family: 'Lobster', cursive;
+}
+
+h4 {
+      font-family: 'Roboto', sans-serif;
+}
+
 h5 {
       color:white;
       text-align: center;
       font-family: 'Lobster', cursive;
 }
 
+h6 {
+      color: rgb(105, 60, 60);
+      font-family: 'Lobster', cursive;
+      font-size: 2em;
+}
+
 .login {
-     padding:20px;
-     margin-left: 60px;
+      padding:20px;
+      margin-left: 60px;
 }
 
 .btn {
       margin-top: 10px;
 }
 
+.btn:hover {
+      background: rgb(58, 37, 37);
+}
+  
+.btn:focus {
+      background: #a3aeba;
+}
+
+#checkout {
+      width: 100%;
+}
+
+.back-btn {
+      float: left;
+      top: 50px;
+      left: 50px;
+}
+
 .modal-close{
-    color:white;
+      color:white;
+}
+
+.input-field input[type=text]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
+      color:  rgb(58, 37, 37) !important;
+}
+   
+.input-field input[type=text]:focus, .materialize-textarea:focus:not([readonly]) {
+      border-bottom: 1px solid  rgb(58, 37, 37) !important;
+      box-shadow: 0 1px 0 0  rgb(58, 37, 37) !important;
+}
+  
+.input-field input[type=text] + label, .materialize-textarea:not([readonly]) + label {
+      color: rgb(116, 85, 85) !important;
+}
+  
+.input-field input[type=text], .materialize-textarea:not([readonly]) {
+      border-bottom: 1px solid rgb(116, 85, 85) !important;
+      box-shadow: 0 1px 0 0 rgb(116, 85, 85) #2B2B2B !important;
+}
+
+.music .materialize-textarea:not([readonly]) {
+      color: rgb(58, 37, 37) !important;
 }
