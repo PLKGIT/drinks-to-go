@@ -1,31 +1,65 @@
 <!-- Checkout Page -->
-<div class="container">
+<div class="container" id="checkout">
 
-
-</div>
-
-
-<!-- Modal Trigger -->
-<button data-target="orderConfirm" class="btn brown modal-trigger">Thank you!</button>
-<!--_________________-->
-
-<!-- Modal Structure -->
-<div id="orderConfirm" class="modal">
-    <div class="modal-content">
-        <h4>Thank you for your order!</h4>
-        
+    <!-- Back button -->
+    <div class="row">
+        <a class="btn brown waves-effect back-btn" href="../index.html"><i class="material-icons">arrow_back</i></a>
     </div>
-    <div class="modal-footer">
-    <hr>
-    Coffee Express!
+    <!--_____________-->
+
+    <!-- Order Total -->
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <div class="row">
+                <h3 class="center-align">Your order includes: <span id="itemsOrdered">Drink 1</span></h3>
+                <h3 class="center-align">Your total is: $<span id="total">4.99</span></h3>
+            </div>
+        </div>
     </div>
-</div>
+    <!--_____________-->
+
+    <!-- Request a song -->
+    <div class="row request">
+        <div class="row center-align">
+            <h6>Request a song</h6>
+        </div>
+        <div class="input-field col s6 offset-s3">
+            <i class="material-icons prefix">audiotrack</i>
+            <input id="icon_prefix" type="text" class="validate">
+            <label class="active" for="icon_prefix">Song Name</label>
+        </div>
+    </div>
+    <!--_________________-->
+
+    <!-- Modal Trigger -->
+    <div class="center-align">
+        <button data-target="orderConfirm" class="btn brown waves-effect waves-light modal-trigger">Submit
+            <i class="material-icons right">send</i>
+        </button>
+    </div>
+    <!--_________________-->
+
+
+
+    {{!-- <button data-target="orderConfirm" class="btn brown modal-trigger">Thank you!</button> --}}
+
+
+    <!-- Modal Structure -->
+    <div id="orderConfirm" class="modal">
+        <div class="modal-content center-align">
+            <h4>Thank you for your order!</h4>
+            <h4>Your order # is: <span id="orderNum"></span></h4>
+        </div>
+        <div class="modal-footer">
+            <hr>
+            Coffee Express!
+        </div>
+    </div>
+    <!--_________________-->
 
 </div>
-</div>
-</div>
-</div>
-<!--_________________-->
+
+
 <!-- jQuery JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Team JavaScript -->
