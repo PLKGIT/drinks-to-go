@@ -5,7 +5,7 @@
 var express = require("express");
 var router = express.Router();
 var db = require("../models");
-
+//var customers = require("../models/customers.js");
 router.get("/", function (req, res) {
 
   db.Customer.findAll({}).then(function (data) {
@@ -18,6 +18,8 @@ router.get("/", function (req, res) {
     // console.log("------");
     res.render("index", {customers:data});
   });
+})
 
-});
+  
+
 module.exports = router;
