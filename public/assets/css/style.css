@@ -12,14 +12,24 @@ body {
 }
 
 .footer-copyright {
-      padding: 10px;
+      position: absolute;
+      bottom: 0;
+      height: 45px;
       text-align: center;
+      width: 100%;
+      /* background-color: #BFA396; */
+     
+   
+      padding-top:10px;
+      text-align: center;
+      /* border-top: 5px solid #00970C; */
 }
 
 #index {
       background: url("../img/smile.jpg") no-repeat center fixed;
       background-size: cover;
-      padding: 20px 20px 80px 20px;
+      padding: 20px 20px 400px 20px;
+     
 }
 
 h1, h2 {
