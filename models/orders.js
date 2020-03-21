@@ -1,7 +1,7 @@
 // ******************************************************************************************************
 // orders.js [Orders Table Model]
 // ******************************************************************************************************
-
+"use strict";
 module.exports = function (sequelize, Sequelize) {
   var Order = sequelize.define("Order", {
     oid: {
@@ -24,5 +24,9 @@ module.exports = function (sequelize, Sequelize) {
       allowNull: false
     }
   }, { timestamps: false });
+
+  Order.associate = function (db) {
+    db.Order.hasMany(db.OrderItem, {foreignKey:'oid'});
+  };
   return Order;
 };
