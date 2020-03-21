@@ -1,6 +1,12 @@
-<!-- Employee Page -->
-<div class="container">
+<h3>Hi Team 2</h3>
 
+<div class="container">
+    <ul>
+        {{#each customers}}
+        <li>{{this.cid}} {{this.cust_name}} {{this.cust_email}}
+        </li>
+        {{/each}}
+    </ul>
 </div>
 <!-- jQuery JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

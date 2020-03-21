@@ -153,7 +153,7 @@ $(document).ready(function() {
   //     $("#guestName").val("");
 
   // })
-  
+
   // Validate form
   $(document).on("click", "#newSubmit", function(event) {
     event.preventDefault();
@@ -177,10 +177,9 @@ $(document).ready(function() {
     //var regEx = /\\S+@\\S+/;
     var regEx = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
 
- 
     var validEmail = regEx.test(newEmail);
     if (!validEmail) {
-        alert("invalid email")
+      alert("invalid email");
       //errCheck = true;
     }
 
@@ -227,30 +226,28 @@ $(document).ready(function() {
   // Store cid from database in custID variable
   // CALL Customer Login logic above after new Account creation
 
-      // Orders in menu.handlebars
-    // ------------------------------------------
-    // ------------------------------------------
-    custName = "Sonal";
-    custID = 3;
+  // Orders in menu.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+  custName = "Sonal";
+  custID = 3;
 
-    function getHistory() {
-        $.get("/api/orders" + custID, function (data) {
-            console.log("Orders", data);
-            ordersArray = data;
-        }).then(function (data) {
-
-        var profile = $("#profile");
-        profile.text("");
-        var content = $("<h2>");
-        content.append(
-            $(custName),
-            $("</h2>")
-        );
-        profile.append(content);
-        });
-    };
-
-    getHistory();
+  function getHistory() {
+    $.get("/api/orders/" + custID, function(data) {
+      ordersArray = data;
+    }).then(function(data) {
+      console.log(data);
+      var profile = $("#profile");
+      profile.text("");
+      var content = $("<h3>");
+      content.text(custName);
+      profile.append(content);
+      console.log(content);
+    });
+  }
+  // getHistory();
 
   // Add to Cart from Order History or Menu
   // ------------------------------------------
