@@ -12,7 +12,7 @@ USE drinkstogo_db;
 CREATE TABLE customers (
     cid INT NOT NULL AUTO_INCREMENT,
     cust_name VARCHAR(50) NOT NULL,
-    cust_email VARCHAR(50) NOT NULL UNIQUE,
+    -- cust_email VARCHAR(50) NOT NULL UNIQUE,
     PRIMARY KEY (cid)
 );
 
