@@ -30,7 +30,6 @@ h1, h2 {
 }
 
 h3 {
-      color:  rgb(105, 60, 60);
       font-family: 'Lobster', cursive;
 }
 
@@ -45,8 +44,11 @@ h5 {
 }
 
 h6 {
-      color: rgb(105, 60, 60);
       font-family: 'Lobster', cursive;
+      font-size: 2em;
+}
+
+p {
       font-size: 2em;
 }
 
@@ -81,20 +83,44 @@ h6 {
       color:white;
 }
 
-.input-field input[type=text]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
+.music, .input-field input[type=text]:focus + label, .input-field input[type=email]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
       color:  rgb(58, 37, 37) !important;
 }
    
-.input-field input[type=text]:focus, .materialize-textarea:focus:not([readonly]) {
+.input-field input[type=text]:focus, .input-field input[type=email]:focus, .materialize-textarea:focus:not([readonly]) {
       border-bottom: 1px solid  rgb(58, 37, 37) !important;
       box-shadow: 0 1px 0 0  rgb(58, 37, 37) !important;
 }
   
-.input-field input[type=text] + label, .materialize-textarea:not([readonly]) + label {
+.music, .input-field input[type=text], .input-field input[type=email] + label, .materialize-textarea:not([readonly]) + label {
       color: rgb(116, 85, 85) !important;
 }
   
-.input-field input[type=text], .materialize-textarea:not([readonly]) {
+.input-field input[type=text], .input-field input[type=email], .materialize-textarea:not([readonly]) {
       border-bottom: 1px solid rgb(116, 85, 85) !important;
       box-shadow: 0 1px 0 0 rgb(116, 85, 85) #2B2B2B !important;
+}
+
+.section {
+      border: 1px solid rgb(58, 37, 37);
+}
+
+.row1 {
+      margin-top: 10px;
+}
+
+.row2 {
+      display: -webkit-flex;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+}
+
+.drkBrn {
+      color: rgb(58, 37, 37)
+}
+
+#songButton {
+      right: -105%;
+      bottom: 50px; 
 }
