@@ -6,14 +6,10 @@
                 <div class="card-content black-text">
                     <span class="card-title">Welcome!</span>
                     <div id="profile">
-                        <p>Name</p>
-                        <p>Email Address</p>
+
                     </div>
                     <br>
                     <p>User should be able to edit their name, but not email address.</p>
-                    <p>Data pulled from Customers table with cid. Plus icons add items to Cart Array and display array
-                        items
-                        in a table in the Cart div below. Clear icons remove items from Cart Array and refresh cart.</p>
                 </div>
             </div>
         </div>
@@ -26,48 +22,10 @@
                 <div class="card-content black-text">
                     <span class="card-title">Order History</span>
                     <div id="history">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Product</th>
-                                    <th>Size</th>
-                                    <th>Price</th>
-                                    <th>Qty</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>03/14/2020</td>
-                                    <td>Mocha</td>
-                                    <td>Small</td>
-                                    <td>3.25</td>
-                                    <td>1</td>
-                                    <td><i class="small material-icons">add_box</i></td>
-                                </tr>
-                                <tr>
-                                    <td>03/15/2020</td>
-                                    <td>Mocha</td>
-                                    <td>Small</td>
-                                    <td>3.25</td>
-                                    <td>1</td>
-                                    <td><i class="small material-icons">add_box</i></td>
-                                </tr>
-                                <tr>
-                                    <td>03/16/2020</td>
-                                    <td>Mocha</td>
-                                    <td>Large</td>
-                                    <td>4.00</td>
-                                    <td>1</td>
-                                    <td><i class="small material-icons">add_box</i></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        {{#each drinks}}
+                        {{> drinks/drinks-history}}
+                        {{/each}}
                     </div>
-                    <br>
-                    <p>Data pulled from Orders, OrderItems, and Product tables based on (cid)</p>
                 </div>
             </div>
         </div>
