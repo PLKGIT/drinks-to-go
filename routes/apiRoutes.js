@@ -1,5 +1,11 @@
 var db = require("../models");
+require("dotenv").config();
 
+var Spotify = require('node-spotify-api');
+
+var keys = require("./../keys.js")
+
+var spotify = new Spotify(keys.spotify);
 module.exports = function(app) {
   app.get("/api/customers", function(req, res) {
     db.Customer.findAll({}).then(function(data) {
@@ -91,4 +97,49 @@ module.exports = function(app) {
       res.json(data);
     });
   });
+
+  app.post("/api/spotify", function(req, res) {
+    console.log("req.body from POST is below");
+    var song = req.body.spotifyThis;
+    console.log(song);
+    
+    spotify.search({ type: 'track', query: song }, function (err, data){
+      res.json(data);
+    })
+    
+    // res.json(req.body);
+  });
+  // app.get("/api/spotify", function(req, res) {
+  //   console.log("req.body from GET is below");
+  //   console.log(res);
+  //   res.json(req.body);
+  // });
 };
+// function runSpotify(song) {
+//   // console.log("Song: " + song)
+//   spotify.search({ type: 'track', query: song }, function (err, data) {
+//       if (err) {
+//           return console.log('Error occurred: ' + err);
+//       }
+//       // console.log(JSON.stringify(data, null, 2));
+//       for (var i = 0; i < data.tracks.items.length; i++) {
+//           console.log("------------------------------------------------------------")
+//           console.log("Artist: " + data.tracks.items[i].album.artists[0].name)
+//           console.log("Song: " + data.tracks.items[i].name)
+//           console.log("Link: " + data.tracks.items[i].external_urls.spotify)
+//           console.log("Album: " + data.tracks.items[i].album.name)
+//           console.log("------------------------------------------------------------")
+//           var text="\nArtist: " + data.tracks.items[i].album.artists[0].name+"\nSong: " + data.tracks.items[i].name+"\nLink: " + 
+//           data.tracks.items[i].external_urls.spotify+"\nAlbum: " + data.tracks.items[i].album.name+"\n-------------------------------------------------------------------";
+//           // fs.appendFile("log.txt", text, function (error) {
+//           //     if (error) {
+//           //         console.log(error)
+//           //     }
+//           //     // else {
+//           //     //     console.log("Content Added")
+//           //     // }
+//           // })
+//       }
+//       return data;
+//   });
+// }

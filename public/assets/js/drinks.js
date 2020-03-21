@@ -39,7 +39,18 @@ var songUrl;
 var songStatus = "pending";
 var songArtist;
 // Include contents of custId in Song Array
-
+$(".modal-trigger").on("click", function(event) {
+  event.preventDefault();
+  var songToSearch = $("#icon_prefix").val();
+  var song = { spotifyThis: songToSearch };
+  console.log("songToSearch is " + songToSearch);
+  $.post("/api/spotify", song, function(data) {
+    console.log("data is below");
+    console.log("----------------------------")
+    console.log(data);
+    console.log("----------------------------")
+  });
+});
 // Logic
 // ------------------------------------------
 // ------------------------------------------
