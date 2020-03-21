@@ -1,5 +1,7 @@
 * {
       box-sizing: border-box;
+      margin:0;
+      padding:0;
 }
 
 body { 
@@ -12,8 +14,9 @@ body {
 }
 
 .footer-copyright {
-      position: absolute;
+      position: relative;
       bottom: 0;
+      left:0;
       height: 45px;
       text-align: center;
       width: 100%;
@@ -22,6 +25,8 @@ body {
    
       padding-top:10px;
       text-align: center;
+      margin-top:-10px;
+      clear: both;
       /* border-top: 5px solid #00970C; */
 }
 
