@@ -1,7 +1,7 @@
 // ******************************************************************************************************
 // orderitems.js [OrderItems Table Model]
 // ******************************************************************************************************
-
+'use strict';
 module.exports = function (sequelize, Sequelize) {
   var OrderItem = sequelize.define("OrderItem", {
     id: {
@@ -15,6 +15,10 @@ module.exports = function (sequelize, Sequelize) {
     },
     pid: {
       type: Sequelize.INTEGER(11),
+      allowNull: false
+    },
+    prod_name: {
+      type: Sequelize.STRING(50),
       allowNull: false
     },
     status: {
@@ -38,5 +42,12 @@ module.exports = function (sequelize, Sequelize) {
       allowNull: false
     }
   }, { timestamps: false });
+
+  OrderItem.associate = function (db) {
+    db.OrderItem.belongsTo(db.Order, {
+      foreignKey: "oid",
+      onDelete: "CASCADE"
+    });
+  };
   return OrderItem;
 };
