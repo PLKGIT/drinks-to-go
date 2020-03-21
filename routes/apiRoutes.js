@@ -1,5 +1,9 @@
 var db = require("../models");
+<<<<<<< HEAD
 require("dotenv").config();
+=======
+// var sequelize = require('sequelize');
+>>>>>>> master
 
 var Spotify = require('node-spotify-api');
 
@@ -21,18 +25,23 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/orders", function(req, res) {
-    db.Order.findAll({}).then(function(data) {
-      res.json(data);
-      console.log(data);
+  app.get("/api/orders/:cid", function (req, res) {
+    db.Order.findAll({
+      where: {
+        cid: req.params.cid
+      },
+      include: db.OrderItem
+    }).then(function (dbOrder) {
+      res.json(dbOrder);
+      console.log(dbOrder);
     });
   });
 
   app.get("/api/orderitems", function(req, res) {
     db.OrderItem.findAll({}).then(function(data) {
       res.json(data);
-      console.log(data);
     });
+
   });
 
   app.get("/api/songs", function(req, res) {
@@ -97,6 +106,7 @@ module.exports = function(app) {
       res.json(data);
     });
   });
+<<<<<<< HEAD
 
   app.post("/api/spotify", function(req, res) {
     console.log("req.body from POST is below");
@@ -143,3 +153,6 @@ module.exports = function(app) {
 //       return data;
 //   });
 // }
+=======
+};
+>>>>>>> master
