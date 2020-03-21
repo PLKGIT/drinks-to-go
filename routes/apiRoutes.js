@@ -51,6 +51,7 @@ module.exports = function(app) {
       // render back to index with handle
       console.log(dbCustomer);
       res.json(dbCustomer);
+    
     });
   });
 

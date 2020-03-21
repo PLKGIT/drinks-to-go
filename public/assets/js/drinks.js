@@ -59,7 +59,7 @@ $(document).ready(function() {
   // Completed: 03/__/2020 by: _____
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
-  // Form, on submit
+ // Form, on submit
   // Validate form
   // Make sure the name input is not blank
   // If error, set errCheck = true
@@ -196,12 +196,15 @@ $(document).ready(function() {
         .val()
         .trim()
     };
-    $.post("api/customers", newCustomer).then(function(data) {
-      console.log(data);
-    });
+    $.post("api/customers", newCustomer).then(function(req,res) {
+    //  console.log(data);
 
-    $("#newName").val("");
-    $("#newEmail").val("");
+      console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
+      // $("#newName").val("");
+      // $("#newEmail").val("");
+    window.location.replace("/menu")
+    });
+    
   });
   // Make sure the name input is not blank
   // If error, set errCheck = true
