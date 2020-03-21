@@ -6,10 +6,7 @@
                 <div class="card-content black-text">
                     <span class="card-title">Welcome!</span>
                     <div id="profile">
-
                     </div>
-                    <br>
-                    <p>User should be able to edit their name, but not email address.</p>
                 </div>
             </div>
         </div>
@@ -22,9 +19,33 @@
                 <div class="card-content black-text">
                     <span class="card-title">Order History</span>
                     <div id="history">
-                        {{#each drinks}}
-                        {{> drinks/drinks-history}}
-                        {{/each}}
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Item</th>
+                                    <th>Description</th>
+                                    <th>Type</th>
+                                    <th>Size</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each OrderItems}}
+                                <tr>
+                                    <td>{{prod_name}}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><i class="small material-icons">add_box</i></td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -134,5 +155,7 @@
 <div class="container"></div>
 <!-- jQuery JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Materialize JavaScript-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <!-- Team JavaScript -->
 <script src="/assets/js/drinks.js"></script>
