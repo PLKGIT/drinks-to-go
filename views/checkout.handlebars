@@ -3,7 +3,7 @@
 
     <!-- Back button -->
     <div class="row">
-        <a class="btn brown waves-effect back-btn" href="/"><i class="material-icons">arrow_back</i></a>
+        <a class="btn brown darken-4 waves-effect back-btn" href="/"><i class="material-icons">arrow_back</i></a>
     </div>
     <!--_____________-->
 
@@ -11,8 +11,9 @@
     <div class="row">
         <div class="col s6 offset-s3">
             <div class="row">
-                <h3 class="center-align brown-text">Your order includes: <span id="itemsOrdered">Drink 1</span></h3>
-                <h3 class="center-align brown-text">Your total is: $<span id="total">4.99</span></h3>
+                <h3 class="center-align text-brown darken-4">Your order includes: <span id="itemsOrdered">Drink 1</span>
+                </h3>
+                <h3 class="center-align text-brown darken-4">Your total is: $<span id="total">4.99</span></h3>
             </div>
         </div>
     </div>
@@ -21,27 +22,30 @@
     <!-- Request a song -->
     <div class="row request">
         <div class="row center-align">
-            <h6 class="brown-text">Request a song</h6>
+            <h6 class="text-brown darken-4">Request a song</h6>
         </div>
         <div class="input-field col s6 offset-s3">
-            <i class="material-icons prefix">audiotrack</i>
+            <i class="material-icons music prefix text-brown darken-4">audiotrack</i>
             <input id="icon_prefix" type="text" class="validate">
             <label class="active" for="icon_prefix">Song Name</label>
+            <button data-target="requestSong" class="btn brown darken-4 waves-effect waves-light modal-trigger"
+                id="songButton">Search Song
+                <i class="material-icons right">audiotrack</i>
+            </button>
         </div>
     </div>
+
+
     <!--_________________-->
 
     <!-- Modal Trigger -->
     <div class="center-align">
-        <button data-target="orderConfirm" class="btn brown waves-effect waves-light modal-trigger">Submit
+        <button data-target="orderConfirm" class="btn brown darken-4 waves-effect waves-light modal-trigger">Submit
             <i class="material-icons right">send</i>
         </button>
     </div>
     <!--_________________-->
 
-
-
-    {{!-- <button data-target="orderConfirm" class="btn brown modal-trigger">Thank you!</button> --}}
 
 
     <!-- Modal Structure -->
@@ -52,7 +56,7 @@
         </div>
         <div class="modal-footer">
             <hr>
-            Coffee Express!
+            <p class="center-align">Coffee Express!</p>
         </div>
     </div>
     <!--_________________-->
