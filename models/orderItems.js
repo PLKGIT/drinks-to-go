@@ -13,6 +13,10 @@ module.exports = function (sequelize, Sequelize) {
       type: Sequelize.INTEGER(11),
       allowNull: false
     },
+    cid: {
+      type: Sequelize.INTEGER(11),
+      allowNull: false
+    },
     pid: {
       type: Sequelize.INTEGER(11),
       allowNull: false

@@ -250,7 +250,7 @@ $(document).ready(function() {
       console.log(content);
     });
   }
-  // getHistory();
+  getHistory();
 
   // Add to Cart from Order History or Menu
   // ------------------------------------------
