@@ -1,4 +1,5 @@
 var db = require("../models");
+// var sequelize = require('sequelize');
 
 module.exports = function(app) {
   app.get("/api/customers", function(req, res) {
@@ -15,18 +16,23 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/orders", function(req, res) {
-    db.Order.findAll({}).then(function(data) {
-      res.json(data);
-      console.log(data);
+  app.get("/api/orders/:cid", function (req, res) {
+    db.Order.findAll({
+      where: {
+        cid: req.params.cid
+      },
+      include: db.OrderItem
+    }).then(function (dbOrder) {
+      res.json(dbOrder);
+      console.log(dbOrder);
     });
   });
 
   app.get("/api/orderitems", function(req, res) {
     db.OrderItem.findAll({}).then(function(data) {
       res.json(data);
-      console.log(data);
     });
+
   });
 
   app.get("/api/songs", function(req, res) {

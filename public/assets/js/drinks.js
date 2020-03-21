@@ -15,6 +15,7 @@ var errCheck = false;
 var custName;
 var custEmail;
 var custID;
+var ordersArray = [];
 var orderId;
 var orderName;
 var orderDate;
@@ -226,9 +227,30 @@ $(document).ready(function() {
   // Store cid from database in custID variable
   // CALL Customer Login logic above after new Account creation
 
-  // Order Login in menu.handlebars
-  // ------------------------------------------
-  // ------------------------------------------
+      // Orders in menu.handlebars
+    // ------------------------------------------
+    // ------------------------------------------
+    custName = "Sonal";
+    custID = 3;
+
+    function getHistory() {
+        $.get("/api/orders" + custID, function (data) {
+            console.log("Orders", data);
+            ordersArray = data;
+        }).then(function (data) {
+
+        var profile = $("#profile");
+        profile.text("");
+        var content = $("<h2>");
+        content.append(
+            $(custName),
+            $("</h2>")
+        );
+        profile.append(content);
+        });
+    };
+
+    getHistory();
 
   // Add to Cart from Order History or Menu
   // ------------------------------------------
