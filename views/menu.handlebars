@@ -22,8 +22,7 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Order #</th>
-                                    <th>Item</th>
+                                    <th>No.</th>
                                     <th>Description</th>
                                     <th>Type</th>
                                     <th>Size</th>
@@ -33,14 +32,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{#each OrderItems}}
+                                {{#each history}}
                                 <tr>
-                                    <td>{{prod_name}}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{this.order}}</td>
+                                    <td>{{this.description}}</td>
+                                    <td>{{this.size}}</td>
+                                    <td>{{this.price}}</td>
+                                    <td>{{this.qty}}</td>
                                     <td><i class="small material-icons">add_box</i></td>
                                 </tr>
                                 {{/each}}

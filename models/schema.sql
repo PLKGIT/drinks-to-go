@@ -43,6 +43,7 @@ CREATE TABLE orders (
 CREATE TABLE orderItems (
     id INT NOT NULL AUTO_INCREMENT,
     oid INT NOT NULL,
+	cid INT NOT NULL,
     pid INT NOT NULL,
     prod_name VARCHAR(50) NOT NULL,
     item_no INT NOT NULL,

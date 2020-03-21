@@ -1,15 +1,15 @@
 var db = require("../models");
 
-module.exports = function(app) {
-  app.get("/", function(req, res) {
+module.exports = function (app) {
+  app.get("/", function (req, res) {
     res.render("index");
   });
 
-  app.get("/customers", function(req, res) {
+  app.get("/customers", function (req, res) {
     // console.log("---This is Get Request---");
-    db.Customer.findAll({}).then(function(data) {
+    db.Customer.findAll({}).then(function (data) {
       console.log("---This is Customers Database---");
-      console.log(data[0].dataValues);
+      // console.log(data.dataValues);
       var listCustomers = {
         customers: data[0]
       };
@@ -20,46 +20,48 @@ module.exports = function(app) {
   });
 
   app.get("/menu", function(req, res) {
-    db.Order.findAll({
+    var orderHistory = {
+      history: []
+    }
+    db.OrderItem.findAll({
       where: {
         cid: 3
-      },
-      include: [db.OrderItem]
-    }).then(function(dbOrder) {
-      for (var i = 0; i < dbOrder.length; i += 1) {
-        for (var j = 0; j < dbOrder[i].OrderItems.length; j++) {
-          var currentOrder = {
-            order: dbOrder[i].dataValues.OrderItems[j].oid,
-            item: dbOrder[i].dataValues.OrderItems[j].item_no,
-            description: dbOrder[i].dataValues.OrderItems[j].prod_name,
-            size: dbOrder[i].dataValues.OrderItems[j].size,
-            price: dbOrder[i].dataValues.OrderItems[j].price,
-            qty: dbOrder[i].dataValues.OrderItems[j].qty
-          };
-          orderHistory.history.push(currentOrder);
-        }
       }
-      console.log("---Show Me the Money---");
-      console.log(orderHistory);
+    }).then(function(data) {
+      // console.log("--Console Logging Data---")
+      // console.log(data[0]);
+      for (var j = 0; j < data.length; j++) {
+        var currentOrder = {
+          order: data[j].dataValues.oid,
+          item: data[j].dataValues.item_no,
+          description: data[j].dataValues.prod_name,
+          size: data[j].dataValues.size,
+          price: data[j].dataValues.price,
+          qty: data[j].dataValues.qty
+        };
+        console.log(data[j].dataValues);
+        orderHistory.history.push(currentOrder);
+      };
       res.render("menu", orderHistory);
+      console.log("--Console Logging OrderHistory---")
+      console.log(orderHistory);
     });
   });
 
-  app.get("/checkout", function(req, res) {
+  app.get("/checkout", function (req, res) {
     res.render("checkout");
   });
 
-  app.get("/status", function(req, res) {
+  app.get("/status", function (req, res) {
     res.render("status");
   });
 
-  app.get("/employee", function(req, res) {
+  app.get("/employee", function (req, res) {
     res.render("employee");
   });
 
-
   // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.render("404");
   });
 };
