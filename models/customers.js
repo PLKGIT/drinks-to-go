@@ -1,7 +1,7 @@
 // ******************************************************************************************************
 // customers.js [Customers Table Model]
 // ******************************************************************************************************
-'use strict';
+
 module.exports = function(sequelize, Sequelize) {
   var Customer = sequelize.define("Customer", {
     cid: {
@@ -19,9 +19,5 @@ module.exports = function(sequelize, Sequelize) {
       allowNull: false
     }
   }, { timestamps: false });
-
-  // Customer.associate = function (models) {
-  //   models.Customer.hasMany(models.Order, {foreignKey:'cid'});
-  // };
   return Customer;
 };

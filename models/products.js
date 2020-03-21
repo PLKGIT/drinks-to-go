@@ -1,7 +1,7 @@
 // ******************************************************************************************************
 // products.js [Products Table Model]
 // ******************************************************************************************************
-'use strict';
+
 module.exports = function (sequelize, Sequelize) {
   var Product = sequelize.define("Product", {
     pid: {
@@ -31,6 +31,5 @@ module.exports = function (sequelize, Sequelize) {
       allowNull: false
     }
   }, { timestamps: false });
-
   return Product;
 };
