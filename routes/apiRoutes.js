@@ -1,9 +1,5 @@
 var db = require("../models");
-<<<<<<< HEAD
 require("dotenv").config();
-=======
-// var sequelize = require('sequelize');
->>>>>>> master
 
 var Spotify = require('node-spotify-api');
 
@@ -25,23 +21,18 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/orders/:cid", function (req, res) {
-    db.Order.findAll({
-      where: {
-        cid: req.params.cid
-      },
-      include: db.OrderItem
-    }).then(function (dbOrder) {
-      res.json(dbOrder);
-      console.log(dbOrder);
+  app.get("/api/orders", function(req, res) {
+    db.Order.findAll({}).then(function(data) {
+      res.json(data);
+      console.log(data);
     });
   });
 
   app.get("/api/orderitems", function(req, res) {
     db.OrderItem.findAll({}).then(function(data) {
       res.json(data);
+      console.log(data);
     });
-
   });
 
   app.get("/api/songs", function(req, res) {
@@ -106,53 +97,13 @@ module.exports = function(app) {
       res.json(data);
     });
   });
-<<<<<<< HEAD
 
   app.post("/api/spotify", function(req, res) {
     console.log("req.body from POST is below");
     var song = req.body.spotifyThis;
     console.log(song);
-    
-    spotify.search({ type: 'track', query: song }, function (err, data){
+    spotify.search({ type: "track", query: song }, function(err, data) {
       res.json(data);
-    })
-    
-    // res.json(req.body);
+    });
   });
-  // app.get("/api/spotify", function(req, res) {
-  //   console.log("req.body from GET is below");
-  //   console.log(res);
-  //   res.json(req.body);
-  // });
 };
-// function runSpotify(song) {
-//   // console.log("Song: " + song)
-//   spotify.search({ type: 'track', query: song }, function (err, data) {
-//       if (err) {
-//           return console.log('Error occurred: ' + err);
-//       }
-//       // console.log(JSON.stringify(data, null, 2));
-//       for (var i = 0; i < data.tracks.items.length; i++) {
-//           console.log("------------------------------------------------------------")
-//           console.log("Artist: " + data.tracks.items[i].album.artists[0].name)
-//           console.log("Song: " + data.tracks.items[i].name)
-//           console.log("Link: " + data.tracks.items[i].external_urls.spotify)
-//           console.log("Album: " + data.tracks.items[i].album.name)
-//           console.log("------------------------------------------------------------")
-//           var text="\nArtist: " + data.tracks.items[i].album.artists[0].name+"\nSong: " + data.tracks.items[i].name+"\nLink: " + 
-//           data.tracks.items[i].external_urls.spotify+"\nAlbum: " + data.tracks.items[i].album.name+"\n-------------------------------------------------------------------";
-//           // fs.appendFile("log.txt", text, function (error) {
-//           //     if (error) {
-//           //         console.log(error)
-//           //     }
-//           //     // else {
-//           //     //     console.log("Content Added")
-//           //     // }
-//           // })
-//       }
-//       return data;
-//   });
-// }
-=======
-};
->>>>>>> master
