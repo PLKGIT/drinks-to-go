@@ -1,17 +1,14 @@
 C:.
 ├───config
-├───controllers
 ├───models
 ├───node_modules (minus directory structure)
 ├───public
-│   ├───assets
-│   │   ├───css
-│   │   ├───img
-│   │   └───js
-│   ├───js
-│   └───styles
+│   └───assets
+│       ├───css
+│       ├───img
+│       └───js
 ├───routes
-├───test
 └───views
     ├───layouts
     └───partials
+        └───drinks

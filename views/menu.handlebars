@@ -4,7 +4,6 @@
         <div class="col s12">
             <div class="card white">
                 <div class="card-content black-text">
-                    <span class="card-title">Welcome!</span>
                     <div id="profile">
                     </div>
                 </div>
@@ -19,12 +18,11 @@
                 <div class="card-content black-text">
                     <span class="card-title">Order History</span>
                     <div id="history">
-                        <table>
+                        <table class="responsive-table">
                             <thead>
                                 <tr>
                                     <th>No.</th>
                                     <th>Description</th>
-                                    <th>Type</th>
                                     <th>Size</th>
                                     <th>Price</th>
                                     <th>Qty</th>
@@ -37,9 +35,9 @@
                                     <td>{{this.order}}</td>
                                     <td>{{this.description}}</td>
                                     <td>{{this.size}}</td>
-                                    <td>{{this.price}}</td>
-                                    <td>{{this.qty}}</td>
-                                    <td><i class="small material-icons">add_box</i></td>
+                                    <td class="right-align">{{this.price}}</td>
+                                    <td class="center-align">{{this.qty}}</td>
+                                    <td class="right-align"><i class="small material-icons">add_box</i></td>
                                 </tr>
                                 {{/each}}
                             </tbody>
@@ -53,48 +51,31 @@
                 <div class="card-content black-text">
                     <span class="card-title">Menu</span>
                     <div id="menu">
-
-
                         <table>
                             <thead>
                                 <tr>
                                     <th>Product</th>
                                     <th>Size</th>
+                                    <th></th>
                                     <th>Price</th>
                                     <th></th>
                                 </tr>
                             </thead>
 
                             <tbody>
+                                {{#each products}}
                                 <tr>
-                                    <td>Mocha</td>
-                                    <td>Small</td>
-                                    <td>3.25</td>
+                                    <td>{{this.product_name}}</td>
+                                    <td>{{this.size}}</td>
+                                    <td class="right-align">{{this.price}}</td>
+                                    <td>{{this.type}}</td>
+                                    <td>{{this.temp}}</td>
                                     <td><i class="small material-icons">add_box</i></td>
                                 </tr>
-                                <tr>
-                                    <td>Mocha</td>
-                                    <td>Large</td>
-                                    <td>4.00</td>
-                                    <td><i class="small material-icons">add_box</i></td>
-                                </tr>
-                                <tr>
-                                    <td>Hot Chocolate</td>
-                                    <td>Small</td>
-                                    <td>2.00</td>
-                                    <td><i class="small material-icons">add_box</i></td>
-                                </tr>
-                                <tr>
-                                    <td>Hot Chocolate</td>
-                                    <td>Large</td>
-                                    <td>2.30</td>
-                                    <td><i class="small material-icons">add_box</i></td>
-                                </tr>
+                                {{/each}}
                             </tbody>
                         </table>
                     </div>
-                    <br>
-                    <p>Data pulled from Products table (pid)</p>
                 </div>
             </div>
         </div>
