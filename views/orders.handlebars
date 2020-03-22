@@ -4,8 +4,10 @@
             <div class="card white">
                 <div class="card-content">
                     <div>
-                    <h3>Coffee Express</h3>
-                    <span><a href="./employee"><h5 class="black-text darken-4 right-align">Employees</h5></a></span>
+                        <h3>Coffee Express</h3>
+                        <span><a href="./employee">
+                                <h5 class="black-text darken-4 right-align">Employees</h5>
+                            </a></span>
                     </div>
                 </div>
             </div>
@@ -18,22 +20,30 @@
         <div class="col s12">
             <div class="card white">
                 <div class="card-content black-text">
-                    <span class="card-title">Customers</span>
+                    <span class="card-title">Orders</span>
                     <div id="customers">
                         <table class="responsive-table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
+                                    <th>Order</th>
+                                    <th>Customer</th>
+                                    <th>Item</th>
+                                    <th>Description</th>
+                                    <th>Size</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{#each customer}}
+                                {{#each orders}}
                                 <tr>
-                                    <td>{{this.cid}}</td>
-                                    <td>{{this.name}}</td>
-                                    <td>{{this.email}}</td>
+                                    <td>{{this.order}}</td>
+                                    <td>{{this.customer}}</td>
+                                    <td>{{this.item}}</td>
+                                    <td>{{this.description}}</td>
+                                    <td>{{this.size}}</td>
+                                    <td>{{this.price}}</td>
+                                    <td>{{this.qty}}</td>
                                 </tr>
                                 {{/each}}
                             </tbody>

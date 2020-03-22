@@ -19,9 +19,5 @@ module.exports = function(sequelize, Sequelize) {
       allowNull: false
     }
   }, { timestamps: false });
-
-  // Customer.associate = function (models) {
-  //   models.Customer.hasMany(models.Order, {foreignKey:'cid'});
-  // };
   return Customer;
 };
