@@ -7,7 +7,10 @@ module.exports = function (app) {
     res.render("index");
   });
 
-  // Customers HTML Route
+  app.get("/splitscreen", function (req, res) {
+    res.render("splitScreen");
+  });
+
   app.get("/customers", function (req, res) {
     var customerList = {
       customer: []

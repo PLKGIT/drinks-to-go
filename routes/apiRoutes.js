@@ -1,4 +1,8 @@
 var db = require("../models");
+// var sequelize = require('sequelize');
+var Spotify = require('node-spotify-api');
+var keys = require("../keys.js")
+var spotify = new Spotify(keys.spotify);
 
 module.exports = function (app) {
 
@@ -83,6 +87,7 @@ module.exports = function (app) {
       res.json(data);
     });
   });
+
   // Songs API Put Route
   app.put("/api/songs", function (req, res) {
     db.Spotify.update(req.body, {
@@ -90,6 +95,15 @@ module.exports = function (app) {
         id: req.body.id
       }
     }).then(function (data) {
+      res.json(data);
+    });
+  });
+
+  app.post("/api/spotify", function(req, res) {
+    console.log("req.body from POST is below");
+    var song = req.body.spotifyThis;
+    console.log(song);
+    spotify.search({ type: "track", query: song }, function(err, data) {
       res.json(data);
     });
   });
