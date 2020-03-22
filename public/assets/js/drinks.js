@@ -34,7 +34,7 @@ var itemNo;
 var itemProdId;
 var itemProdName
 var itemStatus = "pending";
-var itemPrice = 0;
+var itemPrice;
 var itemSize;
 var itemQty = 1;
 
@@ -200,69 +200,88 @@ $(document).ready(function () {
   // }
   // getHistory();
 
-  $(".atc").on("click", function (event) {
+  $('.atc').unbind('click').click(function() {
     event.preventDefault();
 
-    // Increment Item Counter by 1
-    itemCounter++;
-
-    // Test Parameters
-    orderId = 6;
-    custId = 7;
-    orderName = "Pam Test"
-
-    // Set Customer-specific variables with existing variables
-    itemOrderId = orderId;
-    itemCustId = custId;
-    itemOrderName = orderName;
-
-    // Set Item No variable to ItemCounter
-    itemNo = itemCounter;
+    console.log("--this.id--");
+    console.log(this.id);
 
     // Set Product variables by searching product by PID in button
     itemProdId = this.id;
 
-    $.get("/api/products/", itemProdId, function (data) {
+    $.get("/api/products/" + itemProdId, function (data) {
+
+      // Increment Item Counter by 1
+      itemCounter++;
+
+      // Test Parameters
+      orderId = 6;
+      custId = 7;
+      orderName = "Pam Test"
+
+      // Set Customer-specific variables with existing variables
+      itemOrderId = orderId;
+      itemCustId = custId;
+      itemOrderName = orderName;
+
+      // Set Item No variable to ItemCounter
+      itemNo = itemCounter;
+      // Data from Get
       itemProdName = data.prod_name;
       itemSize = data.size;
       itemPrice = data.price;
-    });
-    console.log("--itemOrderId--");
-    console.log(itemOrderId);
-    console.log("--itemCustId--");
-    console.log(itemCustId);
-    console.log("--itemOrderName--");
-    console.log(itemOrderName);
-    console.log("--itemNo--");
-    console.log(itemNo);
-    console.log("--itemProdId--");
-    console.log(itemProdId);
-    console.log("--itemProdName--");
-    console.log(itemProdName);
-    console.log("--itemSize--");
-    console.log(itemSize);
-    console.log("--itemPrice--");
-    console.log(itemPrice);
 
-    // Create Cart Item
-    var newCartItem = {
-      oid: itemOrderId,
-      cid: itemCustId,
-      order_name: itemOrderName,
-      item_no: itemNo,
-      pid: itemProdId,
-      prod_name: itemProdName,
-      size: itemSize,
-      price: itemPrice,
-      qty: itemQty
-    };
-    console.log("--newCartItem--");
-    console.log(newCartItem);
-    // Push OrderItem Object to Cart Array
-    cartArray.push(newCartItem);
-    console.log("--cartArray--");
-    console.log(cartArray);
+
+    })
+      .then(function (data) {
+
+
+        // Console Logs
+        console.log("--Data--");
+        console.log(data);
+        console.log("--itemProdName--");
+        console.log(itemProdName);
+        console.log("--itemSize--");
+        console.log(itemSize);
+        console.log("--itemPrice--");
+        console.log(itemPrice);
+        console.log("--itemOrderId--");
+        console.log(itemOrderId);
+        console.log("--itemCustId--");
+        console.log(itemCustId);
+        console.log("--itemOrderName--");
+        console.log(itemOrderName);
+        console.log("--itemNo--");
+        console.log(itemNo);
+        console.log("--itemProdId--");
+        console.log(itemProdId);
+        console.log("--itemProdName--");
+        console.log(itemProdName);
+        console.log("--itemSize--");
+        console.log(itemSize);
+        console.log("--itemPrice--");
+        console.log(itemPrice);
+
+        // Create Cart Item
+        var newCartItem = {
+          oid: itemOrderId,
+          cid: itemCustId,
+          order_name: itemOrderName,
+          item_no: itemNo,
+          pid: itemProdId,
+          prod_name: itemProdName,
+          size: itemSize,
+          price: itemPrice,
+          qty: itemQty
+        };
+        console.log("--newCartItem--");
+        console.log(newCartItem);
+        // Push OrderItem Object to Cart Array
+        cartArray.push(newCartItem);
+        console.log("--cartArray--");
+        console.log(cartArray);
+      })
+    $("#cart").append(cartArray);
   });
-  // Loop through cartArray and append to the DOM in the Cart div
-  $("#cart").append(cartArray);
+
 });
