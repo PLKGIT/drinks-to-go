@@ -92,6 +92,7 @@ module.exports = function(app) {
     db.Song.create(req.body).then(function(data) {
       res.json(data);
     });
+    console.log(req.body.song)
   });
 
   app.put("/api/songs", function(req, res) {
