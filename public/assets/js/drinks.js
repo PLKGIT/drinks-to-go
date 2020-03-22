@@ -62,12 +62,17 @@ function isValidEmail(email) {
 
 // Query Customers table to ensure the email address exists
 function isEmailAddressExistsInTable(custEmail){
-  alert(custEmail);
-
   $.get("/api/customers/" + custEmail, function(data){
   }).then(function(data){
     console.log(data);
-    //alert("emaildataaaa",data)
+    // TODO: how do we check the data is valid or not that we get from apiRoutes.js??
+    // TODO: currently this is not working !!
+    if (data != null) {
+      return true;
+    }
+    else {
+      return false;
+    }
   });
 }
 
@@ -133,12 +138,16 @@ $(document).ready(function () {
       errCheck = true;
     }
 
-    isEmailAddressExistsInTable(newEmail);
+    var status = isEmailAddressExistsInTable(newEmail);
 
-
-
-
-
+    // TODO: need to get this current status correctly !
+    if (status == true) {
+      // email exists. Go to menu page
+      alert("Going to menu page");
+    }
+    else {
+      alert("Email doesn't exits");
+    }
   })
   // Form, on submit
   // Validate form
