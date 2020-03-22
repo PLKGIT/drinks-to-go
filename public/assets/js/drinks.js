@@ -10,11 +10,14 @@
 // ------------------------------------------
 var errCheck = false;
 
-// User and Order Variables
+// Customer Variables
 // ------------------------------------------
 var custName;
 var custEmail;
 var custID;
+
+// Order Variables
+// ------------------------------------------
 var ordersArray = [];
 var orderId;
 var orderName;
@@ -44,6 +47,10 @@ var songArtist;
 // Logic
 // ------------------------------------------
 // ------------------------------------------
+<<<<<<< HEAD
+
+$(document).ready(function () {
+=======
 // ------------------------------------------
 
 $(document).ready(function () {
@@ -130,31 +137,22 @@ $(document).ready(function () {
   // oid --> orderId variable
   // order_name --> orderName variable
   // ordered --> orderDate variable
+>>>>>>> master
 
-  // Create an Account
+  // Create New Account on index.handlebars
   // ------------------------------------------
-  // Completed: 03/__/2020 by: _____
+  // Completed: 03/__/2020 by: Jyochsna
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
-  // Form, on submit
-  // $("#guestSubmit").on("click",function(event){
-  //     event.preventDefault();
 
-  //     var newCustomer = {
-  //         cust_name : $("#guestName").val().trim(),
+  // Logic for Create an Account index.handlebars Modal
+  $(".modal").modal();
 
-  //     };
-
-  //     $.post("api/customers", newCustomer)
-  //     .then(function(data){
-  //         console.log(data);
-  //     });
-
-  //     $("#guestName").val("");
-
-  // })
-
+<<<<<<< HEAD
+  // Validate Create an Account Form
+=======
   // Validate form
+>>>>>>> master
   $(document).on("click", "#newSubmit", function (event) {
     event.preventDefault();
     // alert("logiiiiiinnnn");
@@ -205,6 +203,10 @@ $(document).ready(function () {
     });
 
   });
+<<<<<<< HEAD
+
+  $("#songButton").on("click", function(event) {
+=======
   // Make sure the name input is not blank
   // If error, set errCheck = true
   // Make sure the name input does not include numbers
@@ -229,6 +231,7 @@ $(document).ready(function () {
   // Store cid from database in custID variable
   // CALL Customer Login logic above after new Account creation
   $("#songButton").on("click", function (event) {
+>>>>>>> master
     event.preventDefault();
     $("#dropdown1").empty();
     var songToSearch = $("#songName").val();

@@ -12,7 +12,7 @@ USE drinkstogo_db;
 CREATE TABLE customers (
     cid INT NOT NULL AUTO_INCREMENT,
     cust_name VARCHAR(50) NOT NULL,
-    -- cust_email VARCHAR(50) NOT NULL UNIQUE,
+    cust_email VARCHAR(50) NOT NULL UNIQUE,
     PRIMARY KEY (cid)
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE orders (
     oid INT NOT NULL AUTO_INCREMENT,
     cid INT NOT NULL,
     order_name VARCHAR(50),
-    ordered DATETIME NOT NULL,
+	ordered DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (oid)
 );
 
@@ -46,11 +46,12 @@ CREATE TABLE orderItems (
 	cid INT NOT NULL,
     pid INT NOT NULL,
     prod_name VARCHAR(50) NOT NULL,
+    order_name VARCHAR(50) NOT NULL,
     item_no INT NOT NULL,
     size VARCHAR(10),
     price DECIMAL(10 , 2 ) NOT NULL,
     ordered DATETIME NOT NULL,
-    status VARCHAR(10) NOT NULL,
+    status VARCHAR(10) NOT NULL DEFAULT "Pending",
     PRIMARY KEY (id)
 );
 
@@ -63,7 +64,7 @@ CREATE TABLE songs (
     song_name VARCHAR(255) NOT NULL,
     song_url VARCHAR(255) NOT NULL,
     artist VARCHAR(255) NOT NULL,
-	requested DATETIME NOT NULL,
-    status VARCHAR(10) NOT NULL,
+	requested DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(10) NOT NULL DEFAULT "Pending",
     PRIMARY KEY (sid)
 );
