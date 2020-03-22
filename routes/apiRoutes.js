@@ -9,6 +9,33 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/customers/:cust_email", function(req, res){
+    db.Customer.findAll({
+      where: {
+        cust_email: req.params.cust_email
+      }
+      }).then(function(dbCustomerEmails){
+        res.json(dbCustomerEmails);
+        console.log("+++++++++++ customer email received.....");
+        console.log(dbCustomerEmails);
+      });
+    });
+
+  // app.get("/api/customers/:cust_email", function(req, res){
+  //   var query={}
+  //   if (req.query.cust_email){
+  //     query.cust_email = req.query.cust_email;
+  //   }
+  //   db.Customer.findOne({
+  //     where:query
+  //     }).then(function(dbCustomerEmails){
+  //       res.json(dbCustomerEmails);
+  //       console.log("+++++++++++ customer email received.....");
+  //       console.log(dbCustomerEmails);
+  //     });
+  //   });
+    
+
   app.get("/api/products", function(req, res) {
     db.Product.findAll({}).then(function(data) {
       res.json(data);

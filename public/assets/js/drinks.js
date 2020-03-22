@@ -41,12 +41,42 @@ var songStatus = "pending";
 var songArtist;
 // Include contents of custId in Song Array
 
+//helper Functions
+function isValidEmail(email) {
+
+  if (email.length < 1) {
+    return false;
+  }
+
+  //var regEx = /^[A-Z0-9][A-Z0-9._%+-]{0,63}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/;
+  //var regEx = /\\S+@\\S+/;
+  var regEx = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+
+  var validEmail = regEx.test(email);
+  if (!validEmail) {
+    return false;
+  }
+
+  return true;
+}
+
+// Query Customers table to ensure the email address exists
+function isEmailAddressExistsInTable(custEmail){
+  alert(custEmail);
+
+  $.get("/api/customers/" + custEmail, function(data){
+  }).then(function(data){
+    console.log(data);
+    //alert("emaildataaaa",data)
+  });
+}
+
 // Logic
 // ------------------------------------------
 // ------------------------------------------
 // ------------------------------------------
 
-$(document).ready(function() {
+$(document).ready(function () {
   // Logic for index.handlebars Modal
   $(".modal").modal();
 
@@ -59,7 +89,7 @@ $(document).ready(function() {
   // Completed: 03/__/2020 by: _____
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
- // Form, on submit
+  // Form, on submit
   // Validate form
   // Make sure the name input is not blank
   // If error, set errCheck = true
@@ -90,6 +120,26 @@ $(document).ready(function() {
   // Completed: 03/__/2020 by: _____
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
+  $("#custSubmit").on("click", function (event) {
+    event.preventDefault();
+
+    //alert("called this ...");
+
+    var newEmail = $("#custEmail")
+      .val()
+      .trim();
+
+    if (!isValidEmail(newEmail)) {
+      errCheck = true;
+    }
+
+    isEmailAddressExistsInTable(newEmail);
+
+
+
+
+
+  })
   // Form, on submit
   // Validate form
   // Make sure the email address is not blank
@@ -155,7 +205,7 @@ $(document).ready(function() {
   // })
 
   // Validate form
-  $(document).on("click", "#newSubmit", function(event) {
+  $(document).on("click", "#newSubmit", function (event) {
     event.preventDefault();
     // alert("logiiiiiinnnn");
     var newName = $("#newName")
@@ -169,19 +219,23 @@ $(document).ready(function() {
       errCheck = true;
     }
 
-    if (newEmail.length < 1) {
+    if (!isValidEmail(newEmail)) {
       errCheck = true;
     }
 
-    //var regEx = /^[A-Z0-9][A-Z0-9._%+-]{0,63}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/;
-    //var regEx = /\\S+@\\S+/;
-    var regEx = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    // if (newEmail.length < 1) {
+    //   errCheck = true;
+    // }
 
-    var validEmail = regEx.test(newEmail);
-    if (!validEmail) {
-      alert("invalid email");
-      //errCheck = true;
-    }
+    // //var regEx = /^[A-Z0-9][A-Z0-9._%+-]{0,63}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/;
+    // //var regEx = /\\S+@\\S+/;
+    // var regEx = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+
+    // var validEmail = regEx.test(newEmail);
+    // if (!validEmail) {
+    //   alert("invalid email");
+    //   //errCheck = true;
+    // }
 
     if (errCheck === true) {
       alert("Error Detected");
@@ -195,15 +249,15 @@ $(document).ready(function() {
         .val()
         .trim()
     };
-    $.post("api/customers", newCustomer).then(function(req,res) {
-    //  console.log(data);
+    $.post("api/customers", newCustomer).then(function (req, res) {
+      //  console.log(data);
 
       console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
       // $("#newName").val("");
       // $("#newEmail").val("");
-    window.location.replace("/menu")
+      window.location.replace("/menu")
     });
-    
+
   });
   // Make sure the name input is not blank
   // If error, set errCheck = true
@@ -238,9 +292,9 @@ $(document).ready(function() {
   custID = 3;
 
   function getHistory() {
-    $.get("/api/orders/" + custID, function(data) {
+    $.get("/api/orders/" + custID, function (data) {
       ordersArray = data;
-    }).then(function(data) {
+    }).then(function (data) {
       console.log(data);
       var profile = $("#profile");
       profile.text("");
