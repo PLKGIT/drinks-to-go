@@ -47,10 +47,6 @@ var songArtist;
 // Logic
 // ------------------------------------------
 // ------------------------------------------
-<<<<<<< HEAD
-
-$(document).ready(function () {
-=======
 // ------------------------------------------
 
 $(document).ready(function () {
@@ -137,7 +133,6 @@ $(document).ready(function () {
   // oid --> orderId variable
   // order_name --> orderName variable
   // ordered --> orderDate variable
->>>>>>> master
 
   // Create New Account on index.handlebars
   // ------------------------------------------
@@ -148,11 +143,7 @@ $(document).ready(function () {
   // Logic for Create an Account index.handlebars Modal
   $(".modal").modal();
 
-<<<<<<< HEAD
-  // Validate Create an Account Form
-=======
   // Validate form
->>>>>>> master
   $(document).on("click", "#newSubmit", function (event) {
     event.preventDefault();
     // alert("logiiiiiinnnn");
@@ -203,10 +194,6 @@ $(document).ready(function () {
     });
 
   });
-<<<<<<< HEAD
-
-  $("#songButton").on("click", function(event) {
-=======
   // Make sure the name input is not blank
   // If error, set errCheck = true
   // Make sure the name input does not include numbers
@@ -231,7 +218,6 @@ $(document).ready(function () {
   // Store cid from database in custID variable
   // CALL Customer Login logic above after new Account creation
   $("#songButton").on("click", function (event) {
->>>>>>> master
     event.preventDefault();
     $("#dropdown1").empty();
     var songToSearch = $("#songName").val();
