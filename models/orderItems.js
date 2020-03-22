@@ -17,7 +17,7 @@ module.exports = function (sequelize, Sequelize) {
       type: Sequelize.INTEGER(11),
       allowNull: false
     },
-    cust_name: {
+    order_name: {
       type: Sequelize.STRING(50),
       allowNull: false
     },

@@ -46,6 +46,7 @@ CREATE TABLE orderItems (
 	cid INT NOT NULL,
     pid INT NOT NULL,
     prod_name VARCHAR(50) NOT NULL,
+    order_name VARCHAR(50) NOT NULL,
     item_no INT NOT NULL,
     size VARCHAR(10),
     price DECIMAL(10 , 2 ) NOT NULL,
