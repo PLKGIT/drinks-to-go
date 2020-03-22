@@ -16,6 +16,7 @@
     "express-handlebars": "^3.1.0",
     "minimist": "^1.2.5",
     "mysql2": "^1.7.0",
+    "node-spotify-api": "^1.1.1",
     "nodemon": "^2.0.2",
     "sequelize": "^5.21.5",
     "sequelize-cli": "^5.5.1"

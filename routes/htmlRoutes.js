@@ -5,6 +5,10 @@ module.exports = function (app) {
     res.render("index");
   });
 
+  app.get("/splitscreen", function (req, res) {
+    res.render("splitScreen");
+  });
+
   app.get("/customers", function (req, res) {
     // console.log("---This is Get Request---");
     db.Customer.findAll({}).then(function (data) {
