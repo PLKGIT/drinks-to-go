@@ -33,27 +33,24 @@ module.exports = function (app) {
   // Menu HTML Route
   app.get("/menu", function (req, res) {
 
-    var orderHistory = {
-      history: []
-    }
+    var productsList = {
+      products: []
+    };
 
-    db.OrderItem.findAll({
-      where: {
-        cid: 7
-      }
-    }).then(function (dataHistory) {
-      for (var i = 0; i < dataHistory.length; i++) {
-        var currentOrder = {
-          order: dataHistory[i].dataValues.oid,
-          item: dataHistory[i].dataValues.item_no,
-          description: dataHistory[i].dataValues.prod_name,
-          size: dataHistory[i].dataValues.size,
-          price: dataHistory[i].dataValues.price,
-          qty: dataHistory[i].dataValues.qty
+    db.Product.findAll({}).then(function (dataProduct) {
+      for (var i = 0; i < dataProduct.length; i++) {
+        var currentProduct = {
+          pid: dataProduct[i].dataValues.pid,
+          prod_name: dataProduct[i].dataValues.prod_name,
+          size: dataProduct[i].dataValues.size,
+          price: dataProduct[i].dataValues.price,
+          type: dataProduct[i].dataValues.type,
+          temp: dataProduct[i].dataValues.temp,
+          check_hot: dataProduct[i].dataValues.check_hot
         };
-        orderHistory.history.push(currentOrder);
+        productsList.products.push(currentProduct);
       };
-      res.render("menu", orderHistory);
+      res.render("menu", productsList);
     });
   });
 

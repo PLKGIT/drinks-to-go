@@ -1,8 +1,8 @@
 var db = require("../models");
 // var sequelize = require('sequelize');
 var Spotify = require('node-spotify-api');
-var keys = require("../keys.js")
-var spotify = new Spotify(keys.spotify);
+// var keys = require("../keys.js")
+// var spotify = new Spotify(keys.spotify);
 
 module.exports = function (app) {
 
@@ -36,9 +36,13 @@ module.exports = function (app) {
       console.log(data);
     });
   });
-  // Products API Get Route
-  app.get("/api/products", function (req, res) {
-    db.Product.findAll({}).then(function (data) {
+  // Products by PID API Get Route
+  app.get("/api/products/:pid", function (req, res) {
+    db.Product.findOne({
+      where: {
+        pid: req.params.pid
+      }
+    }).then(function (data) {
       res.json(data);
       console.log(data);
     });

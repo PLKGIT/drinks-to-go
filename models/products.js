@@ -29,6 +29,10 @@ module.exports = function (sequelize, Sequelize) {
     price: {
       type: Sequelize.DECIMAL(10,2),
       allowNull: false
+    },
+    check_hot: {
+      type: Sequelize.TINYINT(1),
+      allowNull: false
     }
   }, { timestamps: false });
 

@@ -25,6 +25,7 @@ CREATE TABLE products (
 	temp VARCHAR(5) NOT NULL,
     size VARCHAR(10) NOT NULL,
     price DECIMAL(10 , 2 ) NOT NULL,
+    check_hot BOOLEAN (1) NOT NULL,
     PRIMARY KEY (pid)
 );
 
