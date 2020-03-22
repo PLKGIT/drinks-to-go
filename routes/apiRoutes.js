@@ -86,6 +86,7 @@ module.exports = function (app) {
     db.Song.create(req.body).then(function (data) {
       res.json(data);
     });
+    console.log(req.body.song)
   });
 
   // Songs API Put Route
