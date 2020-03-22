@@ -46,7 +46,7 @@ var songArtist;
 // ------------------------------------------
 // ------------------------------------------
 
-$(document).ready(function() {
+$(document).ready(function () {
   // Logic for index.handlebars Modal
   $(".modal").modal();
 
@@ -59,7 +59,7 @@ $(document).ready(function() {
   // Completed: 03/__/2020 by: _____
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
- // Form, on submit
+  // Form, on submit
   // Validate form
   // Make sure the name input is not blank
   // If error, set errCheck = true
@@ -155,7 +155,7 @@ $(document).ready(function() {
   // })
 
   // Validate form
-  $(document).on("click", "#newSubmit", function(event) {
+  $(document).on("click", "#newSubmit", function (event) {
     event.preventDefault();
     // alert("logiiiiiinnnn");
     var newName = $("#newName")
@@ -195,15 +195,15 @@ $(document).ready(function() {
         .val()
         .trim()
     };
-    $.post("api/customers", newCustomer).then(function(req,res) {
-    //  console.log(data);
+    $.post("api/customers", newCustomer).then(function (req, res) {
+      //  console.log(data);
 
       console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
       // $("#newName").val("");
       // $("#newEmail").val("");
-    window.location.replace("/menu")
+      window.location.replace("/menu")
     });
-    
+
   });
   // Make sure the name input is not blank
   // If error, set errCheck = true
@@ -228,18 +228,14 @@ $(document).ready(function() {
   // cust_email should be set to custEmail variable
   // Store cid from database in custID variable
   // CALL Customer Login logic above after new Account creation
-  $("#songButton").on("click", function(event) {
+  $("#songButton").on("click", function (event) {
     event.preventDefault();
     $("#dropdown1").empty();
     var songToSearch = $("#songName").val();
     var song = { spotifyThis: songToSearch };
-    // console.log("songToSearch is " + songToSearch);
-    $.post("/api/spotify", song, function(data) {
-      // console.log("data is below");
-      // console.log("----------------------------")
-      // console.log(data)
-      $(".dropdown-trigger").dropdown({hover: true, constrainWidth: false });
-      
+    $.post("/api/spotify", song, function (data) {
+      $(".dropdown-trigger").dropdown({ hover: true, constrainWidth: false });
+      console.log("post request")
       for (var i = 0; i < 5; i++) {
         var songName = data.tracks.items[i].name;
         var artist = data.tracks.items[i].artists[0].name;
@@ -253,17 +249,17 @@ $(document).ready(function() {
         $("#dropdown1").append(songMenu);
         $("#dropdown1").append(divider);
       }
-
     });
-    
-    
   });
+
+  $(document).on("click", ".songChoice", function (event) {
+    event.preventDefault();
+    var usersSong = $(this).attr("dataval");
+    console.log("usersong is below");
+    $.post("api/songs", {song:usersSong});
+  })
   
-  $(".songChoice").on("click", function() {
-      var usersSong = this.text();
-      console.log("usersong is below")
-      console.log(usersSong);
-    })
+  
   // Orders in menu.handlebars
   // ------------------------------------------
   // Completed: 03/__/2020 by: Pam
@@ -273,9 +269,9 @@ $(document).ready(function() {
   custID = 3;
 
   function getHistory() {
-    $.get("/api/orders/" + custID, function(data) {
+    $.get("/api/orders/" + custID, function (data) {
       ordersArray = data;
-    }).then(function(data) {
+    }).then(function (data) {
       console.log(data);
       var profile = $("#profile");
       profile.text("");
