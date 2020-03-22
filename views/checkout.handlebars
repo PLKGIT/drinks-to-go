@@ -27,15 +27,23 @@
         </div>
         <div class="input-field col s6 offset-s3">
             <i class="material-icons music prefix text-brown darken-4">audiotrack</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label class="active" for="icon_prefix">Song Name</label>
-            <button data-target="requestSong" class="btn brown darken-4 waves-effect waves-light modal-trigger"
-                id="songButton">Search Song
+            <input id="songName" type="text" class="validate">
+            <label class="active" for="songName">Song Name</label>
+            <button data-target="requestSong" class="btn brown darken-4 waves-effect waves-light modal-trigger" id="songButton">Search Song
                 <i class="material-icons right">audiotrack</i>
             </button>
         </div>
     </div>
 
+    <div class="center-align">
+        <!-- Dropdown Trigger -->
+        <a class="dropdown-trigger btn brown darken-4 waves-effect waves-light modal-trigger" id="selectSong" href="#" data-target="dropdown1">Select Song</a>
+
+        <!-- Dropdown Structure -->
+        <ul id="dropdown1" class="dropdown-content" style="width: 500px">
+            {{!-- <li><a href="#!">one</a></li> --}}
+        </ul>
+    </div>
 
     <!--_________________-->
 

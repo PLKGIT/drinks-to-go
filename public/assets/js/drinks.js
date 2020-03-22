@@ -228,7 +228,42 @@ $(document).ready(function() {
   // cust_email should be set to custEmail variable
   // Store cid from database in custID variable
   // CALL Customer Login logic above after new Account creation
+  $("#songButton").on("click", function(event) {
+    event.preventDefault();
+    $("#dropdown1").empty();
+    var songToSearch = $("#songName").val();
+    var song = { spotifyThis: songToSearch };
+    // console.log("songToSearch is " + songToSearch);
+    $.post("/api/spotify", song, function(data) {
+      // console.log("data is below");
+      // console.log("----------------------------")
+      // console.log(data)
+      $(".dropdown-trigger").dropdown({hover: true, constrainWidth: false });
+      
+      for (var i = 0; i < 5; i++) {
+        var songName = data.tracks.items[i].name;
+        var artist = data.tracks.items[i].artists[0].name;
+        var songInfo = songName + " by " + artist;
+        var songMenu = $("<li><a>");
+        songMenu.text(songInfo);
+        songMenu.addClass("songChoice");
+        songMenu.attr("dataVal", songInfo)
+        var divider = $("<li>")
+        divider.addClass("divider")
+        $("#dropdown1").append(songMenu);
+        $("#dropdown1").append(divider);
+      }
 
+    });
+    
+    
+  });
+  
+  $(".songChoice").on("click", function() {
+      var usersSong = this.text();
+      console.log("usersong is below")
+      console.log(usersSong);
+    })
   // Orders in menu.handlebars
   // ------------------------------------------
   // Completed: 03/__/2020 by: Pam
