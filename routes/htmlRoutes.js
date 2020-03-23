@@ -110,7 +110,33 @@ module.exports = function (app) {
 
   // Order Status HTML Route
   app.get("/status", function (req, res) {
-    res.render("status");
+    var drinkQueue = {
+      list: []
+    }
+    db.OrderItem.findAll({
+      where: {
+        complete: 0
+      }
+    }).then(function(data) {
+      console.log("--Console Logging Data---")
+      console.log(data[0]);
+      for (var j = 0; j < data.length; j++) {
+        var allOrders = {
+          order_number: data[j].dataValues.oid,
+          order_name: data[j].dataValues.order_name,
+          description: data[j].dataValues.prod_name,
+          size: data[j].dataValues.size,
+          status: data[j].dataValues.status,
+          ready: data[j].dataValues.ready
+        };
+        console.log("CUSTNAME" + data[j].dataValues.order_name);
+        console.log(data[j].dataValues);
+        drinkQueue.list.push(allOrders);
+      };
+      res.render("status", drinkQueue);
+      console.log("--Console Logging OrderHistory---")
+      console.log(drinkQueue);
+    });
   });
 
   // 404 HTML Route

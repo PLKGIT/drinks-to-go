@@ -49,6 +49,14 @@ module.exports = function (sequelize, Sequelize) {
       type: Sequelize.STRING(10),
       allowNull: false
     },
+    complete: {
+      type: Sequelize.TINYINT(1),
+      allowNull: false
+    },
+    ready: {
+      type: Sequelize.TINYINT(1),
+      allowNull: false
+    }
   }, { timestamps: false });
 
   OrderItem.associate = function (db) {

@@ -381,7 +381,6 @@ $(document).ready(function () {
     })
       .then(function (data) {
 
-
         // Console Logs
         console.log("--Data--");
         console.log(data);
@@ -426,7 +425,12 @@ $(document).ready(function () {
         cartArray.push(newCartItem);
         console.log("--cartArray--");
         console.log(cartArray);
+
+        // for (var x=0; x < cartArray.length; x++){
+
+        // }
       })
+
     $("#cart").append(cartArray);
   });
 

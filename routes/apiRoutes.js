@@ -50,7 +50,7 @@ module.exports = function (app) {
       console.log(data);
     });
   });
-  // Order Items API Get Route
+  // Order Items API by CID Get Route
   app.get("/api/orderitems/:cid", function (req, res) {
     db.OrderItem.findAll({
       where: {
@@ -61,6 +61,18 @@ module.exports = function (app) {
       console.log(data);
     });
   });
+ // Order Items API by Status Get Route
+ app.get("/api/orderitems/:ready", function (req, res) {
+  db.OrderItem.findAll({
+    where: {
+      status: req.params.ready
+    }
+  }).then(function (data) {
+    res.json(data);
+    console.log(data);
+  });
+});
+
   // Products by PID API Get Route
   app.get("/api/products/:pid", function (req, res) {
     db.Product.findOne({
