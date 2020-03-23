@@ -7,7 +7,7 @@ var Spotify = require('node-spotify-api');
 module.exports = function (app) {
 
   app.get("/api/customers/:cust_email", function(req, res){
-    db.Customer.findAll({
+    db.Customer.findOne({
       where: {
         cust_email: req.params.cust_email
       }
