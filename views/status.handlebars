@@ -1,37 +1,74 @@
 <!-- Big Board Page -->
 <div class="container">
-
-    <div class="row row1">
-        <div class="section col m6 pending">
-            <h6 class="center-align">Preparing... <img src="./assets/img/coffeeCup.png" height="40px"></h6>
-        </div>
-        <div class="section col m6 ready">
-            <h6 class="center-align">Ready! <img src="./assets/img/coffeeCup.png" height="40px"></h6>
+    <div class="row">
+        <div class="col s12">
+            <div class="card white">
+                <div class="card-content black-text">
+                    <span class="card-title">Pending</span>
+                    <div id="customers">
+                        <table class="responsive-table">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Customer</th>
+                                    <th>Description</th>
+                                    <th>Size</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each list}}
+                                <tr>
+                                    {{#unless ready}}
+                                    {{> drinks/status-pending}}
+                                    {{/unless}}
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="row row2">
-        <div class="section col m6" id="pendingOrders">
-            <p>Drink #4 - Name, Order#</p>
-            <p>Drink #5 - Name, Order#</p>
-            <p>Drink #6 - Name, Order#</p>
-            <p>Drink #7 - Name, Order#</p>
-            <p>Drink #8 - Name, Order#</p>
-            <p>Drink #9 - Name, Order#</p>
-            <p>Drink #10 - Name, Order#</p>
-        </div>
-        <div class="section col m6" id="readyOrders">
-            <p>Drink #1 - Name, Order#</p>
-            <p>Drink #2 - Name, Order#</p>
-            <p>Drink #3 - Name, Order#</p>
-        </div>
-    </div>
-
-    <div class="section spotify center-align" id="nowPlaying">
-        <h6>Song Playing on Spotify</h6>
-    </div>
-
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <div class="card white">
+                <div class="card-content black-text">
+                    <span class="card-title">Ready</span>
+                    <div id="customers">
+                        <table class="responsive-table">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Customer</th>
+                                    <th>Description</th>
+                                    <th>Size</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                {{#each list}}
+                                <tr>
+                                    {{#if ready}}
+                                    {{> drinks/status-ready}}
+                                    {{/if}}
+
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container"></div>
 <!-- jQuery JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Materialize JavaScript-->

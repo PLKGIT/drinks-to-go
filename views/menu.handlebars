@@ -4,78 +4,12 @@
         <div class="col s12">
             <div class="card white">
                 <div class="card-content black-text">
-                    <div id="profile">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col s6">
-            <div class="card white">
-                <div class="card-content black-text">
-                    <span class="card-title">Order History</span>
-                    <div id="history">
-                        <table class="responsive-table">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Description</th>
-                                    <th>Size</th>
-                                    <th>Price</th>
-                                    <th>Qty</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{#each history}}
-                                <tr>
-                                    <td>{{this.order}}</td>
-                                    <td>{{this.description}}</td>
-                                    <td>{{this.size}}</td>
-                                    <td class="right-align">{{this.price}}</td>
-                                    <td class="center-align">{{this.qty}}</td>
-                                    <td class="right-align"><i class="small material-icons">add_box</i></td>
-                                </tr>
-                                {{/each}}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col s6">
-            <div class="card white">
-                <div class="card-content black-text">
-                    <span class="card-title">Menu</span>
-                    <div id="menu">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Size</th>
-                                    <th></th>
-                                    <th>Price</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                {{#each products}}
-                                <tr>
-                                    <td>{{this.product_name}}</td>
-                                    <td>{{this.size}}</td>
-                                    <td class="right-align">{{this.price}}</td>
-                                    <td>{{this.type}}</td>
-                                    <td>{{this.temp}}</td>
-                                    <td><i class="small material-icons">add_box</i></td>
-                                </tr>
-                                {{/each}}
-                            </tbody>
-                        </table>
-                    </div>
+                    <div id="profile"></div>
+                    <!-- Modal Trigger -->
+                    <p class='right-align'><button class="btn-flat modal-trigger" data-target="atcHistory">
+                            Order from Order History
+                        </button></p>
+                    <!--_________________-->
                 </div>
             </div>
         </div>
@@ -87,51 +21,105 @@
             <div class="card white">
                 <div class="card-content black-text">
                     <span class="card-title">Cart</span>
-                    <div id="cart">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Product</th>
-                                    <th>Size</th>
-                                    <th>Price</th>
-                                    <th>Qty</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Mocha</td>
-                                    <td>Small</td>
-                                    <td>3.25</td>
-                                    <td>1</td>
-                                    <td><i class="small material-icons">clear</i></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Mocha</td>
-                                    <td>large</td>
-                                    <td>4.00</td>
-                                    <td>1</td>
-                                    <td><i class="small material-icons">clear</i></td>
-                                </tr>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <div id="cart"></div>
                     <br>
                     <p><a class="brown darken-4 btn-small">Submit Order <i
                                 class="material-icons right">add_shopping_cart</i></a></p>
-
-                    <p>Data pulled from Cart Array. If nothing in array, display "Please Add to Cart"</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="container"></div>
+<div class="container">
+    <div class="row">
+        <div class="col s6">
+            <div class="card white">
+                <div class="card-content black-text">
+                    <span class="card-title">Drink Menu (Cold)</span>
+                    <div id="menu">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Product</th>
+                                    <th>Size</th>
+                                    <th></th>
+                                    <th>Price</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each products}}
+                                <tr>
+                                    {{#unless check_hot}}
+                                    {{> drinks/menu-cold}}
+                                    {{/unless}}
+                                    {{/each}}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s6">
+            <div class="card white">
+                <div class="card-content black-text">
+                    <span class="card-title">Drink Menu (Hot)</span>
+                    <div id="menu">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Product</th>
+                                    <th>Size</th>
+                                    <th></th>
+                                    <th>Price</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {{#each products}}
+                                <tr>
+                                    {{#if check_hot}}
+                                    {{> drinks/menu-hot}}
+                                    {{/if}}
+                                    {{/each}}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <!-- Modal -->
+    <div id="atcHistory" class="modal">
+        <div class="modal-content">
+            <h4 class="text-brown darken-4">Order History</h4>
+                <div id="ordHistory"></div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</span>
+</div>
+<div class="modal-footer">
+    <hr>
+    Coffee Express!
+</div>
+</div>
+<!--_________________-->
+</div>
+
+<div class="container">
+
+</div>
 <!-- jQuery JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Materialize JavaScript-->

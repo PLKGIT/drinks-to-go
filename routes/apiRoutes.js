@@ -6,7 +6,18 @@ var spotify = new Spotify(keys.spotify);
 
 module.exports = function (app) {
 
-  // Customers API Get Route
+  app.get("/api/customers/:cust_email", function(req, res){
+    db.Customer.findOne({
+      where: {
+        cust_email: req.params.cust_email
+      }
+      }).then(function(dbCustomerEmails){
+        res.json(dbCustomerEmails);
+        console.log("+++++++++++ customer email received.....");
+        console.log(dbCustomerEmails);
+      });
+    });
+    
   app.get("/api/customers", function (req, res) {
     db.Customer.findAll({}).then(function (data) {
       res.json(data);
@@ -15,7 +26,7 @@ module.exports = function (app) {
   });
   // Orders API Get Route
   app.get("/api/orders/:cid", function (req, res) {
-    db.Order.findAll({
+    db.Order.findOne({
       where: {
         cid: req.params.cid
       },
@@ -25,8 +36,19 @@ module.exports = function (app) {
       console.log(data);
     });
   });
-  // Order Items API Get Route
-  app.get("/api/orderitems/:cid", function (req, res) {
+    // Order Items API by ID Get Route
+    app.get("/api/orderitemsid/:id", function (req, res) {
+      db.OrderItem.findAll({
+        where: {
+          cid: req.params.id
+        }
+      }).then(function (data) {
+        res.json(data);
+        console.log(data);
+      });
+    });
+  // Order Items API by CID Get Route
+  app.get("/api/orderitemscid/:cid", function (req, res) {
     db.OrderItem.findAll({
       where: {
         cid: req.params.cid
@@ -36,9 +58,25 @@ module.exports = function (app) {
       console.log(data);
     });
   });
-  // Products API Get Route
-  app.get("/api/products", function (req, res) {
-    db.Product.findAll({}).then(function (data) {
+ // Order Items API by Status Get Route
+ app.get("/api/orderitems/:ready", function (req, res) {
+  db.OrderItem.findAll({
+    where: {
+      status: req.params.ready
+    }
+  }).then(function (data) {
+    res.json(data);
+    console.log(data);
+  });
+});
+
+  // Products by PID API Get Route
+  app.get("/api/products/:pid", function (req, res) {
+    db.Product.findOne({
+      where: {
+        pid: req.params.pid
+      }
+    }).then(function (data) {
       res.json(data);
       console.log(data);
     });

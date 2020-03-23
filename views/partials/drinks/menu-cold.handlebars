@@ -1,11 +1,7 @@
-{{#each drinks}}
-<tr>
-    <td>{{order}}</td>
-    <td>{{item}}</td>
-    <td>{{description}}</td>
-    <td>{{size}}</td>
-    <td>{{price}}</td>
-    <td>{{qty}}</td>
-    <td><i class="small material-icons">add_box</i></td>
-</tr>
-{{/each}}
+<td>{{this.pid}}</td>
+<td>{{this.prod_name}}</td>
+<td>{{this.size}}</td>
+<td class="right-align">{{this.price}}</td>
+<td>{{this.type}}</td>
+<td>{{this.temp}}</td>
+<td><button class='btn-flat atcm' id='{{this.pid}}'><i class="small material-icons">add_box</i></button></td>
