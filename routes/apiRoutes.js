@@ -1,8 +1,8 @@
 var db = require("../models");
 // var sequelize = require('sequelize');
 var Spotify = require('node-spotify-api');
-// var keys = require("../keys.js")
-// var spotify = new Spotify(keys.spotify);
+var keys = require("../keys.js")
+var spotify = new Spotify(keys.spotify);
 
 module.exports = function (app) {
 
@@ -17,20 +17,6 @@ module.exports = function (app) {
         console.log(dbCustomerEmails);
       });
     });
-
-  // app.get("/api/customers/:cust_email", function(req, res){
-  //   var query={}
-  //   if (req.query.cust_email){
-  //     query.cust_email = req.query.cust_email;
-  //   }
-  //   db.Customer.findOne({
-  //     where:query
-  //     }).then(function(dbCustomerEmails){
-  //       res.json(dbCustomerEmails);
-  //       console.log("+++++++++++ customer email received.....");
-  //       console.log(dbCustomerEmails);
-  //     });
-  //   });
     
   app.get("/api/customers", function (req, res) {
     db.Customer.findAll({}).then(function (data) {
