@@ -9,6 +9,9 @@
 // Form Variables
 // ------------------------------------------
 var errCheck = false;
+var errCheck1 = false;
+var errCheck2 = false;
+var errCheck3 = false;
 
 // Customer Variables
 // ------------------------------------------
@@ -89,26 +92,47 @@ var songArtist;
 // ------------------------------------------
 // ------------------------------------------
 
-$(document).ready(function() {
+$(document).ready(function () {
   // Logic for index.handlebars Modal
   $(".modal").modal();
 
-  var errCheck1 = false;
-  var errCheck2 = false;
-  var errCheck3 = false;
+  // var errCheck1 = false;
+  // var errCheck2 = false;
+  // var errCheck3 = false;
 
-  function checkedDuplicate() {
+  function checkedDuplicate(newEmail) {
     $.get("/api/customers/" + newEmail, function(data) {
-      if (!data) {
-        errCheck3 = true;
-      }
-      //console.log("------------------------------")
-      console.log(data);
-      //console.log("$$$$$$$$$$$$$$$$$$$$$$$$$")
+
+      // var emailReceived = data.cust_email;
+      // if (emailReceived === newEmail) {
+      //   alert(">>>>>> Email already exists");
+      //   return true;
+      // }
+      // else {
+      //   return false;
+      // }
+
+      // if (!data) {
+      //   //errCheck3 = true;
+      //   return false;
+      // }
+      // //console.log("------------------------------")
+      // console.log(data);
+      // return true;
+      // //console.log("$$$$$$$$$$$$$$$$$$$$$$$$$")
+    }).then(function(data) {
+        var emailReceived = data.cust_email;
+        if (emailReceived === newEmail) {
+          alert(">>>>>> Email already exists");
+          return true;
+        }
+        else {
+          return false;
+        }
     });
   }
 
-  $(document).on("click", "#newSubmit", function(event) {
+  $(document).unbind("click").on("click", "#newSubmit", function (event) {
     // $("#newSubmit").on("click", function(event) {
     event.preventDefault();
     // alert("logiiiiiinnnn");
@@ -118,8 +142,6 @@ $(document).ready(function() {
     var newEmail = $("#newEmail")
       .val()
       .trim();
-
-     
 
     if (isValidName(newName)) {
       errCheck1 = false;
@@ -136,43 +158,53 @@ $(document).ready(function() {
     }
 
     if (checkedDuplicate(newEmail)) {
-      errCheck3 = false;
+      errCheck3 = true; // duplicate found, so error
     }
     else {
-      errCheck3 = true;
+      errCheck3 = false; // no duplicate found
     }
 
     if (errCheck1 === true) {
       alert("Please Enter a Valid Name");
     }
-    if (errCheck2 === true || errCheck3 === true) {
-      alert("Either Enter Invalid email address or duplicate email adress");
-    }
-    
-    var errCheck1 = false;
-    var errCheck2 = false;
-    var errCheck3 = false;
-    
-    var newCustomer = {
-      cust_name: $("#newName")
-        .val()
-        .trim(),
-      cust_email: $("#newEmail")
-        .val()
-        .trim()
-    };
-    $.post("api/customers", newCustomer).then(function (req, res) {
-      //  console.log(data);
 
-      console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
-      // $("#newName").val("");
-      // $("#newEmail").val("");
-      window.location.replace("/menu")
-    });
-   
+    if (errCheck2 === true || errCheck3 === true) {
+      alert("Either Enter Invalid email address or duplicate email address");
+      alert(errCheck2 + " " + errCheck3)
+    }
+
+    alert("flags>>>>" + errCheck1 + " " + errCheck2 + " " + errCheck3);
+    // var errCheck1 = false;
+    // var errCheck2 = false;
+    // var errCheck3 = false;
+
+    // if everything is Ok, then add the new record to the database
+    if (errCheck1 == false && errCheck2 == false && errCheck3 == false) {
+      var newCustomer = {
+        cust_name: $("#newName")
+          .val()
+          .trim(),
+        cust_email: $("#newEmail")
+          .val()
+          .trim()
+      };
+      $.post("api/customers", newCustomer).then(function (req, res) {
+        //  console.log(data);
+  
+        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        // $("#newName").val("");
+        // $("#newEmail").val("");
+        window.location.replace("/menu")
+      });  
+    }
+
+    // reset
+    // errCheck1 = false;
+    // errCheck2 = false;
+    // errCheck3 = false;    
   });
-// login returning customer
-  $("#custSubmit").on("click", function(event) {
+  // login returning customer
+  $("#custSubmit").on("click", function (event) {
     event.preventDefault();
     var newEmail = $("#formEmail")
       .val()
@@ -186,11 +218,11 @@ $(document).ready(function() {
     }
     if (errCheck2 == true || errCheck == true) {
       alert("Either Enter Invalid email address or duplicate email adress");
-    }else {
-     // window.location.replace("/menu")
+    } else {
+      // window.location.replace("/menu")
 
-      $.get("/api/customers/", function(data){
-        for(var i = 0; i < data.length; i++) {
+      $.get("/api/customers/", function (data) {
+        for (var i = 0; i < data.length; i++) {
           var cusEmail = data[i].cust_email;
           if (cusEmail === newEmail) {
             custName = data[i].cust_name;
@@ -203,7 +235,7 @@ $(document).ready(function() {
         alert(custId + " " + custEmail + " " + custName);
 
         // alert("custumer id found: cusId, cusname, cusname", custId, custEmail, custName);
-        
+
         // custName = data.cust_name;
         // custEmail = data.cust_email;
         // custId = data.cid;
@@ -219,6 +251,13 @@ $(document).ready(function() {
     if (name.length < 1) {
       return false;
     }
+    var regEx = /^[a-zA-Z]+$/;
+    var validName = regEx.test(name);
+    
+    if (!validName) {
+      return false;
+    }
+
     return true;
   }
 
@@ -242,13 +281,19 @@ $(document).ready(function() {
 
   //Guest Login
 
-  // $("#guestSubmit").on("click",function(event){
-  //   event.preventDefault();
-  //   var guestInput = $("#guestName").val().trim();
-  //   console.log("!!!!!!!!!!!!!!!!!!!!!");
-  //   console.log(guestInput);
-  //   window.location.replace("/menu")
-  // });
+  $("#guestSubmit").on("click",function(event){
+    event.preventDefault();
+    var guestInput = $("#guestName").val().trim();
+    console.log("!!!!!!!!!!!!!!!!!!!!!");
+    console.log(guestInput);
+    
+    custId = 1;
+    custEmail = "guest@drinkstogo.com";
+    custName = guestInput;
+
+    window.location.replace("/menu")
+  });
+
   // Form, on submit
   // Validate form
   // Make sure the email address is not blank
@@ -322,36 +367,36 @@ $(document).ready(function() {
   //     alert("Error Detected");
   //   }
 
-    // var newCustomer = {
-    //   cust_name: $("#newName")
-    //     .val()
-    //     .trim(),
-    //   cust_email: $("#newEmail")
-    //     .val()
-    //     .trim()
-    // };
-    // $.post("api/customers", newCustomer).then(function (req, res) {
-    //   //  console.log(data);
+  // var newCustomer = {
+  //   cust_name: $("#newName")
+  //     .val()
+  //     .trim(),
+  //   cust_email: $("#newEmail")
+  //     .val()
+  //     .trim()
+  // };
+  // $.post("api/customers", newCustomer).then(function (req, res) {
+  //   //  console.log(data);
 
-    //   console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
-    //   // $("#newName").val("");
-    //   // $("#newEmail").val("");
-    //   window.location.replace("/menu")
-    // });
+  //   console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
+  //   // $("#newName").val("");
+  //   // $("#newEmail").val("");
+  //   window.location.replace("/menu")
+  // });
 
   // });
 
-  $("#songButton").on("click", function(event) {
+  $("#songButton").on("click", function (event) {
     event.preventDefault();
     $("#dropdown1").empty();
     var songToSearch = $("#songName").val();
     var song = { spotifyThis: songToSearch };
-    $.post("/api/spotify", song, function(data) {
+    $.post("/api/spotify", song, function (data) {
       $(".dropdown-trigger").dropdown({ hover: true, constrainWidth: false });
       console.log("post request");
 
       // console.log("songToSearch is " + songToSearch);
-      $.post("/api/spotify", song, function(data) {
+      $.post("/api/spotify", song, function (data) {
         // console.log("data is below");
         // console.log("----------------------------")
         // console.log(data)
@@ -374,14 +419,14 @@ $(document).ready(function() {
     });
   });
 
-  $(document).on("click", ".songChoice", function(event) {
+  $(document).on("click", ".songChoice", function (event) {
     event.preventDefault();
     var usersSong = $(this).attr("dataval");
     console.log("usersong is below");
     $.post("api/songs", { song: usersSong });
   });
 
-  $(".songChoice").on("click", function() {
+  $(".songChoice").on("click", function () {
     var usersSong = this.text();
     console.log("usersong is below");
     console.log(usersSong);
@@ -428,7 +473,7 @@ $(document).ready(function() {
 
   $(".atc")
     .unbind("click")
-    .click(function() {
+    .click(function () {
       event.preventDefault();
 
       console.log("--this.id--");
@@ -437,7 +482,7 @@ $(document).ready(function() {
       // Set Product variables by searching product by PID in button
       itemProdId = this.id;
 
-      $.get("/api/products/" + itemProdId, function(data) {
+      $.get("/api/products/" + itemProdId, function (data) {
         // Increment Item Counter by 1
         itemCounter++;
 
@@ -457,7 +502,7 @@ $(document).ready(function() {
         itemProdName = data.prod_name;
         itemSize = data.size;
         itemPrice = data.price;
-      }).then(function(data) {
+      }).then(function (data) {
         // Console Logs
         console.log("--Data--");
         console.log(data);
