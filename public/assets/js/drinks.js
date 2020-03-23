@@ -108,7 +108,7 @@ $(document).ready(function() {
     });
   }
 
-  $(document).unbind("click").on("click", "#newSubmit", function(event) {
+  $(document).on("click", "#newSubmit", function(event) {
     // $("#newSubmit").on("click", function(event) {
     event.preventDefault();
     // alert("logiiiiiinnnn");
@@ -210,6 +210,7 @@ $(document).ready(function() {
         //console.log("************* >>>>>>>")
         //console.log(custName)
         //console.log(data[6].cust_name);
+        window.location.replace("/menu")
       })
     }
   });
@@ -425,7 +426,6 @@ $(document).ready(function() {
   // }
   // getHistory();
 
-<<<<<<< HEAD
   $(".atc")
     .unbind("click")
     .click(function() {
@@ -458,43 +458,6 @@ $(document).ready(function() {
         itemSize = data.size;
         itemPrice = data.price;
       }).then(function(data) {
-=======
-  $('.atc').unbind('click').click(function() {
-    event.preventDefault();
-
-    console.log("--this.id--");
-    console.log(this.id);
-
-    // Set Product variables by searching product by PID in button
-    itemProdId = this.id;
-
-    $.get("/api/products/" + itemProdId, function (data) {
-
-      // Increment Item Counter by 1
-      itemCounter++;
-
-      // Test Parameters
-      orderId = 6;
-      custId = 7;
-      orderName = "Pam Test"
-
-      // Set Customer-specific variables with existing variables
-      itemOrderId = orderId;
-      itemCustId = custId;
-      itemOrderName = orderName;
-
-      // Set Item No variable to ItemCounter
-      itemNo = itemCounter;
-      // Data from Get
-      itemProdName = data.prod_name;
-      itemSize = data.size;
-      itemPrice = data.price;
-
-
-    })
-      .then(function (data) {
-
->>>>>>> origin/master
         // Console Logs
         console.log("--Data--");
         console.log(data);
@@ -539,20 +502,7 @@ $(document).ready(function() {
         cartArray.push(newCartItem);
         console.log("--cartArray--");
         console.log(cartArray);
-<<<<<<< HEAD
       });
       $("#cart").append(cartArray);
     });
 });
-=======
-
-        // for (var x=0; x < cartArray.length; x++){
-
-        // }
-      })
-
-    $("#cart").append(cartArray);
-  });
-
-});
->>>>>>> origin/master
