@@ -53,6 +53,7 @@ CREATE TABLE orderItems (
     price DECIMAL(10 , 2 ) NOT NULL,
     ordered DATETIME NOT NULL,
     status VARCHAR(10) NOT NULL DEFAULT "Pending",
+    complete BOOLEAN (1) NOT NULL,
     PRIMARY KEY (id)
 );
 
