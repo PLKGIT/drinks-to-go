@@ -164,15 +164,32 @@ $(document).ready(function () {
       };
       $.post("api/customers", newCustomer).then(function (req, res) {
         //  console.log(data);
+        
 
         console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
         // $("#newName").val("");
         // $("#newEmail").val("");
 
         // SEE LINES 257-285 BELOW re orderName and passing data via localstorage (MUST BE DONE HERE AS WELL)
-        window.location.href = "/menu"
+        if (res) {
+
+          custName = newName;
+          orderName = custName;
+
+          localStorage.setItem('cid', JSON.stringify(custId));
+          localStorage.setItem('name', JSON.stringify(custName));
+          localStorage.setItem('oid', JSON.stringify(orderId));
+
+          custName = "";
+          custEmail = "";
+          custId = 0;
+
+          window.location.href = "/menu"
+        }
+
         // window.location.replace("/menu")
       });
+
     }
 
   });
