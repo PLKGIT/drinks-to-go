@@ -2,6 +2,8 @@
 // * Team JS File
 // ******************************************************************************************************
 
+// import { check } from "prettier";
+
 // Global Variables
 // ------------------------------------------
 // ------------------------------------------
@@ -18,6 +20,7 @@ var errCheck3 = false;
 var custName;
 var custEmail;
 var custId;
+
 
 // Order Variables
 // ------------------------------------------
@@ -50,92 +53,70 @@ var songStatus = "pending";
 var songArtist;
 // Include contents of custId in Song Array
 
-//helper Functions
-// function isValidEmail(email) {
-
-//   if (email.length < 1) {
-//     return false;
-//   }
-
-//   //var regEx = /^[A-Z0-9][A-Z0-9._%+-]{0,63}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/;
-//   //var regEx = /\\S+@\\S+/;
-//   var regEx = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
-
-//   var validEmail = regEx.test(email);
-//   if (!validEmail) {
-//     return false;
-//   }
-
-//   return true;
-// }
-
-// Query Customers table to ensure the email address exists
-// function isEmailAddressExistsInTable(emailInput) {
-//   $.get("/api/customers/" + newEmail, function (data) {
-//     console.log("----FormEmail----");
-//     console.log(newEmail);
-//   }).then(function (data) {
-
-//     console.log(data);
-//     // TODO: how do we check the data is valid or not that we get from apiRoutes.js??
-//     // TODO: currently this is not working !!
-//     if (data != null) {
-//       return true;
-//     }
-//     else {
-//       return false;
-//     }
-//   });
-// }
-
 // Logic
 // ------------------------------------------
 // ------------------------------------------
 
 $(document).ready(function () {
   // Logic for index.handlebars Modal
+  // ------------------------------------------
   $(".modal").modal();
 
-  // var errCheck1 = false;
-  // var errCheck2 = false;
-  // var errCheck3 = false;
+  // User Input Validations on index.handlebars
+  // ------------------------------------------
 
+  // Check if form name input is valid
+  function isValidName(name) {
+    if (name.length < 1) {
+      return false;
+    }
+    var regEx = /^[a-zA-Z]+$/;
+    var validName = regEx.test(name);
+
+    if (!validName) {
+      return false;
+    }
+    return true;
+  }
+
+  // Check if form email address input is valid
+  function isValidEmail(email) {
+    if (email.length < 1) {
+      return false;
+    }
+
+    var regEx = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+
+    var validEmail = regEx.test(email);
+    if (!validEmail) {
+      return false;
+    }
+
+    return true;
+  }
+
+  // Check if new account form email address exists in database
   function checkedDuplicate(newEmail) {
-    $.get("/api/customers/" + newEmail, function(data) {
-
-      // var emailReceived = data.cust_email;
-      // if (emailReceived === newEmail) {
-      //   alert(">>>>>> Email already exists");
-      //   return true;
-      // }
-      // else {
-      //   return false;
-      // }
-
-      // if (!data) {
-      //   //errCheck3 = true;
-      //   return false;
-      // }
-      // //console.log("------------------------------")
-      // console.log(data);
-      // return true;
-      // //console.log("$$$$$$$$$$$$$$$$$$$$$$$$$")
-    }).then(function(data) {
-        var emailReceived = data.cust_email;
-        if (emailReceived === newEmail) {
-          alert(">>>>>> Email already exists");
-          return true;
-        }
-        else {
-          return false;
-        }
+    $.get("/api/customers/" + newEmail, function (data) { }).then(function (data) {
+      var emailReceived = data.cust_email;
+      if (emailReceived === newEmail) {
+        alert(">>>>>> Email already exists");
+        return true;
+      }
+      else {
+        return false;
+      }
     });
   }
 
-  $(document).unbind("click").on("click", "#newSubmit", function (event) {
-    // $("#newSubmit").on("click", function(event) {
+  // Create New Customer and Login
+  $(document).on("click", "#newSubmit", function (event) {
+    // $(document).unbind("click").on("click", "#newSubmit", function (event) {
+    // Prevent double-click
+    event.stopImmediatePropagation();
+    // Prevent default action
     event.preventDefault();
-    // alert("logiiiiiinnnn");
+
     var newName = $("#newName")
       .val()
       .trim();
@@ -174,9 +155,6 @@ $(document).ready(function () {
     }
 
     alert("flags>>>>" + errCheck1 + " " + errCheck2 + " " + errCheck3);
-    // var errCheck1 = false;
-    // var errCheck2 = false;
-    // var errCheck3 = false;
 
     // if everything is Ok, then add the new record to the database
     if (errCheck1 == false && errCheck2 == false && errCheck3 == false) {
@@ -190,201 +168,197 @@ $(document).ready(function () {
       };
       $.post("api/customers", newCustomer).then(function (req, res) {
         //  console.log(data);
-  
+
         console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
         // $("#newName").val("");
         // $("#newEmail").val("");
-        window.location.replace("/menu")
-      });  
+        window.location.href = "/menu"
+        // window.location.replace("/menu")
+      });
     }
 
-    // reset
-    // errCheck1 = false;
-    // errCheck2 = false;
-    // errCheck3 = false;    
   });
-  // login returning customer
-  $("#custSubmit").on("click", function (event) {
+
+
+  // Existing Customer Login
+
+  $(document).on("click", "#custSubmit", function (event) {
+
+    // Prevent double-click
+    event.stopImmediatePropagation();
+    // Prevent default action
     event.preventDefault();
+
+    // Clear Local Storage
+    localStorage.removeItem('id')
+    localStorage.removeItem('name')
+
+    // Clear Customer variables
+    custName = "";
+    custEmail = "";
+    custId = 0;
+
+    // Grab user input from existing customer form
+
     var newEmail = $("#formEmail")
       .val()
       .trim();
+    console.log("--Email address from the form--");
     console.log(newEmail);
 
     if (isValidEmail(newEmail)) {
       errCheck = false;
-    } else if (checkedDuplicate(newEmail)) {
-      errCheck2 = false;
-    }
-    if (errCheck2 == true || errCheck == true) {
-      alert("Either Enter Invalid email address or duplicate email adress");
+      console.log("--Checking for valid email, no errors found--")
+      console.log(errCheck);
+      console.log(newEmail);
     } else {
-      // window.location.replace("/menu")
-
-      $.get("/api/customers/", function (data) {
-        for (var i = 0; i < data.length; i++) {
-          var cusEmail = data[i].cust_email;
-          if (cusEmail === newEmail) {
-            custName = data[i].cust_name;
-            custEmail = data[i].cust_email;
-            custId = data[i].cid
-            break;
+      errCheck = true;
+      console.log("--Checking for valid email, errors found--")
+      console.log(errCheck);
+    }
+    if (errCheck === true) {
+      console.log("--errCheck after email validation with errors--")
+      console.log(errCheck);
+      alert("Please enter a valid email address");
+    } else {
+      console.log("--errCheck after email validation, no errors found--")
+      console.log(errCheck);
+      console.log(newEmail);
+      $.get("/api/customers/" + newEmail, function (data) { })
+        .then(function (data) {
+          console.log("--Results after db search for newEmail match--")
+          console.log(data);
+          if (data !== null) {
+            custName = data.cust_name;
+            custEmail = data.cust_email;
+            custId = data.cid
+            console.log("---Email address in DB with these values---")
+            console.log(custName);
+            console.log(custEmail);
+            console.log(custId);
+          } else {
+            alert("Sorry, no account exists for this email address.");
+            custId = 0;
+            errCheck = true
           }
-        }
 
-        alert(custId + " " + custEmail + " " + custName);
+          if (custId !== 0 && typeof custId != 'undefined') {
+            alert("CID: " + custId + " Email: " + custEmail + " Name: " + custName);
 
-        // alert("custumer id found: cusId, cusname, cusname", custId, custEmail, custName);
+            console.log("--custId in index--");
+            console.log(custId);
+            console.log("--custName in index--");
+            console.log(custName);
 
-        // custName = data.cust_name;
-        // custEmail = data.cust_email;
-        // custId = data.cid;
-        //console.log("************* >>>>>>>")
-        //console.log(custName)
-        //console.log(data[6].cust_name);
-        window.location.replace("/menu")
-      })
+            localStorage.setItem('id', JSON.stringify(custId));
+            localStorage.setItem('name', JSON.stringify(custName));
+
+            // window.location.replace("/menu")
+            custName = "";
+            custEmail = "";
+            custId = 0;
+            window.location.href = "/menu"
+
+          } else {
+            custName = "";
+            custEmail = "";
+            custId = 0;
+          }
+        });
     }
   });
 
-  function isValidName(name) {
-    if (name.length < 1) {
-      return false;
-    }
-    var regEx = /^[a-zA-Z]+$/;
-    var validName = regEx.test(name);
-    
-    if (!validName) {
-      return false;
-    }
 
-    return true;
-  }
+  // Guest Login
 
-  function isValidEmail(email) {
-    if (email.length < 1) {
-      return false;
-    }
-
-    var regEx = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
-
-    var validEmail = regEx.test(email);
-    if (!validEmail) {
-      return false;
-    }
-
-    return true;
-  }
-
-
-
-
-  //Guest Login
-
-  $("#guestSubmit").on("click",function(event){
+  $("#guestSubmit").on("click", function (event) {
+    // Prevent double-click
+    event.stopImmediatePropagation();
+    // Prevent default action
     event.preventDefault();
-    var guestInput = $("#guestName").val().trim();
-    console.log("!!!!!!!!!!!!!!!!!!!!!");
-    console.log(guestInput);
-    
-    custId = 1;
-    custEmail = "guest@drinkstogo.com";
-    custName = guestInput;
 
-    window.location.replace("/menu")
+    // Clear Customer Variables
+    custName = "";
+    custEmail = "";
+    custId = 0;
+
+    // Clear Local Storage
+    localStorage.removeItem('id')
+    localStorage.removeItem('name')
+
+    var guestInput = $("#guestName").val().trim();
+
+    console.log("--Guest Input--");
+    console.log(guestInput);
+
+    if (isValidName(guestInput)) {
+      errCheck = false;
+      custId = 1;
+      console.log("--Checking for valid name, no errors found--")
+      console.log(errCheck);
+      console.log(guestInput);
+    } else {
+      errCheck = true;
+      custId = 0;
+      console.log("--Checking for valid name, errors found--")
+      console.log(errCheck);
+    }
+    if (errCheck === true) {
+      console.log("--errCheck after name validation with errors--")
+      console.log(errCheck);
+      alert("Please enter a valid name");
+    }
+
+    if (custId !== 0) {
+
+      custName = guestInput;
+      localStorage.setItem('id', JSON.stringify(custId));
+      localStorage.setItem('name', JSON.stringify(custName));
+
+      custName = "";
+      custEmail = "";
+      custId = 0;
+
+      window.location.href = "/menu";
+      // window.location.replace("/menu")
+    } else {
+      custName = "";
+      custEmail = "";
+      custId = 0;
+    }
   });
 
-  // Form, on submit
-  // Validate form
-  // Make sure the email address is not blank
-  // If error, set errCheck = true
-  // Make sure the email address is in a valid format
-  // If error, set errCheck = true
-  // Query Customers table to ensure the email address exists
-  // If error, set errCheck = true
-  // If errors
-  // Prompt user -- either fix, login as guest, or create account
-  // Set errCheck = false
-  // Validate again after submit
-  // If no errors:
-  // Store "email" input in custEmail variable and query database based on custEmail
-  // Store cid from database in custID variable
-  // Store cust_name from database in custName variable
-  // Login
-  // Login: Take user to menu.handlebars
-  // Write custID, custName, custEmail to the div
-  // Get Order History for this custID
-  // Join Customers and Orders on cid
-  // Join Orders and OrderItems on oid
-  // Join OrderItems and Products on pid
-  // Write Order History to Div
-  // Orders | ordered (based on oid)
-  // OrderItems | item_no (based on oid)
-  // Products | prod_name (based on pid)
-  // Products | type (based on pid)
-  // OrderItems | size (based on oid)
-  // OrderItems | price (based on oid)
-  // OrderItems | qty (based on oid)
-  // Create an Order in Orders table
-  // oid field will be autogenerated
-  // cid field should be set to custID variable
-  // order_name field should be set to custName variable
-  // ordered field will be autogerated with current date and time
-  // Store order contents from database into variables
-  // oid --> orderId variable
-  // order_name --> orderName variable
-  // ordered --> orderDate variable
-
-  // Create an Account
+  // Customize Header in menu.handlebars
   // ------------------------------------------
-  // Completed: 03/__/2020 by: Jyochsna
+  // Completed: 03/__/2020 by: Pam
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
 
-  // Logic for Create an Account index.handlebars Modal
-  // $(".modal").modal();
 
-  // Validate Create an Account Form
-  // $(document).on("click", "#newSubmit", function (event) {
-  //   event.preventDefault();
-  //   // alert("logiiiiiinnnn");
-  //   var newName = $("#newName")
-  //     .val()
-  //     .trim();
-  //   var newEmail = $("#newEmail")
-  //     .val()
-  //     .trim();
+  function getCustInfo() {
 
-  //   if (newName.length < 1) {
-  //     errCheck = true;
-  //   }
+    // Pull Customer info from local storage
+    custId = JSON.parse(localStorage.getItem('id'));
+    custName = JSON.parse(localStorage.getItem('name'));
 
-  //   if (!isValidEmail(newEmail)) {
-  //     errCheck = true;
-  //   }
+    console.log("--custId in menu--");
+    console.log(custId);
+    console.log("--custName in menu--");
+    console.log(custName);
 
-  //   if (errCheck === true) {
-  //     alert("Error Detected");
-  //   }
 
-  // var newCustomer = {
-  //   cust_name: $("#newName")
-  //     .val()
-  //     .trim(),
-  //   cust_email: $("#newEmail")
-  //     .val()
-  //     .trim()
-  // };
-  // $.post("api/customers", newCustomer).then(function (req, res) {
-  //   //  console.log(data);
+    // Put Welcome message and Customer name in the header
+    var profile = $("#profile");
+    profile.text("");
+    var content = $("<h3 class='brown-text text-darken-4'>");
+    content.text("Welcome " + custName);
+    profile.append(content);
+    console.log(content);
+  }
 
-  //   console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
-  //   // $("#newName").val("");
-  //   // $("#newEmail").val("");
-  //   window.location.replace("/menu")
-  // });
+  // Call getCustInfo ()
+  getCustInfo();
 
-  // });
 
   $("#songButton").on("click", function (event) {
     event.preventDefault();
@@ -431,45 +405,14 @@ $(document).ready(function () {
     console.log("usersong is below");
     console.log(usersSong);
   });
-  // Customize Header in menu.handlebars
+
+
+  // Add to Cart from Menu in menu.handlebars
   // ------------------------------------------
   // Completed: 03/__/2020 by: Pam
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
 
-  function getCustName() {
-    custName = "Pamela";
-    var profile = $("#profile");
-    profile.text("");
-    var content = $("<h3 class='brown-text text-darken-4'>");
-    content.text("Welcome " + custName);
-    profile.append(content);
-    console.log(content);
-  }
-  getCustName();
-
-  // Customize Header in menu.handlebars
-  // ------------------------------------------
-  // Completed: 03/__/2020 by: Pam
-  // Tested: 03/__/2020 by: _____
-  // ------------------------------------------
-  // custName = "Sonal";
-  // custID = 3;
-
-  // function getHistory() {
-  //   $.get("/api/orders/" + custID, function (data) {
-  //     ordersArray = data;
-  //   }).then(function (data) {
-  //     console.log(data);
-  //     var profile = $("#profile");
-  //     profile.text("");
-  //     var content = $("<h3>");
-  //     content.text(custName);
-  //     profile.append(content);
-  //     console.log(content);
-  //   });
-  // }
-  // getHistory();
 
   $(".atc")
     .unbind("click")
@@ -485,16 +428,6 @@ $(document).ready(function () {
       $.get("/api/products/" + itemProdId, function (data) {
         // Increment Item Counter by 1
         itemCounter++;
-
-        // Test Parameters
-        orderId = 6;
-        custId = 7;
-        orderName = "Pam Test";
-
-        // Set Customer-specific variables with existing variables
-        itemOrderId = orderId;
-        itemCustId = custId;
-        itemOrderName = orderName;
 
         // Set Item No variable to ItemCounter
         itemNo = itemCounter;
@@ -551,3 +484,27 @@ $(document).ready(function () {
       $("#cart").append(cartArray);
     });
 });
+
+
+  // ATC from Order History
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+  // custName = "Sonal";
+  // custID = 3;
+
+  // function getHistory() {
+  //   $.get("/api/orders/" + custID, function (data) {
+  //     ordersArray = data;
+  //   }).then(function (data) {
+  //     console.log(data);
+  //     var profile = $("#profile");
+  //     profile.text("");
+  //     var content = $("<h3>");
+  //     content.text(custName);
+  //     profile.append(content);
+  //     console.log(content);
+  //   });
+  // }
+  // getHistory();
