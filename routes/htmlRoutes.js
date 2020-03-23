@@ -75,6 +75,7 @@ module.exports = function (app) {
           order: dataOrders[i].dataValues.oid,
           customer: dataOrders[i].dataValues.order_name,
           item: dataOrders[i].dataValues.item_no,
+          pid: dataOrders[i].dataValues.pid,
           description: dataOrders[i].dataValues.prod_name,
           size: dataOrders[i].dataValues.size,
           price: dataOrders[i].dataValues.price,

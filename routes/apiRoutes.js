@@ -36,8 +36,19 @@ module.exports = function (app) {
       console.log(data);
     });
   });
+    // Order Items API by ID Get Route
+    app.get("/api/orderitemsid/:id", function (req, res) {
+      db.OrderItem.findAll({
+        where: {
+          cid: req.params.id
+        }
+      }).then(function (data) {
+        res.json(data);
+        console.log(data);
+      });
+    });
   // Order Items API by CID Get Route
-  app.get("/api/orderitems/:cid", function (req, res) {
+  app.get("/api/orderitemscid/:cid", function (req, res) {
     db.OrderItem.findAll({
       where: {
         cid: req.params.cid
