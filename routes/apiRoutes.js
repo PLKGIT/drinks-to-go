@@ -26,7 +26,7 @@ module.exports = function (app) {
   });
   // Orders API Get Route
   app.get("/api/orders/:cid", function (req, res) {
-    db.Order.findAll({
+    db.Order.findOne({
       where: {
         cid: req.params.cid
       },
