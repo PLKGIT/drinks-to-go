@@ -15,7 +15,12 @@ module.exports = function (app) {
         res.json(dbCustomerEmails);
         console.log("+++++++++++ customer email received.....");
         console.log(dbCustomerEmails);
+      })
+      .catch(function(err) {
+        res.json(err);
       });
+      console.log("------- no emails found ---------");
+      return null;
     });
     
   app.get("/api/customers", function (req, res) {
