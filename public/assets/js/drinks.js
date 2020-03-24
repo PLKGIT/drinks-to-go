@@ -112,6 +112,9 @@ $(document).ready(function () {
     }
 
     //alert("flags >>>> (valid_name, valid_email, duplicate_email) " + errCheck1 + " " + errCheck2 + " " + errCheck3);
+    var newName = $("#newName")
+      .val()
+      .trim();
 
     // if everything is Ok, then add the new record to the database
     if  ( errCheck1 == false && errCheck2 == false && errCheck3 == false) {
@@ -139,15 +142,15 @@ $(document).ready(function () {
         if (res) {
           // for customer that doesn't exist yet
           custName = newName;
-          orderName = custName;
+          //orderName = custName;
 
           localStorage.setItem('cid', JSON.stringify(custId));
           localStorage.setItem('name', JSON.stringify(custName));
           localStorage.setItem('oid', JSON.stringify(orderId));
 
-          custName = "";
-          custEmail = "";
-          custId = 0;
+          // custName = "";
+          // custEmail = "";
+          // custId = 0;
 
           window.location.href = "/menu"
         }
@@ -157,10 +160,13 @@ $(document).ready(function () {
     else{
       // already exisiting customer
       custName = newName;
-      orderName = custName;
+      //orderName = custName;
 
       // TODO: pass correct cusId and name to the next page
       // currently not working...
+      localStorage.setItem('cid', JSON.stringify(custId));
+      localStorage.setItem('name', JSON.stringify(custName));
+      localStorage.setItem('oid', JSON.stringify(orderId));
 
       window.location.href = "/menu"
     }
