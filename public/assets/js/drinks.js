@@ -6,6 +6,8 @@
 
 // Global Variables
 // ------------------------------------------
+// require("dotenv").config();
+
 // ------------------------------------------
 
 // Form Variables
@@ -720,7 +722,7 @@ $(document).on("click", ".rfc", function (event){
       $.post("/api/spotify", song, function (data) {
         // console.log("data is below");
         // console.log("----------------------------")
-        // console.log(data)
+        console.log(data)
         $(".dropdown-trigger").dropdown({ hover: true, constrainWidth: false });
 
         for (var i = 0; i < 5; i++) {
@@ -744,7 +746,9 @@ $(document).on("click", ".rfc", function (event){
     event.preventDefault();
     var usersSong = $(this).attr("dataval");
     console.log("usersong is below");
-    $.post("api/songs", { song: usersSong });
+    $.post("api/songs", { song: usersSong }).then(function(req, res){
+
+    });
   });
 
   $(".songChoice").on("click", function () {

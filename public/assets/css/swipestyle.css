@@ -1,0 +1,152 @@
+
+* {
+    box-sizing: border-box;
+  }
+  
+  /* :root {
+  --color1:rgb(208, 230, 245);
+  --color0:rgb(142, 183, 209);
+  --color2:rgb(240, 246, 250);
+  --color3:rgb(128, 107, 92);
+  --color4:rgb(241, 101, 60);
+  }
+   */
+  /**
+  Page Layout
+  **/
+  
+  html,body {
+    width: 100%;
+    margin: 0;
+  }
+/*   
+  body {
+    display: grid;
+    grid-template-columns: minmax(min-content, 1024px);
+    justify-content: center;
+    grid-template-rows: min-content min-content 1fr;
+    background-attachment: fixed;
+    background-size: 100vw 100vh;
+    background: var(--color0);
+  } */
+  
+  main {
+    /* Each child element is as wide as main in a single row */
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    grid-template-rows: 1fr;
+  
+    /* This element will overflow scroll and scroll-snap */
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+  
+  /* On small screens use proximity instead for a slightly different experience */
+  /* @media only screen and (max-width: 480px) {
+    main {
+      scroll-snap-type: x proximity;
+    }
+  } */
+  
+  main > article {
+    scroll-snap-align: start;
+  }
+  
+  
+  /**
+  article layout
+  **/
+  
+  body {
+    font-family: 'Sen', sans-serif;
+  }
+  
+  header {
+    padding: 0.2em 2em;
+    background: var(--color1);
+  }
+  
+  h1, h2, h3, h4 {     
+    font-family: 'Bellota Text', cursive;
+  }
+  
+  article {
+    height: 100%;
+    overflow-y: auto;
+  }
+  
+  /**
+  Styling
+  **/
+  
+  h2, h1 {
+    margin: 5px;
+    font-style: italic;
+  }
+  
+  h3 {
+    font-size: 2em;
+  }
+  
+  main {
+    background: var(--color1);
+  }
+  
+  nav {
+    display: flex;
+  }
+  
+  nav > a {
+    display: inline-block;
+    flex-grow: 1;
+    text-align: center;
+  /*   border: 1px solid darksalmon; */
+    border-width: 1px 1px 0 0;
+    background: var(--color2);
+    transition: background 0.5s ease;
+    padding: 1em;
+    color: black;
+  }
+  
+  nav > a.focus {
+    background: var(--color3);
+    color: white;
+  }
+  
+  li > a {
+    padding: 1em;
+    display: inline-block;
+    flex: 1;
+  }
+  
+  article {
+    --padding-size: 1em;
+    padding: var(--padding-size);
+  }
+  
+  /* img {
+    max-width: 100%;
+  } */
+  
+  img.hero {
+    margin: calc(var(--padding-size) * -1);
+    margin-bottom: var(--padding-size);
+    max-height: 60vh;
+    object-fit: cover;
+    width: calc(100% + var(--padding-size) * 2);
+    max-width: calc(100% + var(--padding-size) * 2);
+  }
+  
+  aside {
+    float: left;
+    width: 20em;
+    max-width: 100%;
+    background-color: var(--color4);
+    margin: .5em 1em .5em 0;
+    padding: .5em;
+    color: white;
+    border: 1px solid rgba(0,0,0,0.5); 
+    box-shadow: 0 0 10em -4em rgba(0,0,0,0.4) inset;50% 50% black inset;
+  }

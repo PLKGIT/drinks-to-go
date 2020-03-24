@@ -20,6 +20,7 @@ body {
       height: 45px;
       text-align: center;
       width: 100%;
+
       /* background-color: #BFA396; */
      
    
@@ -28,7 +29,18 @@ body {
       margin-top:-10px;
       clear: both;
       /* border-top: 5px solid #00970C; */
+
+
+      /* position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding-bottom: 10px; */
 }
+
+
+
 
 #index {
       background: url("../img/smile.jpg") no-repeat center fixed;
@@ -38,28 +50,17 @@ body {
 }
 
 h1, h2 {
-      color:white;
       text-align: center;
-      font-family: 'Lobster', cursive;
+      font-family: 'Pacifico', cursive;
       font-weight: bolder;
 }
 
-h3 {
-      font-family: 'Lobster', cursive;
-}
-
-h4 {
-      font-family: 'Roboto', sans-serif;
-}
-
-h5 {
-      color:white;
-      text-align: center;
-      font-family: 'Lobster', cursive;
+h3, h4, h5 {
+      font-family: 'Pacifico', cursive;
 }
 
 h6 {
-      font-family: 'Lobster', cursive;
+      font-family: 'Pacifico', cursive;
       font-size: 2em;
 }
 
@@ -74,15 +75,16 @@ p {
 
 .btn {
       margin-top: 10px;
+      font-family: 'Spinnaker', sans-serif;
 }
 
 .btn:hover {
       background: rgb(58, 37, 37);
 }
   
-/* .btn:focus {
+.btn:focus {
       background: #a3aeba;
-} */
+}
 
 #checkout {
       width: 100%;
@@ -98,26 +100,35 @@ p {
       color:white;
 }
 
-.music, .input-field input[type=text]:focus + label, .input-field input[type=email]:focus + label, .materialize-textarea:focus:not([readonly]) + label {
-      color:  rgb(58, 37, 37) !important;
+.music, .input-field input[type=text]:focus + label, .input-field input[type=email]:focus + label {
+      color:  #3e2723 !important;
 }
    
-.input-field input[type=text]:focus, .input-field input[type=email]:focus, .materialize-textarea:focus:not([readonly]) {
-      border-bottom: 1px solid  rgb(58, 37, 37) !important;
-      box-shadow: 0 1px 0 0  rgb(58, 37, 37) !important;
+.input-field input[type=text]:focus, .input-field input[type=email]:focus {
+      border-bottom: 1px solid  #3e2723 !important;
+      box-shadow: 0 1px 0 0  #3e2723 !important;
 }
   
-.music, .input-field input[type=text], .input-field input[type=email] + label, .materialize-textarea:not([readonly]) + label {
-      color: rgb(116, 85, 85) !important;
+.music, .input-field input[type=text] + label, .input-field input[type=email] + label {
+      color: #a1887f !important;
 }
   
-.input-field input[type=text], .input-field input[type=email], .materialize-textarea:not([readonly]) {
+.input-field input[type=text], .input-field input[type=email] {
       border-bottom: 1px solid rgb(116, 85, 85) !important;
       box-shadow: 0 1px 0 0 rgb(116, 85, 85) #2B2B2B !important;
 }
 
+.input-field input[type=text].valid, .input-field input[type=email].valid {
+      border-bottom: 1px solid #3e2723;
+      box-shadow: 0 1px 0 0 #3e2723;
+}
+
+label:active {
+      color: #a1887f;
+}
+
 .section {
-      border: 1px solid rgb(58, 37, 37);
+      border: 1px solid #3e2723;
 }
 
 .row1 {
@@ -144,7 +155,13 @@ p {
       margin-top: -5%;
 }
 
+.card-content {
+      background-color: #efebe9;
+}
 
+.menuHeading {
+      line-height: .5em;
+}
 
 
 
@@ -188,6 +205,13 @@ p {
       background: #795548;
   }
   
+ thead {
+      font-family: 'Spinnaker', sans-serif;
+      font-size: 1.75em;
+ }
+ tbody {
+      font-family: 'Spinnaker', sans-serif;
+ }
   /* * {
       box-sizing: border-box;
   } */
@@ -237,3 +261,5 @@ p {
   .modal-close{
     color:white;
   } */
+
+  
