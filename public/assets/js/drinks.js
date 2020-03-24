@@ -98,10 +98,10 @@ $(document).ready(function () {
   function handleCreateNewCustomerCallback(status){
     if (status == "yes") { 
       errCheck3 = true; // duplicate found
-      alert("Duplicate email address found.");
+      alert("This Email Address already exists in our database. Please login as a returning customer");
     }
     else if (status == "no") {
-      alert("No duplicate email address found.");
+      alert("Thank you for signing up.");
       errCheck3 = false; // duplicate not found
     }
     else if (status == "undefined") {
@@ -118,7 +118,7 @@ $(document).ready(function () {
 
     // if everything is Ok, then add the new record to the database
     if  ( errCheck1 == false && errCheck2 == false && errCheck3 == false) {
-      console.log("if statement is thereeeeee")
+      // console.log("if statement is thereeeeee")
       var newCustomer = {
         cust_name: $("#newName")
           .val()
@@ -168,7 +168,7 @@ $(document).ready(function () {
       localStorage.setItem('name', JSON.stringify(custName));
       localStorage.setItem('oid', JSON.stringify(orderId));
 
-      window.location.href = "/menu"
+      window.location.href = "/"
     }
   }
 
