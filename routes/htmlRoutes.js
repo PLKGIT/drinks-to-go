@@ -140,8 +140,16 @@ module.exports = function (app) {
     });
   });
 
+
+  app.get("/article", function (req, res) {
+    res.render("article");
+  });
+
+
   // 404 HTML Route
   app.get("*", function (req, res) {
     res.render("404");
   });
+
+
 };
