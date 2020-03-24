@@ -662,7 +662,7 @@ $(document).on("click", ".rfc", function (event){
     event.preventDefault();
 
     if (cartArray.length>0){
-          // Put cartArray in localstorage
+    // Put cartArray in localstorage
     localStorage.setItem('cart', JSON.stringify(cartArray));
 
     // Navigate to checkout.handlebars
@@ -753,7 +753,33 @@ $(document).on("click", ".rfc", function (event){
     console.log(usersSong);
   });
 
+
+  // Employee Page
+  // ----------------------------------------------
+  // Spotify (pending)
+  // Changing status
   
+  // Status Page
+  // ---------------------------------------------
+  // Spotify (pending)
+  // DIV for the Song Playing Now
+  // Posting to Spotify table??
+
+  // Checkout Page
+  // ----------------------------------------------
+  // Display the Cart
+  // Copy the cart
+  // Sum of Cart
+  // Post Order Items to the OrderItems table
+
+  // Sliding Pages
+  // ----------------------------------------------
+  // Getting them done
+
+  // Less important
+  // ----------------------------------------------
+  // Update button on the Order History
+  // Changing the QTY on OrderItem
 
   //---------------------------------------------
   // End of drinks.js
