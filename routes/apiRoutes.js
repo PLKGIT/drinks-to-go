@@ -11,12 +11,18 @@ module.exports = function (app) {
       where: {
         cust_email: req.params.cust_email
       }
-    }).then(function (dbCustomerEmails) {
-      res.json(dbCustomerEmails);
-      console.log("+++++++++++ customer email received.....");
-      console.log(dbCustomerEmails);
+      }).then(function(dbCustomerEmails){
+        res.json(dbCustomerEmails);
+        console.log("+++++++++++ customer email received.....");
+        console.log(dbCustomerEmails);
+      })
+      .catch(function(err) {
+        res.json(err);
+      });
+      console.log("------- no emails found ---------");
+      return null;
     });
-  });
+ 
 
   app.get("/api/customers", function (req, res) {
     db.Customer.findAll({}).then(function (data) {
