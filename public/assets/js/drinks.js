@@ -2,6 +2,8 @@
 // * Team JS File
 // ******************************************************************************************************
 
+// import { check } from "prettier";
+
 // Global Variables
 // ------------------------------------------
 // require("dotenv").config();
@@ -11,12 +13,16 @@
 // Form Variables
 // ------------------------------------------
 var errCheck = false;
+var errCheck1 = false;
+var errCheck2 = false;
+var errCheck3 = false;
 
 // Customer Variables
 // ------------------------------------------
 var custName;
 var custEmail;
 var custId;
+
 
 // Order Variables
 // ------------------------------------------
@@ -29,9 +35,6 @@ var orderDate;
 // ------------------------------------------
 var cartArray = [];
 var itemCounter = 0;
-var itemOrderId;
-var itemCustId;
-var itemOrderName;
 var itemNo;
 var itemProdId;
 var itemProdName;
@@ -49,79 +52,75 @@ var songStatus = "pending";
 var songArtist;
 // Include contents of custId in Song Array
 
-//helper Functions
-// function isValidEmail(email) {
-
-//   if (email.length < 1) {
-//     return false;
-//   }
-
-//   //var regEx = /^[A-Z0-9][A-Z0-9._%+-]{0,63}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/;
-//   //var regEx = /\\S+@\\S+/;
-//   var regEx = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
-
-//   var validEmail = regEx.test(email);
-//   if (!validEmail) {
-//     return false;
-//   }
-
-//   return true;
-// }
-
-// Query Customers table to ensure the email address exists
-// function isEmailAddressExistsInTable(emailInput) {
-//   $.get("/api/customers/" + newEmail, function (data) {
-//     console.log("----FormEmail----");
-//     console.log(newEmail);
-//   }).then(function (data) {
-
-//     console.log(data);
-//     // TODO: how do we check the data is valid or not that we get from apiRoutes.js??
-//     // TODO: currently this is not working !!
-//     if (data != null) {
-//       return true;
-//     }
-//     else {
-//       return false;
-//     }
-//   });
-// }
-
 // Logic
 // ------------------------------------------
 // ------------------------------------------
 
-$(document).ready(function() {
+$(document).ready(function () {
   // Logic for index.handlebars Modal
+  // ------------------------------------------
   $(".modal").modal();
 
-  var errCheck1 = false;
-  var errCheck2 = false;
-  var errCheck3 = false;
+  // User Input Validations on index.handlebars
+  // ------------------------------------------
 
-  function checkedDuplicate() {
-    $.get("/api/customers/" + newEmail, function(data) {
-      if (!data) {
-        errCheck3 = true;
+  // Check if form name input is valid
+  function isValidName(name) {
+    if (name.length < 1) {
+      return false;
+    }
+    var regEx = /^[a-zA-Z]+$/;
+    var validName = regEx.test(name);
+
+    if (!validName) {
+      return false;
+    }
+    return true;
+  }
+
+  // Check if form email address input is valid
+  function isValidEmail(email) {
+    if (email.length < 1) {
+      return false;
+    }
+
+    var regEx = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+
+    var validEmail = regEx.test(email);
+    if (!validEmail) {
+      return false;
+    }
+
+    return true;
+  }
+
+  // Check if new account form email address exists in database
+  function checkedDuplicate(newEmail) {
+    $.get("/api/customers/" + newEmail, function (data) { }).then(function (data) {
+      var emailReceived = data.cust_email;
+      if (emailReceived === newEmail) {
+        alert(">>>>>> Email already exists");
+        return true;
       }
-      //console.log("------------------------------")
-      console.log(data);
-      //console.log("$$$$$$$$$$$$$$$$$$$$$$$$$")
+      else {
+        return false;
+      }
     });
   }
 
-  $(document).on("click", "#newSubmit", function(event) {
-    // $("#newSubmit").on("click", function(event) {
+  // Create New Customer and Login
+  $(document).on("click", "#newSubmit", function (event) {
+    // Prevent double-click
+    event.stopImmediatePropagation();
+    // Prevent default action
     event.preventDefault();
-    // alert("logiiiiiinnnn");
+
     var newName = $("#newName")
       .val()
       .trim();
     var newEmail = $("#newEmail")
       .val()
       .trim();
-
-     
 
     if (isValidName(newName)) {
       errCheck1 = false;
@@ -138,223 +137,590 @@ $(document).ready(function() {
     }
 
     if (checkedDuplicate(newEmail)) {
-      errCheck3 = false;
+      errCheck3 = true; // duplicate found, so error
     }
     else {
-      errCheck3 = true;
+      errCheck3 = false; // no duplicate found
     }
 
     if (errCheck1 === true) {
       alert("Please Enter a Valid Name");
     }
-    if (errCheck2 === true || errCheck3 === true) {
-      alert("Either Enter Invalid email address or duplicate email adress");
-    }
-    
-    var errCheck1 = false;
-    var errCheck2 = false;
-    var errCheck3 = false;
-    
-    var newCustomer = {
-      cust_name: $("#newName")
-        .val()
-        .trim(),
-      cust_email: $("#newEmail")
-        .val()
-        .trim()
-    };
-    $.post("api/customers", newCustomer).then(function (req, res) {
-      //  console.log(data);
 
-      console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
-      // $("#newName").val("");
-      // $("#newEmail").val("");
-      window.location.replace("/menu")
-    });
-   
+    if (errCheck2 === true || errCheck3 === true) {
+      alert("Either Enter Invalid email address or duplicate email address");
+      alert(errCheck2 + " " + errCheck3)
+    }
+
+    alert("flags>>>>" + errCheck1 + " " + errCheck2 + " " + errCheck3);
+
+    // if everything is Ok, then add the new record to the database
+    if (errCheck1 == false && errCheck2 == false && errCheck3 == false) {
+      var newCustomer = {
+        cust_name: $("#newName")
+          .val()
+          .trim(),
+        cust_email: $("#newEmail")
+          .val()
+          .trim()
+      };
+      $.post("api/customers", newCustomer).then(function (req, res) {
+        //  console.log(data);
+
+        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        // $("#newName").val("");
+        // $("#newEmail").val("");
+
+        // SEE LINES 257-285 BELOW re orderName and passing data via localstorage (MUST BE DONE HERE AS WELL)
+        window.location.href = "/menu"
+        // window.location.replace("/menu")
+      });
+    }
+
   });
-// login returning customer
-  $("#custSubmit").on("click", function(event) {
+
+
+  // Existing Customer Login
+
+  $(document).on("click", "#custSubmit", function (event) {
+
+    // Prevent double-click
+    event.stopImmediatePropagation();
+    // Prevent default action
     event.preventDefault();
+
+    // Clear Local Storage
+    localStorage.removeItem('cid')
+    localStorage.removeItem('name')
+    localStorage.removeItem('oid')
+
+    // Clear Customer variables
+    custName = "";
+    custEmail = "";
+    custId=0;
+
+    // Grab user input from existing customer form
+
     var newEmail = $("#formEmail")
       .val()
       .trim();
+    console.log("--Email address from the form--");
     console.log(newEmail);
 
     if (isValidEmail(newEmail)) {
       errCheck = false;
-    } else if (checkedDuplicate(newEmail)) {
-      errCheck2 = false;
+      console.log("--Checking for valid email, no errors found--")
+      console.log(errCheck);
+      console.log(newEmail);
+    } else {
+      errCheck = true;
+      console.log("--Checking for valid email, errors found--")
+      console.log(errCheck);
     }
-    if (errCheck2 == true || errCheck == true) {
-      alert("Either Enter Invalid email address or duplicate email adress");
-    }else {
-     // window.location.replace("/menu")
-
-      $.get("/api/customers/", function(data){
-        for(var i = 0; i < data.length; i++) {
-          var cusEmail = data[i].cust_email;
-          if (cusEmail === newEmail) {
-            custName = data[i].cust_name;
-            custEmail = data[i].cust_email;
-            custId = data[i].cid
-            break;
+    if (errCheck === true) {
+      console.log("--errCheck after email validation with errors--")
+      console.log(errCheck);
+      alert("Please enter a valid email address");
+    } else {
+      console.log("--errCheck after email validation, no errors found--")
+      console.log(errCheck);
+      console.log(newEmail);
+      $.get("/api/customers/" + newEmail, function (data) { })
+        .then(function (data) {
+          console.log("--Results after db search for newEmail match--")
+          console.log(data);
+          if (data !== null) {
+            custName = data.cust_name;
+            custEmail = data.cust_email;
+            custId = data.cid
+            console.log("---Email address in DB with these values---")
+            console.log(custName);
+            console.log(custEmail);
+            console.log(custId);
+          } else {
+            alert("Sorry, no account exists for this email address.");
+            custId = 0;
+            errCheck = true
           }
-        }
 
-        alert(custId + " " + custEmail + " " + custName);
+          if (custId !== 0 && typeof custId != 'undefined') {
+            alert("CID: " + custId + " Email: " + custEmail + " Name: " + custName);
 
-        // alert("custumer id found: cusId, cusname, cusname", custId, custEmail, custName);
-        
-        // custName = data.cust_name;
-        // custEmail = data.cust_email;
-        // custId = data.cid;
-        //console.log("************* >>>>>>>")
-        //console.log(custName)
-        //console.log(data[6].cust_name);
-        window.location.replace("/menu")
-      })
+            console.log("--custId in index--");
+            console.log(custId);
+            console.log("--custName in index--");
+            console.log(custName);
+
+
+            // Pam's Test Data until OID functionality is available
+            orderId = 6
+
+            // Set orderName = custName variable
+            orderName = custName;
+
+            // CREATE AN ORDER in Orders Table
+                // using custId and orderName
+            // RETRIEVE new oid FROM DATABASE
+            // STORE oid in orderId
+            
+            // Pass custId, custName, and orderId via localstorage
+
+            localStorage.setItem('cid', JSON.stringify(custId));
+            localStorage.setItem('name', JSON.stringify(orderName));
+            localStorage.setItem('oid', JSON.stringify(orderId));
+
+            custName = "";
+            custEmail = "";
+            custId = 0;
+
+            // Navigate to menu.handlebars
+            window.location.href = "/menu"
+
+          } else {
+            custName = "";
+            custEmail = "";
+            custId = 0;
+          }
+        });
     }
   });
 
-  function isValidName(name) {
-    if (name.length < 1) {
-      return false;
+
+  // Guest Login
+
+  $("#guestSubmit").on("click", function (event) {
+    // Prevent double-click
+    event.stopImmediatePropagation();
+    // Prevent default action
+    event.preventDefault();
+
+    // Clear Customer Variables
+    custName = "";
+    custEmail = "";
+    custId = 0;
+
+    // Clear Local Storage
+    localStorage.removeItem('cid')
+    localStorage.removeItem('name')
+    localStorage.removeItem('oid')
+
+    // User input from form
+    var guestInput = $("#guestName").val().trim();
+
+    console.log("--Guest Input--");
+    console.log(guestInput);
+
+    // Validate user input
+    if (isValidName(guestInput)) {
+      errCheck = false;
+
+      // Set custId to the guest user's cid
+      custId = 1;
+      console.log("--Checking for valid name, no errors found--")
+      console.log(errCheck);
+      console.log(guestInput);
+    } else {
+      errCheck = true;
+      custId = 0;
+      console.log("--Checking for valid name, errors found--")
+      console.log(errCheck);
     }
-    return true;
-  }
-
-  function isValidEmail(email) {
-    if (email.length < 1) {
-      return false;
+    if (errCheck === true) {
+      console.log("--errCheck after name validation with errors--")
+      console.log(errCheck);
+      alert("Please enter a valid name");
     }
 
-    var regEx = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    // If no errors, send user to menu page
+    if (custId !== 0) {
+      // Set orderName = guestInput variable
+      orderName = guestInput;
 
-    var validEmail = regEx.test(email);
-    if (!validEmail) {
-      return false;
+      // CREATE AN ORDER in Orders Table
+          // using custId and orderName
+      // RETRIEVE new oid FROM DATABASE
+      // STORE oid in orderId
+      
+      // Pass custId, custName, and orderId via localstorage
+
+      localStorage.setItem('cid', JSON.stringify(custId));
+      localStorage.setItem('name', JSON.stringify(orderName));
+      localStorage.setItem('oid', JSON.stringify(orderId));
+
+      custName = "";
+      custEmail = "";
+      custId = 0;
+
+      // Navigate to menu.handlebars
+      window.location.href = "/menu"
+
+    } else {
+      // Clear customer variables
+      custName = "";
+      custEmail = "";
+      custId = 0;
     }
+  });
 
-    return true;
-  }
-
-
-
-
-  //Guest Login
-
-  // $("#guestSubmit").on("click",function(event){
-  //   event.preventDefault();
-  //   var guestInput = $("#guestName").val().trim();
-  //   console.log("!!!!!!!!!!!!!!!!!!!!!");
-  //   console.log(guestInput);
-  //   window.location.replace("/menu")
-  // });
-  // Form, on submit
-  // Validate form
-  // Make sure the email address is not blank
-  // If error, set errCheck = true
-  // Make sure the email address is in a valid format
-  // If error, set errCheck = true
-  // Query Customers table to ensure the email address exists
-  // If error, set errCheck = true
-  // If errors
-  // Prompt user -- either fix, login as guest, or create account
-  // Set errCheck = false
-  // Validate again after submit
-  // If no errors:
-  // Store "email" input in custEmail variable and query database based on custEmail
-  // Store cid from database in custID variable
-  // Store cust_name from database in custName variable
-  // Login
-  // Login: Take user to menu.handlebars
-  // Write custID, custName, custEmail to the div
-  // Get Order History for this custID
-  // Join Customers and Orders on cid
-  // Join Orders and OrderItems on oid
-  // Join OrderItems and Products on pid
-  // Write Order History to Div
-  // Orders | ordered (based on oid)
-  // OrderItems | item_no (based on oid)
-  // Products | prod_name (based on pid)
-  // Products | type (based on pid)
-  // OrderItems | size (based on oid)
-  // OrderItems | price (based on oid)
-  // OrderItems | qty (based on oid)
-  // Create an Order in Orders table
-  // oid field will be autogenerated
-  // cid field should be set to custID variable
-  // order_name field should be set to custName variable
-  // ordered field will be autogerated with current date and time
-  // Store order contents from database into variables
-  // oid --> orderId variable
-  // order_name --> orderName variable
-  // ordered --> orderDate variable
-
-  // Create an Account
+  // Customize Header in menu.handlebars
   // ------------------------------------------
-  // Completed: 03/__/2020 by: Jyochsna
+  // Completed: 03/__/2020 by: Pam
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
 
-  // Logic for Create an Account index.handlebars Modal
-  // $(".modal").modal();
 
-  // Validate Create an Account Form
-  // $(document).on("click", "#newSubmit", function (event) {
-  //   event.preventDefault();
-  //   // alert("logiiiiiinnnn");
-  //   var newName = $("#newName")
-  //     .val()
-  //     .trim();
-  //   var newEmail = $("#newEmail")
-  //     .val()
-  //     .trim();
+  function getCustInfo() {
 
-  //   if (newName.length < 1) {
-  //     errCheck = true;
-  //   }
+    // Clear cart
+    cartArray.length=0;
+    localStorage.removeItem('cart');
 
-  //   if (!isValidEmail(newEmail)) {
-  //     errCheck = true;
-  //   }
+    // Clear customer variables
+    custId=0;
+    orderName="";
+    orderId=0;
 
-  //   if (errCheck === true) {
-  //     alert("Error Detected");
-  //   }
+    // Pull Customer info from local storage
+    custId = JSON.parse(localStorage.getItem('cid'));
+    orderName = JSON.parse(localStorage.getItem('name'));
+    orderId = JSON.parse(localStorage.getItem('oid'));
 
-    // var newCustomer = {
-    //   cust_name: $("#newName")
-    //     .val()
-    //     .trim(),
-    //   cust_email: $("#newEmail")
-    //     .val()
-    //     .trim()
-    // };
-    // $.post("api/customers", newCustomer).then(function (req, res) {
-    //   //  console.log(data);
+    console.log("--custId in menu--");
+    console.log(custId);
+    console.log("--orderName in menu--");
+    console.log(orderName);
+    console.log("--orderId in menu--");
+    console.log(orderId);
 
-    //   console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
-    //   // $("#newName").val("");
-    //   // $("#newEmail").val("");
-    //   window.location.replace("/menu")
-    // });
 
-  // });
+    // Put Welcome message and OrderName in the header
+    var profile = $("#profile");
+    profile.text("");
+    var contentProfile = $("<h3 class='brown-text text-darken-4'>");
+    contentProfile.text("Welcome " + orderName);
+    profile.append(contentProfile);
+    console.log(contentProfile);
+  }
 
-  $("#songButton").on("click", function(event) {
+    // Call getCustInfo ()
+    getCustInfo();
+
+
+  // Get Order History
+
+  function getOrderHistory() {
+    $.get("/api/orderitemscid/" + custId, function (data) { })
+      .then(function (data) {
+
+        $("#ordHistory").text("");
+
+        // console.log("----Data---");
+        // console.log(data);
+
+        // console.log("----Data Length---");
+        // console.log(data.length);
+
+        if (data.length > 0) {
+          $("#ordHistory").text("");
+          $("#ordHistory").append("<table><thead><tr>")
+          $("#ordHistory").append("<th>Order</th><th>Product</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
+          $("#ordHistory").append("</thead><tbody>");
+          var catOrder;
+          for (var i = 0; i < data.length; i++) {
+            catOrder = $("<tr>");
+            catOrder.append("<td>" + data[i].oid + "</td>");
+            catOrder.append("<td>" + data[i].prod_name + "</td>");
+            catOrder.append("<td>" + data[i].size + "</td>");
+            catOrder.append("<td class='right-align'>" + data[i].price + "</td>");
+            catOrder.append("<td class='center-align'>" + data[i].qty + "</td>");
+            catOrder.append("<button class='btn-flat atch' type='submit' id='" + data[i].id + "'><i class='small material-icons'>add_box</i></button></td>");
+            catOrder.append("</tr>");
+            $("#ordHistory").append(catOrder);
+          }
+          catOrder.append("</tbody></table>");
+
+        } else {
+
+          // Create message for no order history results
+          $("#ordHistory").text("");
+          $("#ordHistory").append("<tr><td><h6 class='pink-text center-align'>No Order History Available</h6></td></tr>");
+        }
+      });
+  };
+
+  // Need a button on Modal that calls getOrderHistory to refresh data
+  getOrderHistory()
+
+
+
+
+  // Add to Cart from Menu in menu.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+
+
+  $(".atcm").unbind("click").click(function (){
+
+    // Prevent default action
+    event.preventDefault();
+
+    // console.log("--this.id--");
+    // console.log(this.id);
+
+    // Set Product variables by searching product by PID in button
+    itemProdId = this.id;
+
+    // Pam's Test Data until oid functionality is available
+    itemOrderId = 6;
+
+    $.get("/api/products/" + itemProdId, function (data) {
+      // Increment Item Counter by 1
+      itemCounter++;
+
+      // Set Item No variable to ItemCounter
+      itemNo = itemCounter;
+      // Set itemProdName, itemSize, and itemPrice from database
+      itemProdName = data.prod_name;
+      itemSize = data.size;
+      itemPrice = data.price;
+    }).then(function (data) {
+      // Console Logs for Testing
+      console.log("--Data--");
+      console.log(data);
+      console.log("--itemProdName--");
+      console.log(itemProdName);
+      console.log("--itemSize--");
+      console.log(itemSize);
+      console.log("--itemPrice--");
+      console.log(itemPrice);
+      console.log("--orderId--");
+      console.log(orderId);
+      console.log("--custId--");
+      console.log(custId);
+      console.log("--orderName--");
+      console.log(orderName);
+      console.log("--itemNo--");
+      console.log(itemNo);
+      console.log("--itemProdId--");
+      console.log(itemProdId);
+      console.log("--itemProdName--");
+      console.log(itemProdName);
+      console.log("--itemQty--");
+      console.log(itemQty);
+
+      // Create Cart Item
+      var newCartItem = {
+        oid: orderId,
+        cid: custId,
+        order_name: orderName,
+        item_no: itemNo,
+        pid: itemProdId,
+        prod_name: itemProdName,
+        size: itemSize,
+        price: itemPrice,
+        qty: itemQty
+      };
+      console.log("--newCartItem--");
+      console.log(newCartItem);
+
+      // Push OrderItem Object to Cart Array
+      cartArray.push(newCartItem);
+
+      console.log("--cartArray--");
+      console.log(cartArray);
+
+      getCartItems()
+    });
+
+  });
+
+  // Add to Cart from Order History in menu.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+
+
+  $(document).on("click", ".atch", function (event) {
+
+    // Prevent double-click
+    event.stopImmediatePropagation();
+    // Prevent default action
+    event.preventDefault();
+    // Increment Item Counter by 1
+    // Set Item No variable to ItemCounter
+    // Grab the orderItems table's id from the button
+    // Search orderItems table by the id
+    // Grab product id from orderItems table
+    // Search product table by product id
+    // Set itemProdName, itemSize, and itemPrice from database
+        // itemProdName = data.prod_name;
+        // itemSize = data.size;
+        // itemPrice = data.price;
+    // Create Cart Item
+        // var newCartItem = {
+        // oid: orderId,
+        // cid: custId,
+        // order_name: orderName,
+        // item_no: itemNo,
+        // pid: itemProdId,
+        // prod_name: itemProdName,
+        // size: itemSize,
+        // price: itemPrice,
+        // qty: itemQty
+    // Push OrderItem Object to Cart Array
+    // Append Cart to the DOM
+  });
+
+  // Display the Cart in menu.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+
+function getCartItems() {
+
+  $("#cart").text("");
+
+      if (cartArray.length > 0) {
+        $("#cart").text("");
+        $("#cart").append("<table><thead><tr>")
+        $("#cart").append("<th>Item No.</th><th>Description</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
+        $("#cart").append("</thead><tbody>");
+        var cartItems;
+        for (var i = 0; i < cartArray.length; i++) {
+          cartItems = $("<tr>");
+          cartItems.append("<td>" + cartArray[i].item_no + "</td>");
+          cartItems.append("<td>" + cartArray[i].prod_name + "</td>");
+          cartItems.append("<td>" + cartArray[i].size + "</td>");
+          cartItems.append("<td class='right-align'>" + cartArray[i].price + "</td>");
+          cartItems.append("<td class='center-align'>" + cartArray[i].qty + "</td>");
+          cartItems.append("<button class='btn-flat rfc' type='submit' id='" + cartArray[i].item_no + "'><i class='small material-icons'>clear</i></button></td>");
+          cartItems.append("</tr>");
+          $("#cart").append(cartItems);
+        }
+        cartItems.append("</tbody></table><br>");
+      
+
+      } else {
+
+        // Create message for no order history results
+        $("#cart").text("");
+        $("#cart").append("<tr><td><p class='pink-text center-align small'>Please select an item from products or order history.</p></td></tr>");
+      }
+    
+};
+
+// Call getCartItems() function
+getCartItems();
+
+
+  // Delete item from cartArray in menu.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+
+$(document).on("click", ".rfc", function (event){
+
+  // Prevent double-click
+  event.stopImmediatePropagation();
+
+  // Prevent default action
+  event.preventDefault();
+
+  // Delete Array Item based on Order Item id
+  var findItem = parseInt(this.id) - 1;
+  cartArray.splice(findItem,1);
+
+  // Renumber Order Item No. for remaining items
+  for (var i = 0; i<cartArray.length;i++){
+    cartArray[i].item_no = i+1;
+  }
+  
+  // Update itemCounter to reflect the delete
+  itemCounter = cartArray.length;
+
+  localStorage.setItem('cart', JSON.stringify(cartArray));
+
+  getCartItems();
+
+});
+
+  // Cart submit button in menu.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+
+  $(document).on("click", "#submitCart", function (event){
+
+    // Prevent double-click
+    event.stopImmediatePropagation();
+  
+    // Prevent default action
+    event.preventDefault();
+
+    if (cartArray.length>0){
+          // Put cartArray in localstorage
+    localStorage.setItem('cart', JSON.stringify(cartArray));
+
+    // Navigate to checkout.handlebars
+    window.location.href = "/checkout";
+
+    } else {
+      alert("Please add at least one item to your cart.")
+    };
+
+  });
+
+  // Checkout in checkout.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Nida/Hebah
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+  function checkout(){
+
+    // Retrieve Customer info from local storage on checkout page
+      // custId = JSON.parse(localStorage.getItem('cid'));
+            // console.log("--custId from Local Storage-");
+            // console.log(custId);
+      // orderName = JSON.parse(localStorage.getItem('name'));
+            // console.log("--orderName from Local Storage-");
+            // console.log(orderName);
+      // orderId = JSON.parse(localStorage.getItem('oid'));
+            // console.log("--orderId from Local Storage-");
+            // console.log(orderId);
+
+  // Retrieve Cart from local storage on checkout page
+      // var retrievedCart = localStorage.getItem("cart");
+      // var finalCart = JSON.parse(retrievedCart);
+      // console.log("--Final from Local Storage-");
+      // console.log(finalCart);
+
+
+  }
+
+  // Spotify in checkout.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Nida/Hebah
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+
+  $("#songButton").on("click", function (event) {
     event.preventDefault();
     $("#dropdown1").empty();
     var songToSearch = $("#songName").val();
     var song = { spotifyThis: songToSearch };
-    $.post("/api/spotify", song, function(data) {
+    $.post("/api/spotify", song, function (data) {
       $(".dropdown-trigger").dropdown({ hover: true, constrainWidth: false });
       console.log("post request");
 
-      console.log("songToSearch is " + songToSearch);
-      $.post("/api/spotify", song, function(data) {
-        console.log("data is below");
+      // console.log("songToSearch is " + songToSearch);
+      $.post("/api/spotify", song, function (data) {
+        // console.log("data is below");
         // console.log("----------------------------")
         console.log(data)
         $(".dropdown-trigger").dropdown({ hover: true, constrainWidth: false });
@@ -376,7 +742,7 @@ $(document).ready(function() {
     });
   });
 
-  $(document).on("click", ".songChoice", function(event) {
+  $(document).on("click", ".songChoice", function (event) {
     event.preventDefault();
     var usersSong = $(this).attr("dataval");
     console.log("usersong is below");
@@ -385,128 +751,15 @@ $(document).ready(function() {
     });
   });
 
-  $(".songChoice").on("click", function() {
+  $(".songChoice").on("click", function () {
     var usersSong = this.text();
     console.log("usersong is below");
     console.log(usersSong);
   });
-  // Customize Header in menu.handlebars
-  // ------------------------------------------
-  // Completed: 03/__/2020 by: Pam
-  // Tested: 03/__/2020 by: _____
-  // ------------------------------------------
 
-  function getCustName() {
-    custName = "Pamela";
-    var profile = $("#profile");
-    profile.text("");
-    var content = $("<h3 class='brown-text text-darken-4'>");
-    content.text("Welcome " + custName);
-    profile.append(content);
-    console.log(content);
-  }
-  getCustName();
+  
 
-  // Customize Header in menu.handlebars
-  // ------------------------------------------
-  // Completed: 03/__/2020 by: Pam
-  // Tested: 03/__/2020 by: _____
-  // ------------------------------------------
-  // custName = "Sonal";
-  // custID = 3;
-
-  // function getHistory() {
-  //   $.get("/api/orders/" + custID, function (data) {
-  //     ordersArray = data;
-  //   }).then(function (data) {
-  //     console.log(data);
-  //     var profile = $("#profile");
-  //     profile.text("");
-  //     var content = $("<h3>");
-  //     content.text(custName);
-  //     profile.append(content);
-  //     console.log(content);
-  //   });
-  // }
-  // getHistory();
-
-  $(".atc")
-    .unbind("click")
-    .click(function() {
-      event.preventDefault();
-
-      console.log("--this.id--");
-      console.log(this.id);
-
-      // Set Product variables by searching product by PID in button
-      itemProdId = this.id;
-
-      $.get("/api/products/" + itemProdId, function(data) {
-        // Increment Item Counter by 1
-        itemCounter++;
-
-        // Test Parameters
-        orderId = 6;
-        custId = 7;
-        orderName = "Pam Test";
-
-        // Set Customer-specific variables with existing variables
-        itemOrderId = orderId;
-        itemCustId = custId;
-        itemOrderName = orderName;
-
-        // Set Item No variable to ItemCounter
-        itemNo = itemCounter;
-        // Data from Get
-        itemProdName = data.prod_name;
-        itemSize = data.size;
-        itemPrice = data.price;
-      }).then(function(data) {
-        // Console Logs
-        console.log("--Data--");
-        console.log(data);
-        console.log("--itemProdName--");
-        console.log(itemProdName);
-        console.log("--itemSize--");
-        console.log(itemSize);
-        console.log("--itemPrice--");
-        console.log(itemPrice);
-        console.log("--itemOrderId--");
-        console.log(itemOrderId);
-        console.log("--itemCustId--");
-        console.log(itemCustId);
-        console.log("--itemOrderName--");
-        console.log(itemOrderName);
-        console.log("--itemNo--");
-        console.log(itemNo);
-        console.log("--itemProdId--");
-        console.log(itemProdId);
-        console.log("--itemProdName--");
-        console.log(itemProdName);
-        console.log("--itemSize--");
-        console.log(itemSize);
-        console.log("--itemPrice--");
-        console.log(itemPrice);
-
-        // Create Cart Item
-        var newCartItem = {
-          oid: itemOrderId,
-          cid: itemCustId,
-          order_name: itemOrderName,
-          item_no: itemNo,
-          pid: itemProdId,
-          prod_name: itemProdName,
-          size: itemSize,
-          price: itemPrice,
-          qty: itemQty
-        };
-        console.log("--newCartItem--");
-        console.log(newCartItem);
-        // Push OrderItem Object to Cart Array
-        cartArray.push(newCartItem);
-        console.log("--cartArray--");
-        console.log(cartArray);
-      });
-      $("#cart").append(cartArray);
-    });
+  //---------------------------------------------
+  // End of drinks.js
+  //---------------------------------------------
 });

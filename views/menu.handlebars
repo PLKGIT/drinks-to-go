@@ -5,9 +5,11 @@
             <div class="card white">
                 <div class="card-content black-text">
                     <div id="profile"></div>
-                    <span>
-                        <h5 class="black-text darken-4 right-align">Order from Order History</h5>
-                    </span>
+                    <!-- Modal Trigger -->
+                    <p class='right-align'><button class="btn-flat modal-trigger" data-target="atcHistory">
+                            Order from Order History
+                        </button></p>
+                    <!--_________________-->
                 </div>
             </div>
         </div>
@@ -21,7 +23,7 @@
                     <span class="card-title">Cart</span>
                     <div id="cart"></div>
                     <br>
-                    <p><a class="brown darken-4 btn-small">Submit Order <i
+                    <p><a class="brown darken-4 btn-small" id="submitCart">Submit Order <i
                                 class="material-icons right">add_shopping_cart</i></a></p>
                 </div>
             </div>
@@ -93,8 +95,27 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <!-- Modal -->
+    <div id="atcHistory" class="modal">
+        <div class="modal-content">
+            <h4 class="text-brown darken-4">Order History</h4>
+            <div id="ordHistory"></div>
+        </div>
+        <div class="modal-footer">
+            <hr>
+            Coffee Express!
+        </div>
+    </div>
+</div>
 
-<div class="container"></div>
+</div>
+<!--_________________-->
+</div>
+
+<div class="container">
+
+</div>
 <!-- jQuery JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Materialize JavaScript-->
