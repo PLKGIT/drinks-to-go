@@ -16,6 +16,7 @@ var errCheck = false;
 var errCheck1 = false;
 var errCheck2 = false;
 var errCheck3 = false;
+var errFlag = 1;
 
 // Customer Variables
 // ------------------------------------------
@@ -94,18 +95,97 @@ $(document).ready(function () {
     return true;
   }
 
+  function handleCreateNewCustomerCallback(status){
+    if (status == "yes") { 
+      errCheck3 = true; // duplicate found
+      alert("Duplicate email address found.");
+    }
+    else if (status == "no") {
+      alert("No duplicate email address found.");
+      errCheck3 = false; // duplicate not found
+    }
+    else if (status == "undefined") {
+      // handle case for undefined. When there is a duplicate email, it gets called two times. the first async call is non-deterministic
+      // so we need to ignore that
+      //alert("undefined...returning this time");
+      return;
+    }
+
+    //alert("flags >>>> (valid_name, valid_email, duplicate_email) " + errCheck1 + " " + errCheck2 + " " + errCheck3);
+
+    // if everything is Ok, then add the new record to the database
+    if  ( errCheck1 == false && errCheck2 == false && errCheck3 == false) {
+      console.log("if statement is thereeeeee")
+      var newCustomer = {
+        cust_name: $("#newName")
+          .val()
+          .trim(),
+        cust_email: $("#newEmail")
+          .val()
+          .trim()
+          
+      };
+      
+     
+      $.post("api/customers", newCustomer).then(function (req, res) {
+        //  console.log(data);
+        
+
+      
+        // $("#newName").val("");
+        // $("#newEmail").val("");
+
+        // SEE LINES 257-285 BELOW re orderName and passing data via localstorage (MUST BE DONE HERE AS WELL)
+        if (res) {
+          // for customer that doesn't exist yet
+          custName = newName;
+          orderName = custName;
+
+          localStorage.setItem('cid', JSON.stringify(custId));
+          localStorage.setItem('name', JSON.stringify(custName));
+          localStorage.setItem('oid', JSON.stringify(orderId));
+
+          custName = "";
+          custEmail = "";
+          custId = 0;
+
+          window.location.href = "/menu"
+        }
+        // window.location.replace("/menu")
+      });
+    }
+    else{
+      // already exisiting customer
+      custName = newName;
+      orderName = custName;
+
+      // TODO: pass correct cusId and name to the next page
+      // currently not working...
+
+      window.location.href = "/menu"
+    }
+  }
+
   // Check if new account form email address exists in database
-  function checkedDuplicate(newEmail) {
-    $.get("/api/customers/" + newEmail, function (data) { }).then(function (data) {
-      var emailReceived = data.cust_email;
-      if (emailReceived === newEmail) {
-        alert(">>>>>> Email already exists");
-        return true;
+  function checkedDuplicate(newEmail, callback) {
+    $.get("/api/customers/" + newEmail, function (data) {
+      if (data == null) {
+        callback("no"); // no duplicate email found
       }
-      else {
-        return false;
+     }).then(function (data) {
+      console.log("------for data-----");
+      console.log(data)
+      console.log("------for data-----");
+      var emailReceived = data.cust_email;
+
+      console.log(emailReceived);
+      if (emailReceived === newEmail) {
+        custId = 0;
+        callback("yes"); // duplicate email found
       }
     });
+
+    callback("undefined"); // this is undefined state
   }
 
   // Create New Customer and Login
@@ -127,56 +207,27 @@ $(document).ready(function () {
     }
     else {
       errCheck1 = true;
-    }
+      }
 
     if (isValidEmail(newEmail)) {
       errCheck2 = false;
     }
     else {
       errCheck2 = true;
-    }
-
-    if (checkedDuplicate(newEmail)) {
-      errCheck3 = true; // duplicate found, so error
-    }
-    else {
-      errCheck3 = false; // no duplicate found
+      
     }
 
     if (errCheck1 === true) {
       alert("Please Enter a Valid Name");
+      return;
     }
 
-    if (errCheck2 === true || errCheck3 === true) {
-      alert("Either Enter Invalid email address or duplicate email address");
-      alert(errCheck2 + " " + errCheck3)
+    if (errCheck2 === true) {
+      alert("Enter Valid email address.");
+      return;
     }
 
-    alert("flags>>>>" + errCheck1 + " " + errCheck2 + " " + errCheck3);
-
-    // if everything is Ok, then add the new record to the database
-    if (errCheck1 == false && errCheck2 == false && errCheck3 == false) {
-      var newCustomer = {
-        cust_name: $("#newName")
-          .val()
-          .trim(),
-        cust_email: $("#newEmail")
-          .val()
-          .trim()
-      };
-      $.post("api/customers", newCustomer).then(function (req, res) {
-        //  console.log(data);
-
-        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++")
-        // $("#newName").val("");
-        // $("#newEmail").val("");
-
-        // SEE LINES 257-285 BELOW re orderName and passing data via localstorage (MUST BE DONE HERE AS WELL)
-        window.location.href = "/menu"
-        // window.location.replace("/menu")
-      });
-    }
-
+    checkedDuplicate(newEmail, handleCreateNewCustomerCallback);
   });
 
 
@@ -259,6 +310,10 @@ $(document).ready(function () {
             orderName = custName;
 
             // CREATE AN ORDER in Orders Table
+            // var orderTable = {
+            //   cid:custId,
+              
+            // }
                 // using custId and orderName
             // RETRIEVE new oid FROM DATABASE
             // STORE oid in orderId
