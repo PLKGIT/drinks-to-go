@@ -264,7 +264,7 @@ $(document).ready(function () {
             // Pass custId, custName, and orderId via localstorage
 
             localStorage.setItem('cid', JSON.stringify(custId));
-            localStorage.setItem('name', JSON.stringify(custName));
+            localStorage.setItem('name', JSON.stringify(orderName));
             localStorage.setItem('oid', JSON.stringify(orderId));
 
             custName = "";
@@ -342,7 +342,7 @@ $(document).ready(function () {
       // Pass custId, custName, and orderId via localstorage
 
       localStorage.setItem('cid', JSON.stringify(custId));
-      localStorage.setItem('name', JSON.stringify(custName));
+      localStorage.setItem('name', JSON.stringify(orderName));
       localStorage.setItem('oid', JSON.stringify(orderId));
 
       custName = "";
@@ -354,7 +354,7 @@ $(document).ready(function () {
 
     } else {
       // Clear customer variables
-      custName = ""; m
+      custName = "";
       custEmail = "";
       custId = 0;
     }
@@ -369,27 +369,35 @@ $(document).ready(function () {
 
   function getCustInfo() {
 
+    // Clear cart
+    cartArray.length=0;
+    localStorage.removeItem('cart');
+
+    // Clear customer variables
+    custId=0;
+    orderName="";
+    orderId=0;
+
     // Pull Customer info from local storage
     custId = JSON.parse(localStorage.getItem('cid'));
-    custName = JSON.parse(localStorage.getItem('name'));
+    orderName = JSON.parse(localStorage.getItem('name'));
     orderId = JSON.parse(localStorage.getItem('oid'));
 
     console.log("--custId in menu--");
     console.log(custId);
-    console.log("--custName in menu--");
-    console.log(custName);
+    console.log("--orderName in menu--");
+    console.log(orderName);
     console.log("--orderId in menu--");
     console.log(orderId);
 
 
-    // Put Welcome message and Customer name in the header
+    // Put Welcome message and OrderName in the header
     var profile = $("#profile");
     profile.text("");
     var contentProfile = $("<h3 class='brown-text text-darken-4'>");
-    contentProfile.text("Welcome " + custName);
+    contentProfile.text("Welcome " + orderName);
     profile.append(contentProfile);
     console.log(contentProfile);
-
   }
 
     // Call getCustInfo ()
@@ -404,11 +412,11 @@ $(document).ready(function () {
 
         $("#ordHistory").text("");
 
-        console.log("----Data---");
-        console.log(data);
+        // console.log("----Data---");
+        // console.log(data);
 
-        console.log("----Data Length---");
-        console.log(data.length);
+        // console.log("----Data Length---");
+        // console.log(data.length);
 
         if (data.length > 0) {
           $("#ordHistory").text("");
@@ -441,6 +449,263 @@ $(document).ready(function () {
   // Need a button on Modal that calls getOrderHistory to refresh data
   getOrderHistory()
 
+
+
+
+  // Add to Cart from Menu in menu.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+
+
+  $(".atcm").unbind("click").click(function (){
+
+    // Prevent default action
+    event.preventDefault();
+
+    // console.log("--this.id--");
+    // console.log(this.id);
+
+    // Set Product variables by searching product by PID in button
+    itemProdId = this.id;
+
+    // Pam's Test Data until oid functionality is available
+    itemOrderId = 6;
+
+    $.get("/api/products/" + itemProdId, function (data) {
+      // Increment Item Counter by 1
+      itemCounter++;
+
+      // Set Item No variable to ItemCounter
+      itemNo = itemCounter;
+      // Set itemProdName, itemSize, and itemPrice from database
+      itemProdName = data.prod_name;
+      itemSize = data.size;
+      itemPrice = data.price;
+    }).then(function (data) {
+      // Console Logs for Testing
+      console.log("--Data--");
+      console.log(data);
+      console.log("--itemProdName--");
+      console.log(itemProdName);
+      console.log("--itemSize--");
+      console.log(itemSize);
+      console.log("--itemPrice--");
+      console.log(itemPrice);
+      console.log("--orderId--");
+      console.log(orderId);
+      console.log("--custId--");
+      console.log(custId);
+      console.log("--orderName--");
+      console.log(orderName);
+      console.log("--itemNo--");
+      console.log(itemNo);
+      console.log("--itemProdId--");
+      console.log(itemProdId);
+      console.log("--itemProdName--");
+      console.log(itemProdName);
+      console.log("--itemQty--");
+      console.log(itemQty);
+
+      // Create Cart Item
+      var newCartItem = {
+        oid: orderId,
+        cid: custId,
+        order_name: orderName,
+        item_no: itemNo,
+        pid: itemProdId,
+        prod_name: itemProdName,
+        size: itemSize,
+        price: itemPrice,
+        qty: itemQty
+      };
+      console.log("--newCartItem--");
+      console.log(newCartItem);
+
+      // Push OrderItem Object to Cart Array
+      cartArray.push(newCartItem);
+
+      console.log("--cartArray--");
+      console.log(cartArray);
+
+      getCartItems()
+    });
+
+  });
+
+  // Add to Cart from Order History in menu.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+
+
+  $(document).on("click", ".atch", function (event) {
+
+    // Prevent double-click
+    event.stopImmediatePropagation();
+    // Prevent default action
+    event.preventDefault();
+    // Increment Item Counter by 1
+    // Set Item No variable to ItemCounter
+    // Grab the orderItems table's id from the button
+    // Search orderItems table by the id
+    // Grab product id from orderItems table
+    // Search product table by product id
+    // Set itemProdName, itemSize, and itemPrice from database
+        // itemProdName = data.prod_name;
+        // itemSize = data.size;
+        // itemPrice = data.price;
+    // Create Cart Item
+        // var newCartItem = {
+        // oid: orderId,
+        // cid: custId,
+        // order_name: orderName,
+        // item_no: itemNo,
+        // pid: itemProdId,
+        // prod_name: itemProdName,
+        // size: itemSize,
+        // price: itemPrice,
+        // qty: itemQty
+    // Push OrderItem Object to Cart Array
+    // Append Cart to the DOM
+  });
+
+  // Display the Cart in menu.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+
+function getCartItems() {
+
+  $("#cart").text("");
+
+      if (cartArray.length > 0) {
+        $("#cart").text("");
+        $("#cart").append("<table><thead><tr>")
+        $("#cart").append("<th>Item No.</th><th>Description</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
+        $("#cart").append("</thead><tbody>");
+        var cartItems;
+        for (var i = 0; i < cartArray.length; i++) {
+          cartItems = $("<tr>");
+          cartItems.append("<td>" + cartArray[i].item_no + "</td>");
+          cartItems.append("<td>" + cartArray[i].prod_name + "</td>");
+          cartItems.append("<td>" + cartArray[i].size + "</td>");
+          cartItems.append("<td class='right-align'>" + cartArray[i].price + "</td>");
+          cartItems.append("<td class='center-align'>" + cartArray[i].qty + "</td>");
+          cartItems.append("<button class='btn-flat rfc' type='submit' id='" + cartArray[i].item_no + "'><i class='small material-icons'>clear</i></button></td>");
+          cartItems.append("</tr>");
+          $("#cart").append(cartItems);
+        }
+        cartItems.append("</tbody></table><br>");
+      
+
+      } else {
+
+        // Create message for no order history results
+        $("#cart").text("");
+        $("#cart").append("<tr><td><p class='pink-text center-align small'>Please select an item from products or order history.</p></td></tr>");
+      }
+    
+};
+
+// Call getCartItems() function
+getCartItems();
+
+
+  // Delete item from cartArray in menu.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+
+$(document).on("click", ".rfc", function (event){
+
+  // Prevent double-click
+  event.stopImmediatePropagation();
+
+  // Prevent default action
+  event.preventDefault();
+
+  // Delete Array Item based on Order Item id
+  var findItem = parseInt(this.id) - 1;
+  cartArray.splice(findItem,1);
+
+  // Renumber Order Item No. for remaining items
+  for (var i = 0; i<cartArray.length;i++){
+    cartArray[i].item_no = i+1;
+  }
+  
+  // Update itemCounter to reflect the delete
+  itemCounter = cartArray.length;
+
+  localStorage.setItem('cart', JSON.stringify(cartArray));
+
+  getCartItems();
+
+});
+
+  // Cart submit button in menu.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Pam
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+
+  $(document).on("click", "#submitCart", function (event){
+
+    // Prevent double-click
+    event.stopImmediatePropagation();
+  
+    // Prevent default action
+    event.preventDefault();
+
+    if (cartArray.length>0){
+          // Put cartArray in localstorage
+    localStorage.setItem('cart', JSON.stringify(cartArray));
+
+    // Navigate to checkout.handlebars
+    window.location.href = "/checkout";
+
+    } else {
+      alert("Please add at least one item to your cart.")
+    };
+
+  });
+
+  // Checkout in checkout.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Nida/Hebah
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
+  function checkout(){
+
+    // Retrieve Customer info from local storage on checkout page
+      // custId = JSON.parse(localStorage.getItem('cid'));
+            // console.log("--custId from Local Storage-");
+            // console.log(custId);
+      // orderName = JSON.parse(localStorage.getItem('name'));
+            // console.log("--orderName from Local Storage-");
+            // console.log(orderName);
+      // orderId = JSON.parse(localStorage.getItem('oid'));
+            // console.log("--orderId from Local Storage-");
+            // console.log(orderId);
+
+  // Retrieve Cart from local storage on checkout page
+      // var retrievedCart = localStorage.getItem("cart");
+      // var finalCart = JSON.parse(retrievedCart);
+      // console.log("--Final from Local Storage-");
+      // console.log(finalCart);
+
+
+  }
+
+  // Spotify in checkout.handlebars
+  // ------------------------------------------
+  // Completed: 03/__/2020 by: Nida/Hebah
+  // Tested: 03/__/2020 by: _____
+  // ------------------------------------------
 
   $("#songButton").on("click", function (event) {
     event.preventDefault();
@@ -488,131 +753,7 @@ $(document).ready(function () {
     console.log(usersSong);
   });
 
-
-  // Add to Cart from Menu in menu.handlebars
-  // ------------------------------------------
-  // Completed: 03/__/2020 by: Pam
-  // Tested: 03/__/2020 by: _____
-  // ------------------------------------------
-
-
-  $(".atcm").unbind("click").click(function () {
-    event.preventDefault();
-
-    console.log("--this.id--");
-    console.log(this.id);
-
-    // Set Product variables by searching product by PID in button
-    itemProdId = this.id;
-
-    // Pam's Test Data until oid functionality is available
-    itemOrderId =6;
-
-    $.get("/api/products/" + itemProdId, function (data) {
-      // Increment Item Counter by 1
-      itemCounter++;
-
-      // Set Item No variable to ItemCounter
-      itemNo = itemCounter;
-      // Set itemProdName, itemSize, and itemPrice from database
-      itemProdName = data.prod_name;
-      itemSize = data.size;
-      itemPrice = data.price;
-    }).then(function (data) {
-      // Console Logs for Testing
-      // console.log("--Data--");
-      // console.log(data);
-      // console.log("--itemProdName--");
-      // console.log(itemProdName);
-      // console.log("--itemSize--");
-      // console.log(itemSize);
-      // console.log("--itemPrice--");
-      // console.log(itemPrice);
-      // console.log("--itemOrderId--");
-      // console.log(itemOrderId);
-      // console.log("--itemCustId--");
-      // console.log(itemCustId);
-      // console.log("--itemOrderName--");
-      // console.log(itemOrderName);
-      // console.log("--itemNo--");
-      // console.log(itemNo);
-      // console.log("--itemProdId--");
-      // console.log(itemProdId);
-      // console.log("--itemProdName--");
-      // console.log(itemProdName);
-      // console.log("--itemSize--");
-      // console.log(itemSize);
-      // console.log("--itemPrice--");
-      // console.log(itemPrice);
-
-      // Create Cart Item
-      var newCartItem = {
-        oid: orderId,
-        cid: custId,
-        order_name: orderName,
-        item_no: itemNo,
-        pid: itemProdId,
-        prod_name: itemProdName,
-        size: itemSize,
-        price: itemPrice,
-        qty: itemQty
-      };
-      console.log("--newCartItem--");
-      console.log(newCartItem);
-      // Push OrderItem Object to Cart Array
-      cartArray.push(newCartItem);
-      console.log("--cartArray--");
-      console.log(cartArray);
-    });
-    $("#cart").append(cartArray);
-  });
-
-  // Add to Cart from Order History in menu.handlebars
-  // ------------------------------------------
-  // Completed: 03/__/2020 by: Pam
-  // Tested: 03/__/2020 by: _____
-  // ------------------------------------------
-
-
-  $(document).on("click", ".atch", function (event) {
-
-    // Prevent double-click
-    event.stopImmediatePropagation();
-    // Prevent default action
-    event.preventDefault();
-    // Increment Item Counter by 1
-    // Set Item No variable to ItemCounter
-    // Grab the orderItems table's id from the button
-    // Search orderItems table by the id
-    // Grab product id from orderItems table
-    // Search product table by product id
-    // Set itemProdName, itemSize, and itemPrice from database
-        // itemProdName = data.prod_name;
-        // itemSize = data.size;
-        // itemPrice = data.price;
-    // Create Cart Item
-        // var newCartItem = {
-        // oid: orderId,
-        // cid: custId,
-        // order_name: orderName,
-        // item_no: itemNo,
-        // pid: itemProdId,
-        // prod_name: itemProdName,
-        // size: itemSize,
-        // price: itemPrice,
-        // qty: itemQty
-    // Push OrderItem Object to Cart Array
-    // Append Cart to the DOM
-  });
-
-  // Cart submit button inmenu.handlebars
-  // ------------------------------------------
-  // Completed: 03/__/2020 by: Pam
-  // Tested: 03/__/2020 by: _____
-  // ------------------------------------------
-
-  // Put cartArray in localstorage
-  // Navigate to checkout.handlebars, passing oid, cid, order_name, and cartArray from localstorage
+  
 
   //---------------------------------------------
   // End of drinks.js
