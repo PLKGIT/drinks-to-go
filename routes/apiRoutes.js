@@ -1,6 +1,8 @@
 var db = require("../models");
 // var sequelize = require('sequelize');
 var Spotify = require('node-spotify-api');
+var keys = require("../keys.js")
+var spotify = new Spotify(keys.spotify);
 // var keys = require("../keys.js")
 // var spotify = new Spotify(keys.spotify);
 
