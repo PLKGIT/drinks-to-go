@@ -15,16 +15,27 @@
     </div>
     <!--_____________-->
 
+    <!-- ******************* -->
+    <br>
+    <button id="getCart" class="btn brown darken-4 waves-effect modal-trigger">Get Cart
+        <i class="material-icons right">send</i>
+    </button>
+
+    <!-- ******************* -->
+
     <!-- Order Total -->
     <div class="row">
         <div class="col s6 offset-s3">
             <div class="row">
-                <h3 class="center-align text-brown darken-4">Your order includes: <span id="itemsOrdered">Drink 1</span>
-                </h3>
+                <h2 class="center-align text-brown darken-4">Your order includes: 
+                    <br><span id="itemsOrdered">Drink 1</span>
+                </h2>
                 <h3 class="center-align text-brown darken-4">Your total is: $<span id="total">4.99</span></h3>
             </div>
         </div>
     </div>
+    <br>
+    <br>
     <!--_____________-->
 </div>
 <div class="container">
@@ -37,7 +48,7 @@
             <i class="material-icons music prefix text-brown darken-4">audiotrack</i>
             <input id="songName" type="text" class="validate">
             <label class="active" for="songName">Song Name</label>
-            <button data-target="requestSong" class="btn brown darken-4 waves-effect waves-light modal-trigger" id="songButton">Search Song
+            <button data-target="requestSong" class="btn brown darken-4 waves-effect modal-trigger" id="songButton">Search Song
                 <i class="material-icons right">audiotrack</i>
             </button>
         </div>
@@ -45,7 +56,7 @@
 
     <div class="center-align">
         <!-- Dropdown Trigger -->
-        <a class="dropdown-trigger btn brown darken-4 waves-effect waves-light modal-trigger" id="selectSong" href="#" data-target="dropdown1">Select Song</a>
+        <a class="dropdown-trigger btn brown darken-4 waves-effect modal-trigger" id="selectSong" href="#" data-target="dropdown1">Select Song</a>
 
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content" style="width: 500px">
@@ -57,7 +68,7 @@
 
     <!-- Modal Trigger -->
     <div class="center-align">
-        <button data-target="orderConfirm" class="btn brown darken-4 waves-effect waves-light modal-trigger">Submit
+        <button data-target="orderConfirm" class="btn brown darken-4 waves-effect modal-trigger" id="att">Submit
             <i class="material-icons right">send</i>
         </button>
     </div>

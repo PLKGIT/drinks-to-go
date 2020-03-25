@@ -594,7 +594,7 @@ $(document).ready(function () {
 
     // Clear cart
     cartArray.length = 0;
-    localStorage.removeItem('cart');
+    // localStorage.removeItem('cart');
 
     // Clear customer variables
     custId = 0;
@@ -915,19 +915,18 @@ $(document).ready(function () {
 
     // Prevent default action
     event.preventDefault();
-
-
-    if (cartArray.length>0){
-    // Put cartArray in localstorage
-    localStorage.setItem('cart', JSON.stringify(cartArray));
-
-
+    
+    if (cartArray.length > 0) {
+      // Put cartArray in localstorage
+      localStorage.setItem('cart', JSON.stringify(cartArray));
+      checkout();
       // Navigate to checkout.handlebars
       window.location.href = "/checkout";
-
+      
     } else {
       alert("Please add at least one item to your cart.")
     };
+    
 
   });
 
@@ -936,27 +935,104 @@ $(document).ready(function () {
   // Completed: 03/__/2020 by: Nida/Hebah
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
+
+  $(document).on("click", "#getCart", function (event) {
+
+    // Prevent double-click
+    event.stopImmediatePropagation();
+
+    // Prevent default action
+    event.preventDefault();
+
+    checkout();
+
+
+  });
+
+
   function checkout() {
+    
+    var retrievedCart = localStorage.getItem("cart");
+    var finalCart = JSON.parse(retrievedCart);
+    console.log("--Final from Local Storage-");
+    console.log(finalCart);
+    // console.log(cartArray.length)
 
-    // Retrieve Customer info from local storage on checkout page
-    // custId = JSON.parse(localStorage.getItem('cid'));
-    // console.log("--custId from Local Storage-");
-    // console.log(custId);
-    // orderName = JSON.parse(localStorage.getItem('name'));
-    // console.log("--orderName from Local Storage-");
-    // console.log(orderName);
-    // orderId = JSON.parse(localStorage.getItem('oid'));
-    // console.log("--orderId from Local Storage-");
-    // console.log(orderId);
+    $("#itemsOrdered").text("");
 
-    // Retrieve Cart from local storage on checkout page
-    // var retrievedCart = localStorage.getItem("cart");
-    // var finalCart = JSON.parse(retrievedCart);
-    // console.log("--Final from Local Storage-");
-    // console.log(finalCart);
+    if (finalCart.length > 0) {
+      $("#itemsOrdered").text("");
+      $("#itemsOrdered").append("<table><thead><tr>")
+      // $("#itemsOrdered").append("<th>Item No.</th><th>Description</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
+      $("#itemsOrdered").append("</thead><tbody>");
+      var cartItems;
+      var totalPrice = 0;
+      $("#total").text("");
+          for (var i = 0; i < finalCart.length; i++){
+            totalPrice += parseFloat(finalCart[i].price.toString());
+            console.log("Total price is " , totalPrice);
+          }
+
+      for (var i = 0; i < finalCart.length; i++) {
+        cartItems = $("<tr>");
+        cartItems.append("<td>" + finalCart[i].item_no + "</td>");
+        cartItems.append("<td>" + finalCart[i].prod_name + "</td>");
+        cartItems.append("<td>" + finalCart[i].size + "</td>");
+        // cartItems.append("<td class='right-align'>" + finalCart[i].price + "</td>");
+        // cartItems.append("<td class='center-align'>" + finalCart[i].qty + "</td>");
+        // cartItems.append("<button class='btn-flat rfc' type='submit' id='" + finalCart[i].item_no + "'><i class='small material-icons'>clear</i></button></td>");
+        cartItems.append("</tr>");
+        $("#itemsOrdered").append(cartItems);
+      }
+      $("#total").append(totalPrice.toFixed(2));
+
+      // cartItems.append("<tr class='center-align'>" + totalPrice + "</tr>")
+      console.log(totalPrice);
+      cartItems.append("</tbody></table><br>");
 
 
+      // } else {
+
+      //   // Create message for no order history results
+      //   $("#cart").text("");
+      //   $("#cart").append("<tr><td><p class='pink-text center-align small'>Please select an item from products or order history.</p></td></tr>");
+
+
+      // };
+
+      // Retrieve Customer info from local storage on checkout page
+      // custId = JSON.parse(localStorage.getItem('cid'));
+      // console.log("--custId from Local Storage-");
+      // console.log(custId);
+      // orderName = JSON.parse(localStorage.getItem('name'));
+      // console.log("--orderName from Local Storage-");
+      // console.log(orderName);
+      // orderId = JSON.parse(localStorage.getItem('oid'));
+      // console.log("--orderId from Local Storage-");
+      // console.log(orderId);
+
+      // Retrieve Cart from local storage on checkout page
+      // var retrievedCart = localStorage.getItem("cart");
+      // var finalCart = JSON.parse(retrievedCart);
+      // console.log("--Final from Local Storage-");
+      // console.log(finalCart);
+
+
+    }
   }
+
+
+  // Submit button in checkout.handlebars
+  $("#att").on("click", function (event) {
+    event.preventDefault();
+    var retrievedCart = localStorage.getItem("cart");
+    var finalCart = JSON.parse(retrievedCart);
+    console.log("final cart is... ", finalCart);
+    $.post("/api/orderitems", finalCart)
+    .then(function(req,res) {
+      console.log(finalCart);
+    })
+  })
 
 
   // Employee-side orders / Status update
@@ -1072,35 +1148,6 @@ $(document).ready(function () {
   //   console.log(usersSong);
   // });
 
-
-
-
-  // Employee Page
-  // ----------------------------------------------
-  // Spotify (pending)
-  // Changing status
-  
-  // Status Page
-  // ---------------------------------------------
-  // Spotify (pending)
-  // DIV for the Song Playing Now
-  // Posting to Spotify table??
-
-  // Checkout Page
-  // ----------------------------------------------
-  // Display the Cart
-  // Copy the cart
-  // Sum of Cart
-  // Post Order Items to the OrderItems table
-
-  // Sliding Pages
-  // ----------------------------------------------
-  // Getting them done
-
-  // Less important
-  // ----------------------------------------------
-  // Update button on the Order History
-  // Changing the QTY on OrderItem
 
 
   //---------------------------------------------

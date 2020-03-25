@@ -95,6 +95,14 @@ module.exports = function (app) {
       console.log(data);
     });
   });
+  // Order Items API by ID Get Route
+  app.get("/api/orderitems", function (req, res) {
+    db.OrderItem.findAll({}).then(function (data) {
+      res.json(data);
+      console.log(data);
+    });
+  });
+
 
   // Order Items API Get Route by Order Items Id
   app.get("/api/orderitemsid/:id", function (req, res) {
