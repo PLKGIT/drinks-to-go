@@ -34,9 +34,10 @@ module.exports = function (app) {
       .catch(function (err) {
         res.json(err);
       });
-    console.log("------- no emails found ---------");
-    return null;
+      console.log("------- no emails found ---------");
+      return null;
   });
+ 
 
   // Orders API Get Route
   app.get("/api/orders", function (req, res) {
