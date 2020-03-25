@@ -31,8 +31,8 @@ var ordersArray = [];
 var orderId;
 var orderName;
 var orderDate;
-var cust_code="";
-var orderCreated=0;
+var cust_code = "";
+var orderCreated = 0;
 
 // Cart Variables
 // ------------------------------------------
@@ -119,12 +119,12 @@ $(document).ready(function () {
     var newName = $("#newName")
       .val()
       .trim();
-      // var newEmail = $("#newEmail")
-      //    .val()
-      //    .trim();
+    // var newEmail = $("#newEmail")
+    //    .val()
+    //    .trim();
 
     // if everything is Ok, then add the new record to the database
-    if  ( errCheck1 == false && errCheck2 == false && errCheck3 == false) {
+    if (errCheck1 == false && errCheck2 == false && errCheck3 == false) {
       // console.log("if statement is thereeeeee")
       var newCustomer = {
         cust_name: $("#newName")
@@ -147,71 +147,71 @@ $(document).ready(function () {
 
         // SEE LINES 257-285 BELOW re orderName and passing data via localstorage (MUST BE DONE HERE AS WELL)
         if (res) {
-  
+
           // for customer that doesn't exist yet
           custName = newName;
           // orderName = custName;
 
-          
+
           // localStorage.setItem('cid', JSON.stringify(custId));
           // localStorage.setItem('name', JSON.stringify(custName));
           // localStorage.setItem('oid', JSON.stringify(orderId));
 
           // custName = "";
           // custEmail = "";
-        // Clear Local Storage
-        localStorage.removeItem('cid')
-        localStorage.removeItem('name')
-        localStorage.removeItem('oid')
-    
-        // Clear Customer variables
-        custName = "";
-        custEmail = "";
-        custId=0;
-    
-         // Create an Order
-         // TEST
-         var newEmail = $("#newEmail")
-         .val()
-         .trim();
-         $.get("/api/customers/" + newEmail, function (data) { })
-        .then(function (data) {
-          console.log("--Results after db search for newEmail match--")
-          console.log(data);
-          if (data !== null) {
-            custName = data.cust_name;
-            custEmail = data.cust_email;
-            custId = data.cid
-            console.log("---Email address in DB with these values---")
-            console.log(custName);
-            console.log(custEmail);
-            console.log(custId);
+          // Clear Local Storage
+          localStorage.removeItem('cid')
+          localStorage.removeItem('name')
+          localStorage.removeItem('oid')
 
-            // createOrder();
-        //     localStorage.setItem('cid', JSON.stringify(custId));
-         localStorage.setItem('name', JSON.stringify(custName));
-        //  localStorage.setItem('oid', JSON.stringify(orderId));
+          // Clear Customer variables
+          custName = "";
+          custEmail = "";
+          custId = 0;
 
-        orderName = custName;
+          // Create an Order
+          // TEST
+          var newEmail = $("#newEmail")
+            .val()
+            .trim();
+          $.get("/api/customers/" + newEmail, function (data) { })
+            .then(function (data) {
+              console.log("--Results after db search for newEmail match--")
+              console.log(data);
+              if (data !== null) {
+                custName = data.cust_name;
+                custEmail = data.cust_email;
+                custId = data.cid
+                console.log("---Email address in DB with these values---")
+                console.log(custName);
+                console.log(custEmail);
+                console.log(custId);
 
-            createOrder();
-          }
+                // createOrder();
+                //     localStorage.setItem('cid', JSON.stringify(custId));
+                localStorage.setItem('name', JSON.stringify(custName));
+                //  localStorage.setItem('oid', JSON.stringify(orderId));
+
+                orderName = custName;
+
+                createOrder();
+              }
 
 
-         } );
-         // TEST
-        
-        //  localStorage.setItem('cid', JSON.stringify(custId));
-        //  localStorage.setItem('name', JSON.stringify(custName));
-        //  localStorage.setItem('oid', JSON.stringify(orderId));
-         
-        // Create an Order
-      
+            });
+          // TEST
 
-      // // Create an Order
-      // createOrder();
+          //  localStorage.setItem('cid', JSON.stringify(custId));
+          //  localStorage.setItem('name', JSON.stringify(custName));
+          //  localStorage.setItem('oid', JSON.stringify(orderId));
 
-          window.location.href = "/menu"
+          // Create an Order
+
+
+          // // Create an Order
+          // createOrder();
+
+          window.location.href = "/article"
         }
         // window.location.replace("/menu")
       });
@@ -236,7 +236,7 @@ $(document).ready(function () {
     $.get("/api/customers/" + newEmail, function (data) {
       if (data == null) {
         callback("no"); // no duplicate email found
-      }else {
+      } else {
         //custId = data.cid;
       }
     }).then(function (data) {
@@ -366,7 +366,7 @@ $(document).ready(function () {
           }
 
           if (custId !== 0 && typeof custId != 'undefined') {
-            alert("CID: " + custId + " Email: " + custEmail + " Name: " + custName);
+            // alert("CID: " + custId + " Email: " + custEmail + " Name: " + custName);
 
             console.log("--custId in index--");
             console.log(custId);
@@ -397,7 +397,7 @@ $(document).ready(function () {
             localStorage.setItem('name', JSON.stringify(orderName));
             localStorage.setItem('oid', JSON.stringify(orderId));
 
-            
+
             console.log("--orderName in index--");
             console.log(orderName);
 
@@ -407,7 +407,7 @@ $(document).ready(function () {
 
             if (orderId !== 0) {
               // Navigate to menu.handlebars
-              window.location.href = "/menu"
+              window.location.href = "/article"
             } else {
               alert("There was an issue with login, please try again.")
             }
@@ -492,16 +492,16 @@ $(document).ready(function () {
       custEmail = "";
       custId = 0;
 
-       // Create an Order
-       createOrder();
+      // Create an Order
+      createOrder();
 
 
-       if (orderId !== 0) {
-         // Navigate to menu.handlebars
-         window.location.href = "/menu"
-       } else {
-         alert("There was an issue with login, please try again.")
-       }
+      if (orderId !== 0) {
+        // Navigate to menu.handlebars
+        window.location.href = "/article"
+      } else {
+        alert("There was an issue with login, please try again.")
+      }
 
     } else {
       // Clear customer variables
@@ -521,15 +521,15 @@ $(document).ready(function () {
   // Tested: 03/24/2020 by: PLK
   // ------------------------------------------
   function genCode(length) {
-    cust_code="";
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    cust_code = "";
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result
- }
+  }
 
 
   // Create an Order
@@ -538,50 +538,50 @@ $(document).ready(function () {
   // Tested:  03/___/2020 by: _____
   // ------------------------------------------
   function createOrder() {
-  // Reset cust_code variable - it should be unique each time
-  cust_code = "";
-  // Generate a new random number and assign to cust_code
-  cust_code=genCode(15);
+    // Reset cust_code variable - it should be unique each time
+    cust_code = "";
+    // Generate a new random number and assign to cust_code
+    cust_code = genCode(15);
 
-  // Create a New Order with cust_code
-  var newOrder = {
-    cid: custId,
-    order_name: orderName,
-    cust_code: cust_code
-  };
+    // Create a New Order with cust_code
+    var newOrder = {
+      cid: custId,
+      order_name: orderName,
+      cust_code: cust_code
+    };
 
-  $.post("api/orders", newOrder)
-  .then(function (req, res) {
-    });
+    $.post("api/orders", newOrder)
+      .then(function (req, res) {
+      });
 
     // Retrieve order number based on cust_code
-    $.get("api/orders/" + cust_code, function (data) {})
+    $.get("api/orders/" + cust_code, function (data) { })
 
-    .then(function (data) {
-      if (data){
-        // Set orderId to returned value
-        orderId = data.oid;
-        console.log("---data--")
-        console.log(data);
-        console.log("---oid--")
-        console.log(data.oid);
-        console.log("---orderId--")
-        console.log(orderId);
+      .then(function (data) {
+        if (data) {
+          // Set orderId to returned value
+          orderId = data.oid;
+          console.log("---data--")
+          console.log(data);
+          console.log("---oid--")
+          console.log(data.oid);
+          console.log("---orderId--")
+          console.log(orderId);
 
-              // Pass custId, custName, and orderId via localstorage
+          // Pass custId, custName, and orderId via localstorage
 
-      localStorage.setItem('cid', JSON.stringify(custId));
-      localStorage.setItem('name', JSON.stringify(orderName));
-      localStorage.setItem('oid', JSON.stringify(orderId));
+          localStorage.setItem('cid', JSON.stringify(custId));
+          localStorage.setItem('name', JSON.stringify(orderName));
+          localStorage.setItem('oid', JSON.stringify(orderId));
 
-    
+
         } else {
-          orderId=0;
+          orderId = 0;
         }
-      
+
       });
-    
- }
+
+  }
 
   // Customize Header in menu.handlebars
   // ------------------------------------------
@@ -602,16 +602,16 @@ $(document).ready(function () {
     orderId = 0;
 
     // Pull Customer info from local storage
-       custId = JSON.parse(localStorage.getItem('cid'));
-       orderName = JSON.parse(localStorage.getItem('name'));
-       orderId = JSON.parse(localStorage.getItem('oid'));
+    custId = JSON.parse(localStorage.getItem('cid'));
+    orderName = JSON.parse(localStorage.getItem('name'));
+    orderId = JSON.parse(localStorage.getItem('oid'));
 
-       console.log("--custId from localStorage");
-        console.log(custId);
-        console.log("--orderName from localStorage");
-        console.log(orderName);
-        console.log("--orderId from localStorage");
-        console.log(orderId);
+    console.log("--custId from localStorage");
+    console.log(custId);
+    console.log("--orderName from localStorage");
+    console.log(orderName);
+    console.log("--orderId from localStorage");
+    console.log(orderId);
 
     // Put Welcome message and OrderName in the header
     var profile = $("#profile");
@@ -668,8 +668,13 @@ $(document).ready(function () {
       });
   };
 
+  $(document).on("click", "#orderHistory", function(event){
+    event.preventDefault();
+    console.log("order history button is clicked")
+    getOrderHistory();
+  })
   // Need a button on Modal that calls getOrderHistory to refresh data
-  getOrderHistory()
+  // getOrderHistory()
 
 
 
@@ -756,6 +761,86 @@ $(document).ready(function () {
 
   });
 
+
+  $(document).on("click", ".atch", function(event){
+  // $(".atch").on("click").click(function () {
+
+    // Prevent default action
+    event.preventDefault();
+
+    // console.log("--this.id--");
+    // console.log(this.id);
+
+    // Set Product variables by searching product by PID in button
+    itemProdId = this.id;
+    console.log("itemprodid from outside teh .get is "+itemProdId)
+    // Pam's Test Data until oid functionality is available
+    // itemOrderId = 6;
+
+    $.get("/api/orderitemsid/" + itemProdId, function (data) {
+      console.log("itemprodid from inside the .get "+itemProdId)
+      // Increment Item Counter by 1
+      itemCounter++;
+
+      // Set Item No variable to ItemCounter
+      itemNo = itemCounter;
+      // Set itemProdName, itemSize, and itemPrice from database
+      // itemProdName = data.prod_name;
+      // itemSize = data.size;
+      // itemPrice = data.price;
+    }).then(function (data) {
+      // Console Logs for Testing
+      console.log("--Data--");
+      console.log(data);
+      console.log("--itemProdName--");
+      itemProdName = data[0].prod_name;
+      console.log(itemProdName);
+      console.log("--itemSize--");
+      itemSize = data[0].size;
+      console.log(itemSize);
+      console.log("--itemPrice--");
+      itemPrice = data[0].price;
+      console.log(itemPrice);
+      console.log("--orderId--");
+      console.log(orderId);
+      console.log("--custId--");
+      console.log(custId);
+      console.log("--orderName--");
+      console.log(orderName);
+      console.log("--itemNo--");
+      console.log(itemNo);
+      console.log("--itemProdId--");
+      console.log(itemProdId);
+      console.log("--itemProdName--");
+      console.log(itemProdName);
+      console.log("--itemQty--");
+      console.log(itemQty);
+
+      // Create Cart Item
+      var newCartItem = {
+        oid: orderId,
+        cid: custId,
+        order_name: orderName,
+        item_no: itemNo,
+        pid: itemProdId,
+        prod_name: itemProdName,
+        size: itemSize,
+        price: itemPrice,
+        qty: itemQty
+      };
+      console.log("--newCartItem--");
+      console.log(newCartItem);
+
+      // Push OrderItem Object to Cart Array
+      cartArray.push(newCartItem);
+
+      console.log("--cartArray--");
+      console.log(cartArray);
+
+      getCartItems()
+    });
+
+  });
   // Add to Cart from Order History in menu.handlebars
   // ------------------------------------------
   // Completed: 03/__/2020 by: Pam
@@ -763,36 +848,36 @@ $(document).ready(function () {
   // ------------------------------------------
 
 
-  $(document).on("click", ".atch", function (event) {
+  // $(document).on("click", ".atch", function (event) {
 
-    // Prevent double-click
-    event.stopImmediatePropagation();
-    // Prevent default action
-    event.preventDefault();
-    // Increment Item Counter by 1
-    // Set Item No variable to ItemCounter
-    // Grab the orderItems table's id from the button
-    // Search orderItems table by the id
-    // Grab product id from orderItems table
-    // Search product table by product id
-    // Set itemProdName, itemSize, and itemPrice from database
-    // itemProdName = data.prod_name;
-    // itemSize = data.size;
-    // itemPrice = data.price;
-    // Create Cart Item
-    // var newCartItem = {
-    // oid: orderId,
-    // cid: custId,
-    // order_name: orderName,
-    // item_no: itemNo,
-    // pid: itemProdId,
-    // prod_name: itemProdName,
-    // size: itemSize,
-    // price: itemPrice,
-    // qty: itemQty
-    // Push OrderItem Object to Cart Array
-    // Append Cart to the DOM
-  });
+  //   // Prevent double-click
+  //   event.stopImmediatePropagation();
+  //   // Prevent default action
+  //   event.preventDefault();
+  //   // Increment Item Counter by 1
+  //   // Set Item No variable to ItemCounter
+  //   // Grab the orderItems table's id from the button
+  //   // Search orderItems table by the id
+  //   // Grab product id from orderItems table
+  //   // Search product table by product id
+  //   // Set itemProdName, itemSize, and itemPrice from database
+  //   // itemProdName = data.prod_name;
+  //   // itemSize = data.size;
+  //   // itemPrice = data.price;
+  //   // Create Cart Item
+  //   // var newCartItem = {
+  //   // oid: orderId,
+  //   // cid: custId,
+  //   // order_name: orderName,
+  //   // item_no: itemNo,
+  //   // pid: itemProdId,
+  //   // prod_name: itemProdName,
+  //   // size: itemSize,
+  //   // price: itemPrice,
+  //   // qty: itemQty
+  //   // Push OrderItem Object to Cart Array
+  //   // Append Cart to the DOM
+  // });
 
   // Display the Cart in menu.handlebars
   // ------------------------------------------
@@ -909,26 +994,29 @@ $(document).ready(function () {
   // ------------------------------------------
 
   $(document).on("click", "#submitCart", function (event) {
-
     // Prevent double-click
-    event.stopImmediatePropagation();
+    // event.stopImmediatePropagation();
 
     // Prevent default action
     event.preventDefault();
-    
+
     if (cartArray.length > 0) {
       // Put cartArray in localstorage
       localStorage.setItem('cart', JSON.stringify(cartArray));
-      checkout();
       // Navigate to checkout.handlebars
       window.location.href = "/checkout";
-      
+      // checkout();
     } else {
       alert("Please add at least one item to your cart.")
     };
-    
+
 
   });
+
+  $(document).ready(function () {
+    console.log("hittting the on load /checkout")
+    checkout();
+  })
 
   // Checkout in checkout.handlebars
   // ------------------------------------------
@@ -936,22 +1024,22 @@ $(document).ready(function () {
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
 
-  $(document).on("click", "#getCart", function (event) {
+  // $(document).on("click", "#getCart", function (event) {
 
-    // Prevent double-click
-    event.stopImmediatePropagation();
+  //   // Prevent double-click
+  //   // event.stopImmediatePropagation();
 
-    // Prevent default action
-    event.preventDefault();
+  //   // Prevent default action
+  //   event.preventDefault();
 
-    checkout();
+  //   checkout();
 
 
-  });
+  // });
 
 
   function checkout() {
-    
+
     var retrievedCart = localStorage.getItem("cart");
     var finalCart = JSON.parse(retrievedCart);
     console.log("--Final from Local Storage-");
@@ -968,10 +1056,10 @@ $(document).ready(function () {
       var cartItems;
       var totalPrice = 0;
       $("#total").text("");
-          for (var i = 0; i < finalCart.length; i++){
-            totalPrice += parseFloat(finalCart[i].price.toString());
-            console.log("Total price is " , totalPrice);
-          }
+      for (var i = 0; i < finalCart.length; i++) {
+        totalPrice += parseFloat(finalCart[i].price.toString());
+        console.log("Total price is ", totalPrice);
+      }
 
       for (var i = 0; i < finalCart.length; i++) {
         cartItems = $("<tr>");
@@ -1023,57 +1111,57 @@ $(document).ready(function () {
 
 
   // Submit button in checkout.handlebars
-  $("#att").on("click", function (event) {
-    event.preventDefault();
-    var retrievedCart = localStorage.getItem("cart");
-    var finalCart = JSON.parse(retrievedCart);
-    console.log("final cart is... ", finalCart);
-    $.post("/api/orderitems", finalCart)
-    .then(function(req,res) {
-      console.log(finalCart);
-    })
-  })
+  // $("#att").on("click", function (event) {
+  //   event.preventDefault();
+  //   var retrievedCart = localStorage.getItem("cart");
+  //   var finalCart = JSON.parse(retrievedCart);
+  //   console.log("final cart is... ", finalCart);
+  //   $.post("/api/orderitems", finalCart)
+  //     .then(function (req, res) {
+  //       console.log(finalCart);
+  //     })
+  // })
 
 
   // Employee-side orders / Status update
   $(".rtg").on("click", function (event) {
     // alert(this.id)
-   // alert("button working")
+    // alert("button working")
     event.preventDefault();
-    itemId = this.id; 
+    itemId = this.id;
     console.log(this.id);
     var statusInfo = {
-     status: "ready",
-     ready: 1,
+      status: "ready",
+      ready: 1,
     };
     $.ajax({
-     type: "PUT",
-     url: "/api/orderitems/" + itemId,
-     data: statusInfo
-    }).then(function (data) {
-      location.reload();
-    });
-   }); 
-   $(".com").on("click", function (event) {
-    // alert(this.id)
-    // alert("button working")
-     event.preventDefault();
-    
-     itemId = this.id; 
-     console.log(this.id);
-    
-     var statusInfo = {
-      status: "complete",
-      complete: 1,
-     };
-     $.ajax({
       type: "PUT",
       url: "/api/orderitems/" + itemId,
       data: statusInfo
-     }).then(function (data) {
+    }).then(function (data) {
       location.reload();
-     });
     });
+  });
+  $(".com").on("click", function (event) {
+    // alert(this.id)
+    // alert("button working")
+    event.preventDefault();
+
+    itemId = this.id;
+    console.log(this.id);
+
+    var statusInfo = {
+      status: "complete",
+      complete: 1,
+    };
+    $.ajax({
+      type: "PUT",
+      url: "/api/orderitems/" + itemId,
+      data: statusInfo
+    }).then(function (data) {
+      location.reload();
+    });
+  });
 
   // Spotify in checkout.handlebars
   // ------------------------------------------
@@ -1140,7 +1228,7 @@ $(document).ready(function () {
     });
   });
 
-  $("#")
+  // $("#")
 
   // $(".songChoice").on("click", function () {
   //   var usersSong = this.text();
