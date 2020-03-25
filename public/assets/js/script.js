@@ -1,18 +1,18 @@
 
 /* 
     Short cuts for document querySelector and querySelectorAll
-    which can handle being used as template tags $`main` or $$`div`
+    which can handle being used as template tags dollarSign`main` or doubleDollarSign`div`
     
     Also if the first character is < then create a fragment instead
 */
-const $ = (...s) => {
+const dollarSign = (...s) => {
     const str = Array.isArray(s[0]) ? String.raw(...s) : s[0];
     return str[0] === '<' ? document.createRange().createContextualFragment(str) : document.querySelector(str);
   }
   
-  const $$ = (...s) => {
+  const doubleDollarSign = (...s) => {
     const str = Array.isArray(s[0]) ? String.raw(...s) : s[0];
-    return Array.from(str[0] === '<' ? $(str).children : document.querySelectorAll(str));
+    return Array.from(str[0] === '<' ? dollarSign(str).children : document.querySelectorAll(str));
   }
   
   /* Function for fetching a document fragment and replacing an element with it */
@@ -20,7 +20,7 @@ const $ = (...s) => {
     return fetch(url)
       .then(r => r.text())
       .then(html => {
-        el.parentNode.insertBefore($(html), el);
+        el.parentNode.insertBefore(dollarSign(html), el);
         el.remove();
       });
   }
@@ -37,7 +37,7 @@ const $ = (...s) => {
   
   const iO = new IntersectionObserver(entries => entries.forEach(entry => {
       const hash = '#'+entry.target.id;
-      const navEl = $`[href="${hash}"]`;
+      const navEl = dollarSign`[href="${hash}"]`;
       if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
           navEl.classList.add('focus');
           updateHistory(hash);
@@ -45,13 +45,13 @@ const $ = (...s) => {
           navEl.classList.remove('focus');
       }
   }), {
-      root: $`main`,
+      root: dollarSign`main`,
       threshold: 0.5
   });
   
-  window.addEventListener('DOMContentLoaded', () => $$`article`.map(a => iO.observe(a)));
+  window.addEventListener('DOMContentLoaded', () => doubleDollarSign`article`.map(a => iO.observe(a)));
   window.addEventListener('hashchange', function (e) {
-    const articleToShow =  $(window.location.hash || '#' + $`article`.id);
+    const articleToShow =  dollarSign(window.location.hash || '#' + dollarSign`article`.id);
     articleToShow.scrollIntoView();
     e.preventDefault();
   }, false);

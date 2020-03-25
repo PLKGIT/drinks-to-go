@@ -1,5 +1,9 @@
+// Required
+//---------------------------------------
 var db = require("../models");
 
+// HTML Routes
+//---------------------------------------
 module.exports = function (app) {
 
   // Login HTML Route (Default)
@@ -65,21 +69,29 @@ module.exports = function (app) {
   });
 
   // Orders HTML Route
+  // Orders HTML Route
   app.get("/orders", function (req, res) {
     var ordersList = {
       orders: []
     };
-    db.OrderItem.findAll({}).then(function (dataOrders) {
+    db.OrderItem.findAll({
+      // where: {
+      //   complete: 0
+      // }
+    }).then(function (dataOrders) {
       for (var i = 0; i < dataOrders.length; i++) {
         var currentOrder = {
+          item_no: dataOrders[i].dataValues.id,
           order: dataOrders[i].dataValues.oid,
           customer: dataOrders[i].dataValues.order_name,
           item: dataOrders[i].dataValues.item_no,
-          pid: dataOrders[i].dataValues.pid,
           description: dataOrders[i].dataValues.prod_name,
           size: dataOrders[i].dataValues.size,
           price: dataOrders[i].dataValues.price,
-          qty: dataOrders[i].dataValues.qty
+          qty: dataOrders[i].dataValues.qty,
+          status: dataOrders[i].dataValues.status,
+          ready: dataOrders[i].dataValues.ready,
+          complete: dataOrders[i].dataValues.complete,
         };
         ordersList.orders.push(currentOrder);
       };
@@ -118,7 +130,7 @@ module.exports = function (app) {
       where: {
         complete: 0
       }
-    }).then(function(data) {
+    }).then(function (data) {
       console.log("--Console Logging Data---")
       console.log(data[0]);
       for (var j = 0; j < data.length; j++) {
@@ -141,15 +153,62 @@ module.exports = function (app) {
   });
 
 
-  app.get("/article", function (req, res) {
-    res.render("article");
+  app.get("/spotify", function (req, res) {
+    var songList = {
+      songs: []
+    };
+
+    db.Song.findAll({}).then(function (dataSong) {
+      console.log(dataSong[7].dataValues)
+      console.log(dataSong[7].dataValues.song_name)
+      console.log(dataSong[7].dataValues.artist)
+      console.log(dataSong[7].dataValues.song_url)
+      console.log(dataSong[7].dataValues.requested)
+      console.log(dataSong[7].dataValues.status)
+      for (var i = 0; i < dataSong.length; i++) {
+        var currentSong = {
+          song_name: dataSong[i].dataValues.song_name,
+          artist: dataSong[i].dataValues.artist,
+          song_url: dataSong[i].dataValues.song_url,
+          requested: dataSong[i].dataValues.requested,
+          status: dataSong[i].dataValues.status
+        };
+        songList.songs.push(currentSong);
+      };
+      res.render("spotify", songList);
+    });
   });
 
+
+  // app.get("/article", function (req, res) {
+  //   res.render("article");
+  // });
+
+  app.get("/article", function (req, res) {
+
+    var productsList = {
+      products: []
+    };
+
+    db.Product.findAll({}).then(function (dataProduct) {
+      for (var i = 0; i < dataProduct.length; i++) {
+        var currentProduct = {
+          pid: dataProduct[i].dataValues.pid,
+          prod_name: dataProduct[i].dataValues.prod_name,
+          size: dataProduct[i].dataValues.size,
+          price: dataProduct[i].dataValues.price,
+          type: dataProduct[i].dataValues.type,
+          temp: dataProduct[i].dataValues.temp,
+          check_hot: dataProduct[i].dataValues.check_hot
+        };
+        productsList.products.push(currentProduct);
+      };
+      res.render("article", productsList);
+    });
+  });
 
   // 404 HTML Route
   app.get("*", function (req, res) {
     res.render("404");
   });
-
-
 };

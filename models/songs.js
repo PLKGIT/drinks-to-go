@@ -10,21 +10,21 @@ module.exports = function (sequelize, Sequelize) {
       autoIncrement: true,
       allowNull: false
     },
-    cid: {
-      type: Sequelize.INTEGER(11),
-      allowNull: false
-    },
+    // cid: {
+    //   type: Sequelize.INTEGER(11),
+    //   allowNull: false
+    // },
     song_name: {
       type: Sequelize.STRING(255),
-      allowNull: false
+      allowNull: true
     },
     song_url: {
       type: Sequelize.STRING(255),
-      allowNull: false
+      allowNull: true
     },
     artist: {
       type: Sequelize.STRING(255),
-      allowNull: false
+      allowNull: true
     },
     requested: {
       type: Sequelize.DATE,
@@ -33,6 +33,7 @@ module.exports = function (sequelize, Sequelize) {
     },
     status: {
       type: Sequelize.STRING(10),
+      defaultValue: "Pending",
       allowNull: false
     }
   }, { timestamps: false });

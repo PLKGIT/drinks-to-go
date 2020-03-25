@@ -14,6 +14,10 @@ module.exports = function (sequelize, Sequelize) {
       type: Sequelize.INTEGER(11),
       allowNull: false
     },
+    cust_code: {
+      type: Sequelize.STRING(12),
+      allowNull: false
+    },
     order_name: {
       type: Sequelize.STRING(50),
       allowNull: false
