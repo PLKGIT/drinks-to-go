@@ -397,9 +397,6 @@ $(document).ready(function () {
       // Set orderName = guestInput variable
       orderName = guestInput;
 
-      // Create an Order
-      createOrder();
-
        // Create an Order
        createOrder();
 
