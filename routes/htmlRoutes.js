@@ -1,5 +1,9 @@
+// Required
+//---------------------------------------
 var db = require("../models");
 
+// HTML Routes
+//---------------------------------------
 module.exports = function (app) {
 
   // Login HTML Route (Default)
@@ -150,6 +154,4 @@ module.exports = function (app) {
   app.get("*", function (req, res) {
     res.render("404");
   });
-
-
 };
