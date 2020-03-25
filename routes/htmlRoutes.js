@@ -50,7 +50,8 @@ module.exports = function (app) {
           price: dataProduct[i].dataValues.price,
           type: dataProduct[i].dataValues.type,
           temp: dataProduct[i].dataValues.temp,
-          check_hot: dataProduct[i].dataValues.check_hot
+          check_hot: dataProduct[i].dataValues.check_hot,
+          // popular: dataProduct[i].dataValues.popular
         };
         productsList.products.push(currentProduct);
       };
@@ -113,7 +114,9 @@ module.exports = function (app) {
           size: dataProduct[i].dataValues.size,
           price: dataProduct[i].dataValues.price,
           type: dataProduct[i].dataValues.type,
-          temp: dataProduct[i].dataValues.temp
+          temp: dataProduct[i].dataValues.temp,
+          check_hot: dataProduct[i].dataValues.check_hot,
+          // popular: dataProduct[i].dataValues.popular
         };
         productsList.products.push(currentProduct);
       };
@@ -191,6 +194,7 @@ module.exports = function (app) {
     };
 
     db.Product.findAll({}).then(function (dataProduct) {
+      console.log("dataproducts from db"+dataProduct)
       for (var i = 0; i < dataProduct.length; i++) {
         var currentProduct = {
           pid: dataProduct[i].dataValues.pid,

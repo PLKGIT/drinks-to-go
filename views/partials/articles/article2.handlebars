@@ -8,9 +8,9 @@
           <th>Id</th>
           <th>Product</th>
           <th>Size</th>
-          <th></th>
+          {{!-- <th></th> --}}
           <th>Price</th>
-          <th></th>
+          {{!-- <th></th> --}}
         </tr>
       </thead>
 
@@ -23,9 +23,9 @@
           <td>{{this.pid}}</td>
           <td>{{this.prod_name}}</td>
           <td>{{this.size}}</td>
-          <td class="right-align">{{this.price}}</td>
-          <td>{{this.type}}</td>
-          <td>{{this.temp}}</td>
+          <td>{{this.price}}</td>
+          {{!-- <td>{{this.type}}</td> --}}
+          {{!-- <td>{{this.temp}}</td> --}}
           <td><button class='btn-flat atcm' type="submit" id='{{this.pid}}'><i
                 class="small material-icons">add_box</i></button></td>
           {{/if}}

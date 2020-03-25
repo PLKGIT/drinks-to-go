@@ -1,6 +1,6 @@
 <div class="container text-brown darken-4">
   {{!-- <span class="card-title">Drink Menu (Hot)</span> --}}
-  <h4>Hot Menu</h4>
+  <h4>Popular Drinks</h4>
   <div id="menu">
     <table>
       <thead>
@@ -8,7 +8,7 @@
           <th>Id</th>
           <th>Product</th>
           <th>Size</th>
-          <th></th>
+          {{!-- <th></th> --}}
           <th>Price</th>
           <th></th>
         </tr>
@@ -18,7 +18,14 @@
         {{#each products}}
         <tr>
           {{#if check_hot}}
-          {{> drinks/menu-hot}}
+          <td>{{this.pid}}</td>
+          <td>{{this.prod_name}}</td>
+          <td>{{this.size}}</td>
+          <td>{{this.price}}</td>
+          {{!-- <td>{{this.type}}</td> --}}
+          {{!-- <td>{{this.temp}}</td> --}}
+          <td><button class='btn-flat atcm' type="submit" id='{{this.pid}}'><i
+                class="small material-icons">add_box</i></button></td>
           {{/if}}
           {{/each}}
         </tr>

@@ -11,15 +11,15 @@
 
     <!-- Back button -->
     <div class="row">
-        <a class="btn brown darken-4 waves-effect back-btn" href="/"><i class="material-icons">arrow_back</i></a>
+        <a class="btn brown darken-4 waves-effect back-btn" href="/article"><i class="material-icons">arrow_back</i></a>
     </div>
     <!--_____________-->
 
     <!-- ******************* -->
     <br>
-    <button id="getCart" class="btn brown darken-4 waves-effect modal-trigger">Get Cart
+    {{!-- <button id="getCart" class="btn brown darken-4 waves-effect modal-trigger">Get Cart
         <i class="material-icons right">send</i>
-    </button>
+    </button> --}}
 
     <!-- ******************* -->
 
@@ -28,9 +28,9 @@
         <div class="col s6 offset-s3">
             <div class="row">
                 <h2 class="center-align text-brown darken-4">Your order includes: 
-                    <br><span id="itemsOrdered">Drink 1</span>
+                    <br><span id="itemsOrdered"></span>
                 </h2>
-                <h3 class="center-align text-brown darken-4">Your total is: $<span id="total">4.99</span></h3>
+                <h3 class="center-align text-brown darken-4">Your total is: $<span id="total"></span></h3>
             </div>
         </div>
     </div>
@@ -88,7 +88,7 @@
     <div id="orderConfirm" class="modal">
         <div class="modal-content center-align">
             <h4>Thank you for your order!</h4>
-            <h4>Your order # is: <span id="orderNum"></span></h4>
+            {{!-- <h4>Your order # is: <span id="orderNum"></span></h4> --}}
         </div>
         <div class="modal-footer">
             <hr>

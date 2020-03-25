@@ -34,6 +34,10 @@ module.exports = function (sequelize, Sequelize) {
       type: Sequelize.TINYINT(1),
       allowNull: false
     }
+    // popular: {
+    //   type: Sequelize.TINYINT(1),
+    //   allowNull: false
+    // }
   }, { timestamps: false });
 
   return Product;
