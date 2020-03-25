@@ -119,6 +119,9 @@ $(document).ready(function () {
     var newName = $("#newName")
       .val()
       .trim();
+      // var newEmail = $("#newEmail")
+      //    .val()
+      //    .trim();
 
     // if everything is Ok, then add the new record to the database
     if  ( errCheck1 == false && errCheck2 == false && errCheck3 == false) {
@@ -144,17 +147,69 @@ $(document).ready(function () {
 
         // SEE LINES 257-285 BELOW re orderName and passing data via localstorage (MUST BE DONE HERE AS WELL)
         if (res) {
+  
           // for customer that doesn't exist yet
           custName = newName;
-          //orderName = custName;
+          // orderName = custName;
 
-          localStorage.setItem('cid', JSON.stringify(custId));
-          localStorage.setItem('name', JSON.stringify(custName));
-          localStorage.setItem('oid', JSON.stringify(orderId));
+          
+          // localStorage.setItem('cid', JSON.stringify(custId));
+          // localStorage.setItem('name', JSON.stringify(custName));
+          // localStorage.setItem('oid', JSON.stringify(orderId));
 
           // custName = "";
           // custEmail = "";
-          // custId = 0;
+        // Clear Local Storage
+        localStorage.removeItem('cid')
+        localStorage.removeItem('name')
+        localStorage.removeItem('oid')
+    
+        // Clear Customer variables
+        custName = "";
+        custEmail = "";
+        custId=0;
+    
+         // Create an Order
+         // TEST
+         var newEmail = $("#newEmail")
+         .val()
+         .trim();
+         $.get("/api/customers/" + newEmail, function (data) { })
+        .then(function (data) {
+          console.log("--Results after db search for newEmail match--")
+          console.log(data);
+          if (data !== null) {
+            custName = data.cust_name;
+            custEmail = data.cust_email;
+            custId = data.cid
+            console.log("---Email address in DB with these values---")
+            console.log(custName);
+            console.log(custEmail);
+            console.log(custId);
+
+            // createOrder();
+        //     localStorage.setItem('cid', JSON.stringify(custId));
+         localStorage.setItem('name', JSON.stringify(custName));
+        //  localStorage.setItem('oid', JSON.stringify(orderId));
+
+        orderName = custName;
+
+            createOrder();
+          }
+
+
+         } );
+         // TEST
+        
+        //  localStorage.setItem('cid', JSON.stringify(custId));
+        //  localStorage.setItem('name', JSON.stringify(custName));
+        //  localStorage.setItem('oid', JSON.stringify(orderId));
+         
+        // Create an Order
+      
+
+      // // Create an Order
+      // createOrder();
 
           window.location.href = "/menu"
         }
@@ -181,12 +236,18 @@ $(document).ready(function () {
     $.get("/api/customers/" + newEmail, function (data) {
       if (data == null) {
         callback("no"); // no duplicate email found
+      }else {
+        //custId = data.cid;
       }
      }).then(function (data) {
       console.log("------for data-----");
       console.log(data)
       console.log("------for data-----");
       var emailReceived = data.cust_email;
+      custName = data.cust_name;
+      custEmail = data.cust_email;
+      custId = data.cid;
+      //orderName = custName;
 
       console.log(emailReceived);
       if (emailReceived === newEmail) {
