@@ -95,8 +95,8 @@ $(document).ready(function () {
     return true;
   }
 
-  function handleCreateNewCustomerCallback(status){
-    if (status == "yes") { 
+  function handleCreateNewCustomerCallback(status) {
+    if (status == "yes") {
       errCheck3 = true; // duplicate found
       alert("Duplicate email address found.");
     }
@@ -117,7 +117,7 @@ $(document).ready(function () {
       .trim();
 
     // if everything is Ok, then add the new record to the database
-    if  ( errCheck1 == false && errCheck2 == false && errCheck3 == false) {
+    if (errCheck1 == false && errCheck2 == false && errCheck3 == false) {
       console.log("if statement is thereeeeee")
       var newCustomer = {
         cust_name: $("#newName")
@@ -126,15 +126,15 @@ $(document).ready(function () {
         cust_email: $("#newEmail")
           .val()
           .trim()
-          
+
       };
-      
-     
+
+
       $.post("api/customers", newCustomer).then(function (req, res) {
         //  console.log(data);
-        
 
-      
+
+
         // $("#newName").val("");
         // $("#newEmail").val("");
 
@@ -157,7 +157,7 @@ $(document).ready(function () {
         // window.location.replace("/menu")
       });
     }
-    else{
+    else {
       // already exisiting customer
       custName = newName;
       //orderName = custName;
@@ -178,7 +178,7 @@ $(document).ready(function () {
       if (data == null) {
         callback("no"); // no duplicate email found
       }
-     }).then(function (data) {
+    }).then(function (data) {
       console.log("------for data-----");
       console.log(data)
       console.log("------for data-----");
@@ -213,14 +213,14 @@ $(document).ready(function () {
     }
     else {
       errCheck1 = true;
-      }
+    }
 
     if (isValidEmail(newEmail)) {
       errCheck2 = false;
     }
     else {
       errCheck2 = true;
-      
+
     }
 
     if (errCheck1 === true) {
@@ -254,7 +254,7 @@ $(document).ready(function () {
     // Clear Customer variables
     custName = "";
     custEmail = "";
-    custId=0;
+    custId = 0;
 
     // Grab user input from existing customer form
 
@@ -318,12 +318,12 @@ $(document).ready(function () {
             // CREATE AN ORDER in Orders Table
             // var orderTable = {
             //   cid:custId,
-              
+
             // }
-                // using custId and orderName
+            // using custId and orderName
             // RETRIEVE new oid FROM DATABASE
             // STORE oid in orderId
-            
+
             // Pass custId, custName, and orderId via localstorage
 
             localStorage.setItem('cid', JSON.stringify(custId));
@@ -398,10 +398,10 @@ $(document).ready(function () {
       orderName = guestInput;
 
       // CREATE AN ORDER in Orders Table
-          // using custId and orderName
+      // using custId and orderName
       // RETRIEVE new oid FROM DATABASE
       // STORE oid in orderId
-      
+
       // Pass custId, custName, and orderId via localstorage
 
       localStorage.setItem('cid', JSON.stringify(custId));
@@ -433,13 +433,13 @@ $(document).ready(function () {
   function getCustInfo() {
 
     // Clear cart
-    cartArray.length=0;
-    localStorage.removeItem('cart');
+    cartArray.length = 0;
+    // localStorage.removeItem('cart');
 
     // Clear customer variables
-    custId=0;
-    orderName="";
-    orderId=0;
+    custId = 0;
+    orderName = "";
+    orderId = 0;
 
     // Pull Customer info from local storage
     custId = JSON.parse(localStorage.getItem('cid'));
@@ -463,8 +463,8 @@ $(document).ready(function () {
     console.log(contentProfile);
   }
 
-    // Call getCustInfo ()
-    getCustInfo();
+  // Call getCustInfo ()
+  getCustInfo();
 
 
   // Get Order History
@@ -522,7 +522,7 @@ $(document).ready(function () {
   // ------------------------------------------
 
 
-  $(".atcm").unbind("click").click(function (){
+  $(".atcm").unbind("click").click(function () {
 
     // Prevent default action
     event.preventDefault();
@@ -617,20 +617,20 @@ $(document).ready(function () {
     // Grab product id from orderItems table
     // Search product table by product id
     // Set itemProdName, itemSize, and itemPrice from database
-        // itemProdName = data.prod_name;
-        // itemSize = data.size;
-        // itemPrice = data.price;
+    // itemProdName = data.prod_name;
+    // itemSize = data.size;
+    // itemPrice = data.price;
     // Create Cart Item
-        // var newCartItem = {
-        // oid: orderId,
-        // cid: custId,
-        // order_name: orderName,
-        // item_no: itemNo,
-        // pid: itemProdId,
-        // prod_name: itemProdName,
-        // size: itemSize,
-        // price: itemPrice,
-        // qty: itemQty
+    // var newCartItem = {
+    // oid: orderId,
+    // cid: custId,
+    // order_name: orderName,
+    // item_no: itemNo,
+    // pid: itemProdId,
+    // prod_name: itemProdName,
+    // size: itemSize,
+    // price: itemPrice,
+    // qty: itemQty
     // Push OrderItem Object to Cart Array
     // Append Cart to the DOM
   });
@@ -641,41 +641,41 @@ $(document).ready(function () {
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
 
-function getCartItems() {
+  function getCartItems() {
 
-  $("#cart").text("");
+    $("#cart").text("");
 
-      if (cartArray.length > 0) {
-        $("#cart").text("");
-        $("#cart").append("<table><thead><tr>")
-        $("#cart").append("<th>Item No.</th><th>Description</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
-        $("#cart").append("</thead><tbody>");
-        var cartItems;
-        for (var i = 0; i < cartArray.length; i++) {
-          cartItems = $("<tr>");
-          cartItems.append("<td>" + cartArray[i].item_no + "</td>");
-          cartItems.append("<td>" + cartArray[i].prod_name + "</td>");
-          cartItems.append("<td>" + cartArray[i].size + "</td>");
-          cartItems.append("<td class='right-align'>" + cartArray[i].price + "</td>");
-          cartItems.append("<td class='center-align'>" + cartArray[i].qty + "</td>");
-          cartItems.append("<button class='btn-flat rfc' type='submit' id='" + cartArray[i].item_no + "'><i class='small material-icons'>clear</i></button></td>");
-          cartItems.append("</tr>");
-          $("#cart").append(cartItems);
-        }
-        cartItems.append("</tbody></table><br>");
-      
-
-      } else {
-
-        // Create message for no order history results
-        $("#cart").text("");
-        $("#cart").append("<tr><td><p class='pink-text center-align small'>Please select an item from products or order history.</p></td></tr>");
+    if (cartArray.length > 0) {
+      $("#cart").text("");
+      $("#cart").append("<table><thead><tr>")
+      $("#cart").append("<th>Item No.</th><th>Description</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
+      $("#cart").append("</thead><tbody>");
+      var cartItems;
+      for (var i = 0; i < cartArray.length; i++) {
+        cartItems = $("<tr>");
+        cartItems.append("<td>" + cartArray[i].item_no + "</td>");
+        cartItems.append("<td>" + cartArray[i].prod_name + "</td>");
+        cartItems.append("<td>" + cartArray[i].size + "</td>");
+        cartItems.append("<td class='right-align'>" + cartArray[i].price + "</td>");
+        cartItems.append("<td class='center-align'>" + cartArray[i].qty + "</td>");
+        cartItems.append("<button class='btn-flat rfc' type='submit' id='" + cartArray[i].item_no + "'><i class='small material-icons'>clear</i></button></td>");
+        cartItems.append("</tr>");
+        $("#cart").append(cartItems);
       }
-    
-};
+      cartItems.append("</tbody></table><br>");
 
-// Call getCartItems() function
-getCartItems();
+
+    } else {
+
+      // Create message for no order history results
+      $("#cart").text("");
+      $("#cart").append("<tr><td><p class='pink-text center-align small'>Please select an item from products or order history.</p></td></tr>");
+    }
+
+  };
+
+  // Call getCartItems() function
+  getCartItems();
 
 
   // Delete item from cartArray in menu.handlebars
@@ -684,31 +684,31 @@ getCartItems();
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
 
-$(document).on("click", ".rfc", function (event){
+  $(document).on("click", ".rfc", function (event) {
 
-  // Prevent double-click
-  event.stopImmediatePropagation();
+    // Prevent double-click
+    event.stopImmediatePropagation();
 
-  // Prevent default action
-  event.preventDefault();
+    // Prevent default action
+    event.preventDefault();
 
-  // Delete Array Item based on Order Item id
-  var findItem = parseInt(this.id) - 1;
-  cartArray.splice(findItem,1);
+    // Delete Array Item based on Order Item id
+    var findItem = parseInt(this.id) - 1;
+    cartArray.splice(findItem, 1);
 
-  // Renumber Order Item No. for remaining items
-  for (var i = 0; i<cartArray.length;i++){
-    cartArray[i].item_no = i+1;
-  }
-  
-  // Update itemCounter to reflect the delete
-  itemCounter = cartArray.length;
+    // Renumber Order Item No. for remaining items
+    for (var i = 0; i < cartArray.length; i++) {
+      cartArray[i].item_no = i + 1;
+    }
 
-  localStorage.setItem('cart', JSON.stringify(cartArray));
+    // Update itemCounter to reflect the delete
+    itemCounter = cartArray.length;
 
-  getCartItems();
+    localStorage.setItem('cart', JSON.stringify(cartArray));
 
-});
+    getCartItems();
+
+  });
 
   // Cart submit button in menu.handlebars
   // ------------------------------------------
@@ -716,24 +716,25 @@ $(document).on("click", ".rfc", function (event){
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
 
-  $(document).on("click", "#submitCart", function (event){
+  $(document).on("click", "#submitCart", function (event) {
 
     // Prevent double-click
     event.stopImmediatePropagation();
-  
+
     // Prevent default action
     event.preventDefault();
-
-    if (cartArray.length>0){
-          // Put cartArray in localstorage
-    localStorage.setItem('cart', JSON.stringify(cartArray));
-
-    // Navigate to checkout.handlebars
-    window.location.href = "/checkout";
-
+    
+    if (cartArray.length > 0) {
+      // Put cartArray in localstorage
+      localStorage.setItem('cart', JSON.stringify(cartArray));
+      checkout();
+      // Navigate to checkout.handlebars
+      window.location.href = "/checkout";
+      
     } else {
       alert("Please add at least one item to your cart.")
     };
+    
 
   });
 
@@ -742,27 +743,106 @@ $(document).on("click", ".rfc", function (event){
   // Completed: 03/__/2020 by: Nida/Hebah
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
-  function checkout(){
 
-    // Retrieve Customer info from local storage on checkout page
+  $(document).on("click", "#getCart", function (event) {
+
+    // Prevent double-click
+    event.stopImmediatePropagation();
+
+    // Prevent default action
+    event.preventDefault();
+
+    checkout();
+
+
+  });
+
+
+  function checkout() {
+    
+    var retrievedCart = localStorage.getItem("cart");
+    var finalCart = JSON.parse(retrievedCart);
+    console.log("--Final from Local Storage-");
+    console.log(finalCart);
+    // console.log(cartArray.length)
+
+    $("#itemsOrdered").text("");
+
+    if (finalCart.length > 0) {
+      $("#itemsOrdered").text("");
+      $("#itemsOrdered").append("<table><thead><tr>")
+      // $("#itemsOrdered").append("<th>Item No.</th><th>Description</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
+      $("#itemsOrdered").append("</thead><tbody>");
+      var cartItems;
+      var totalPrice = 0;
+      $("#total").text("");
+          for (var i = 0; i < finalCart.length; i++){
+            totalPrice += parseFloat(finalCart[i].price.toString());
+            console.log("Total price is " , totalPrice);
+          }
+
+      for (var i = 0; i < finalCart.length; i++) {
+        cartItems = $("<tr>");
+        cartItems.append("<td>" + finalCart[i].item_no + "</td>");
+        cartItems.append("<td>" + finalCart[i].prod_name + "</td>");
+        cartItems.append("<td>" + finalCart[i].size + "</td>");
+        // cartItems.append("<td class='right-align'>" + finalCart[i].price + "</td>");
+        // cartItems.append("<td class='center-align'>" + finalCart[i].qty + "</td>");
+        // cartItems.append("<button class='btn-flat rfc' type='submit' id='" + finalCart[i].item_no + "'><i class='small material-icons'>clear</i></button></td>");
+        cartItems.append("</tr>");
+        $("#itemsOrdered").append(cartItems);
+      }
+      $("#total").append(totalPrice.toFixed(2));
+
+      // cartItems.append("<tr class='center-align'>" + totalPrice + "</tr>")
+      console.log(totalPrice);
+      cartItems.append("</tbody></table><br>");
+
+
+      // } else {
+
+      //   // Create message for no order history results
+      //   $("#cart").text("");
+      //   $("#cart").append("<tr><td><p class='pink-text center-align small'>Please select an item from products or order history.</p></td></tr>");
+
+
+      // };
+
+      // Retrieve Customer info from local storage on checkout page
       // custId = JSON.parse(localStorage.getItem('cid'));
-            // console.log("--custId from Local Storage-");
-            // console.log(custId);
+      // console.log("--custId from Local Storage-");
+      // console.log(custId);
       // orderName = JSON.parse(localStorage.getItem('name'));
-            // console.log("--orderName from Local Storage-");
-            // console.log(orderName);
+      // console.log("--orderName from Local Storage-");
+      // console.log(orderName);
       // orderId = JSON.parse(localStorage.getItem('oid'));
-            // console.log("--orderId from Local Storage-");
-            // console.log(orderId);
+      // console.log("--orderId from Local Storage-");
+      // console.log(orderId);
 
-  // Retrieve Cart from local storage on checkout page
+      // Retrieve Cart from local storage on checkout page
       // var retrievedCart = localStorage.getItem("cart");
       // var finalCart = JSON.parse(retrievedCart);
       // console.log("--Final from Local Storage-");
       // console.log(finalCart);
 
 
+    }
   }
+
+
+  // Submit button in checkout.handlebars
+  $("#att").on("click", function (event) {
+    event.preventDefault();
+    var retrievedCart = localStorage.getItem("cart");
+    var finalCart = JSON.parse(retrievedCart);
+    console.log("final cart is... ", finalCart);
+    $.post("/api/orderitems", finalCart)
+    .then(function(req,res) {
+      console.log(finalCart);
+    })
+  })
+
+
 
   // Spotify in checkout.handlebars
   // ------------------------------------------
@@ -807,7 +887,7 @@ $(document).on("click", ".rfc", function (event){
     event.preventDefault();
     var usersSong = $(this).attr("dataval");
     console.log("usersong is below");
-    $.post("api/songs", { song: usersSong }).then(function(req, res){
+    $.post("api/songs", { song: usersSong }).then(function (req, res) {
 
     });
   });
@@ -818,7 +898,7 @@ $(document).on("click", ".rfc", function (event){
     console.log(usersSong);
   });
 
-  
+
 
   //---------------------------------------------
   // End of drinks.js

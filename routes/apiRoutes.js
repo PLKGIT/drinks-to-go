@@ -43,6 +43,13 @@ module.exports = function (app) {
     });
   });
   // Order Items API by ID Get Route
+  app.get("/api/orderitems", function (req, res) {
+    db.OrderItem.findAll({}).then(function (data) {
+      res.json(data);
+      console.log(data);
+    });
+  });
+
   app.get("/api/orderitemsid/:id", function (req, res) {
     db.OrderItem.findAll({
       where: {
@@ -115,7 +122,7 @@ app.post("/api/orderitems", function (req, res) {
   db.OrderItem.create(req.body).then(function (data) {
     res.json(data);
   });
-});
+})
 // Order Items API Put Route
 app.put("/api/orderitems", function (req, res) {
   db.OrderItem.update(req.body, {

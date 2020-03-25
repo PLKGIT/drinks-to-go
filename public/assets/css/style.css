@@ -52,7 +52,6 @@ body {
 h1, h2 {
       text-align: center;
       font-family: 'Pacifico', cursive;
-      font-weight: bolder;
 }
 
 h3, h4, h5 {
@@ -79,15 +78,19 @@ p {
 }
 
 .btn:hover {
-      background: rgb(58, 37, 37);
+      background: #8d6e63;
 }
   
 .btn:focus {
-      background: #a3aeba;
+      background: #5d4037;
 }
 
 #checkout {
       width: 100%;
+}
+
+#itemsOrdered {
+      font-size: .65em;
 }
 
 .back-btn {
