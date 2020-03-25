@@ -64,7 +64,7 @@ var songArtist;
 $(document).ready(function () {
   // Logic for index.handlebars Modal
   // ------------------------------------------
-  // $(".modal").modal();
+  $(".modal").modal();
 
   // User Input Validations on index.handlebars
   // ------------------------------------------
