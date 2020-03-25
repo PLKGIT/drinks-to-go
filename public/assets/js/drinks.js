@@ -45,6 +45,7 @@ var itemStatus = "pending";
 var itemPrice;
 var itemSize;
 var itemQty = 1;
+var itemOrderItemId;
 
 // Song Variables
 // ------------------------------------------
@@ -211,7 +212,11 @@ $(document).ready(function () {
           // // Create an Order
           // createOrder();
 
+<<<<<<< Updated upstream
           window.location.href = "/article"
+=======
+          window.location.href = "/menu"
+>>>>>>> Stashed changes
         }
         // window.location.replace("/menu")
       });
@@ -498,7 +503,11 @@ $(document).ready(function () {
 
       if (orderId !== 0) {
         // Navigate to menu.handlebars
+<<<<<<< Updated upstream
         window.location.href = "/article"
+=======
+        window.location.href = "/menu"
+>>>>>>> Stashed changes
       } else {
         alert("There was an issue with login, please try again.")
       }
@@ -697,9 +706,6 @@ $(document).ready(function () {
     // Set Product variables by searching product by PID in button
     itemProdId = this.id;
 
-    // Pam's Test Data until oid functionality is available
-    // itemOrderId = 6;
-
     $.get("/api/products/" + itemProdId, function (data) {
       // Increment Item Counter by 1
       itemCounter++;
@@ -848,6 +854,7 @@ $(document).ready(function () {
   // ------------------------------------------
 
 
+<<<<<<< Updated upstream
   // $(document).on("click", ".atch", function (event) {
 
   //   // Prevent double-click
@@ -878,6 +885,105 @@ $(document).ready(function () {
   //   // Push OrderItem Object to Cart Array
   //   // Append Cart to the DOM
   // });
+=======
+  $(document).on("click", ".atch", function (event) {
+
+    // Prevent double-click
+    event.stopImmediatePropagation();
+    // Prevent default action
+    event.preventDefault();
+
+    // Grab the orderItems table's id from the button
+    itemOrderItemId = this.id;
+    console.log("--orderItemId from Order History");
+    console.log(this.id);
+
+    // Search orderItems table by the itemOrderItemId
+    $.get("/api/orderitemsid/" + itemOrderItemId, function (data) { })
+      .then(function (data) {
+        // Grab product id from orderItems table
+
+        console.log("--data from search of orderitems table on itemOrderItemId--");
+        console.log(data);
+        console.log("--pid--");
+        console.log(data.pid);
+        console.log("--itemProdId--");
+        itemProdId = data.pid;
+
+        $.get("api/products/" + itemProdId, function (data) {
+          // Increment Item Counter by 1
+          itemCounter++;
+
+          // Set Item No variable to ItemCounter
+          itemNo = itemCounter;
+
+          console.log("--Data--");
+          console.log(data);
+          // Set itemProdName, itemSize, and itemPrice from database
+          console.log("--itemProdName--");
+          itemProdName = data.prod_name;
+          console.log("--itemSize--");
+          itemSize = data.size;
+          console.log("--itemPrice--");
+          itemPrice = data.price;
+
+
+        }).then(function (data) {
+
+
+          // Console Logs for Testing
+          console.log("--Data--");
+          console.log(data);
+          console.log("--itemProdName--");
+          console.log(itemProdName);
+          console.log("--itemSize--");
+          console.log(itemSize);
+          console.log("--itemPrice--");
+          console.log(itemPrice);
+          console.log("--orderId--");
+          console.log(orderId);
+          console.log("--custId--");
+          console.log(custId);
+          console.log("--orderName--");
+          console.log(orderName);
+          console.log("--itemNo--");
+          console.log(itemNo);
+          console.log("--itemProdId--");
+          console.log(itemProdId);
+          console.log("--itemProdName--");
+          console.log(itemProdName);
+          console.log("--itemQty--");
+          console.log(itemQty);
+
+          // Create Cart Item
+          var newCartItem = {
+            oid: orderId,
+            cid: custId,
+            order_name: orderName,
+            item_no: itemNo,
+            pid: itemProdId,
+            prod_name: itemProdName,
+            size: itemSize,
+            price: itemPrice,
+            qty: itemQty
+          };
+          console.log("--newCartItem--");
+          console.log(newCartItem);
+
+          // Push OrderItem Object to Cart Array
+          cartArray.push(newCartItem);
+
+          console.log("--cartArray--");
+          console.log(cartArray);
+
+          getCartItems()
+        });
+      });
+
+
+
+  });
+>>>>>>> Stashed changes
 
   // Display the Cart in menu.handlebars
   // ------------------------------------------
@@ -1006,6 +1112,7 @@ $(document).ready(function () {
       // Navigate to checkout.handlebars
       window.location.href = "/checkout";
       // checkout();
+
     } else {
       alert("Please add at least one item to your cart.")
     };
@@ -1228,7 +1335,6 @@ $(document).ready(function () {
     });
   });
 
-  // $("#")
 
   // $(".songChoice").on("click", function () {
   //   var usersSong = this.text();
