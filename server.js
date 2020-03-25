@@ -1,14 +1,13 @@
+// Required
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
-
 var Spotify = require('node-spotify-api');
-
 var keys = require("./keys.js")
-
-var spotify = new Spotify(keys.spotify);
-
 var db = require("./models");
+
+// Spotify Keys Propagation
+var spotify = new Spotify(keys.spotify);
 
 var app = express();
 // var PORT = process.env.PORT || 3000;
