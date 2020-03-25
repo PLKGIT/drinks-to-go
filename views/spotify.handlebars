@@ -1,5 +1,3 @@
-
-
 <div class="container">
     <div class="row">
         <div class="col s12">
@@ -22,28 +20,33 @@
         <div class="col s12">
             <div class="card white">
                 <div class="card-content text-brown darken-4">
-                    <span class="card-title">Products</span>
+                    <span class="card-title">Spotify Requests</span>
                     <div id="customers">
                         <table class="responsive-table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Description</th>
-                                    <th>Type</th>
-                                    <th></th>
-                                    <th>Size</th>
-                                    <th>Price</th>
+                                    <th>Song</th>
+                                    <th>Artist</th>
+                                    <th>URL</th>
+                                    <th>Requested</th>
+                                    <th>Status</th>
+                                    {{!-- <th>Price</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
-                                {{#each products}}
+                                {{#each songs}}
                                 <tr>
-                                    <td>{{this.id}}</td>
-                                    <td>{{this.prod_name}}</td>
-                                    <td>{{this.type}}</td>
-                                    <td>{{this.temp}}</td>
-                                    <td>{{this.size}}</td>
-                                    <td>{{this.price}}</td>
+                                    <td>{{this.song_name}}</td>
+                                    <td>{{this.artist}}</td>
+                                    {{#if this.song_url}}
+                                    <td><a href={{this.song_url}} target="_blank">Play Song</a></td>
+
+                                    {{else}}
+                                    <td>No link available</td>
+                                    {{/if}}
+                                    <td>{{this.requested}}</td>
+                                    <td>{{this.status}}</td>
+                                    {{!-- <td>{{this.price}}</td> --}}
                                 </tr>
                                 {{/each}}
                             </tbody>
@@ -56,8 +59,8 @@
 </div>
 <div class="container"></div>
 <!-- jQuery JavaScript -->
-{{!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Materialize JavaScript-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <!-- Team JavaScript -->
-<script src="/assets/js/drinks.js"></script> --}}
+<script src="/assets/js/drinks.js"></script>

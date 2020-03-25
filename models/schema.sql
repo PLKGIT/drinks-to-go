@@ -54,6 +54,7 @@ CREATE TABLE orderItems (
     ordered DATETIME NOT NULL,
     status VARCHAR(10) NOT NULL DEFAULT "Pending",
     complete BOOLEAN (1) NOT NULL,
+    ready BOOLEAN (1) NOT NULL,
     PRIMARY KEY (id)
 );
 

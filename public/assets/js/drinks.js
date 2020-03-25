@@ -60,7 +60,7 @@ var songArtist;
 $(document).ready(function () {
   // Logic for index.handlebars Modal
   // ------------------------------------------
-  $(".modal").modal();
+  // $(".modal").modal();
 
   // User Input Validations on index.handlebars
   // ------------------------------------------
@@ -95,8 +95,8 @@ $(document).ready(function () {
     return true;
   }
 
-  function handleCreateNewCustomerCallback(status){
-    if (status == "yes") { 
+  function handleCreateNewCustomerCallback(status) {
+    if (status == "yes") {
       errCheck3 = true; // duplicate found
       alert("Duplicate email address found.");
     }
@@ -114,7 +114,7 @@ $(document).ready(function () {
     //alert("flags >>>> (valid_name, valid_email, duplicate_email) " + errCheck1 + " " + errCheck2 + " " + errCheck3);
 
     // if everything is Ok, then add the new record to the database
-    if  ( errCheck1 == false && errCheck2 == false && errCheck3 == false) {
+    if (errCheck1 == false && errCheck2 == false && errCheck3 == false) {
       console.log("if statement is thereeeeee")
       var newCustomer = {
         cust_name: $("#newName")
@@ -123,15 +123,15 @@ $(document).ready(function () {
         cust_email: $("#newEmail")
           .val()
           .trim()
-          
+
       };
-      
-     
+
+
       $.post("api/customers", newCustomer).then(function (req, res) {
         //  console.log(data);
-        
 
-      
+
+
         // $("#newName").val("");
         // $("#newEmail").val("");
 
@@ -154,7 +154,7 @@ $(document).ready(function () {
         // window.location.replace("/menu")
       });
     }
-    else{
+    else {
       // already exisiting customer
       custName = newName;
       orderName = custName;
@@ -172,7 +172,7 @@ $(document).ready(function () {
       if (data == null) {
         callback("no"); // no duplicate email found
       }
-     }).then(function (data) {
+    }).then(function (data) {
       console.log("------for data-----");
       console.log(data)
       console.log("------for data-----");
@@ -207,14 +207,14 @@ $(document).ready(function () {
     }
     else {
       errCheck1 = true;
-      }
+    }
 
     if (isValidEmail(newEmail)) {
       errCheck2 = false;
     }
     else {
       errCheck2 = true;
-      
+
     }
 
     if (errCheck1 === true) {
@@ -248,7 +248,7 @@ $(document).ready(function () {
     // Clear Customer variables
     custName = "";
     custEmail = "";
-    custId=0;
+    custId = 0;
 
     // Grab user input from existing customer form
 
@@ -312,12 +312,12 @@ $(document).ready(function () {
             // CREATE AN ORDER in Orders Table
             // var orderTable = {
             //   cid:custId,
-              
+
             // }
-                // using custId and orderName
+            // using custId and orderName
             // RETRIEVE new oid FROM DATABASE
             // STORE oid in orderId
-            
+
             // Pass custId, custName, and orderId via localstorage
 
             localStorage.setItem('cid', JSON.stringify(custId));
@@ -392,10 +392,10 @@ $(document).ready(function () {
       orderName = guestInput;
 
       // CREATE AN ORDER in Orders Table
-          // using custId and orderName
+      // using custId and orderName
       // RETRIEVE new oid FROM DATABASE
       // STORE oid in orderId
-      
+
       // Pass custId, custName, and orderId via localstorage
 
       localStorage.setItem('cid', JSON.stringify(custId));
@@ -427,13 +427,13 @@ $(document).ready(function () {
   function getCustInfo() {
 
     // Clear cart
-    cartArray.length=0;
+    cartArray.length = 0;
     localStorage.removeItem('cart');
 
     // Clear customer variables
-    custId=0;
-    orderName="";
-    orderId=0;
+    custId = 0;
+    orderName = "";
+    orderId = 0;
 
     // Pull Customer info from local storage
     custId = JSON.parse(localStorage.getItem('cid'));
@@ -457,8 +457,8 @@ $(document).ready(function () {
     console.log(contentProfile);
   }
 
-    // Call getCustInfo ()
-    getCustInfo();
+  // Call getCustInfo ()
+  getCustInfo();
 
 
   // Get Order History
@@ -516,7 +516,7 @@ $(document).ready(function () {
   // ------------------------------------------
 
 
-  $(".atcm").unbind("click").click(function (){
+  $(".atcm").unbind("click").click(function () {
 
     // Prevent default action
     event.preventDefault();
@@ -611,20 +611,20 @@ $(document).ready(function () {
     // Grab product id from orderItems table
     // Search product table by product id
     // Set itemProdName, itemSize, and itemPrice from database
-        // itemProdName = data.prod_name;
-        // itemSize = data.size;
-        // itemPrice = data.price;
+    // itemProdName = data.prod_name;
+    // itemSize = data.size;
+    // itemPrice = data.price;
     // Create Cart Item
-        // var newCartItem = {
-        // oid: orderId,
-        // cid: custId,
-        // order_name: orderName,
-        // item_no: itemNo,
-        // pid: itemProdId,
-        // prod_name: itemProdName,
-        // size: itemSize,
-        // price: itemPrice,
-        // qty: itemQty
+    // var newCartItem = {
+    // oid: orderId,
+    // cid: custId,
+    // order_name: orderName,
+    // item_no: itemNo,
+    // pid: itemProdId,
+    // prod_name: itemProdName,
+    // size: itemSize,
+    // price: itemPrice,
+    // qty: itemQty
     // Push OrderItem Object to Cart Array
     // Append Cart to the DOM
   });
@@ -635,41 +635,74 @@ $(document).ready(function () {
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
 
-function getCartItems() {
+  // function getCartItems() {
 
-  $("#cart").text("");
+  //   $("#cart").text("");
 
-      if (cartArray.length > 0) {
-        $("#cart").text("");
-        $("#cart").append("<table><thead><tr>")
-        $("#cart").append("<th>Item No.</th><th>Description</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
-        $("#cart").append("</thead><tbody>");
-        var cartItems;
-        for (var i = 0; i < cartArray.length; i++) {
-          cartItems = $("<tr>");
-          cartItems.append("<td>" + cartArray[i].item_no + "</td>");
-          cartItems.append("<td>" + cartArray[i].prod_name + "</td>");
-          cartItems.append("<td>" + cartArray[i].size + "</td>");
-          cartItems.append("<td class='right-align'>" + cartArray[i].price + "</td>");
-          cartItems.append("<td class='center-align'>" + cartArray[i].qty + "</td>");
-          cartItems.append("<button class='btn-flat rfc' type='submit' id='" + cartArray[i].item_no + "'><i class='small material-icons'>clear</i></button></td>");
-          cartItems.append("</tr>");
-          $("#cart").append(cartItems);
-        }
-        cartItems.append("</tbody></table><br>");
-      
+  //   if (cartArray.length > 0) {
+  //     $("#cart").text("");
+  //     $("#cart").append("<table><thead><tr>")
+  //     $("#cart").append("<th>Item No.</th><th>Description</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
+  //     $("#cart").append("</thead><tbody>");
+  //     var cartItems;
+  //     for (var i = 0; i < cartArray.length; i++) {
+  //       cartItems = $("<tr>");
+  //       cartItems.append("<td>" + cartArray[i].item_no + "</td>");
+  //       cartItems.append("<td>" + cartArray[i].prod_name + "</td>");
+  //       cartItems.append("<td>" + cartArray[i].size + "</td>");
+  //       cartItems.append("<td class='right-align'>" + cartArray[i].price + "</td>");
+  //       cartItems.append("<td class='center-align'>" + cartArray[i].qty + "</td>");
+  //       cartItems.append("<button class='btn-flat rfc' type='submit' id='" + cartArray[i].item_no + "'><i class='small material-icons'>clear</i></button></td>");
+  //       cartItems.append("</tr>");
+  //       $("#cart").append(cartItems);
+  //     }
+  //     cartItems.append("</tbody></table><br>");
 
-      } else {
 
-        // Create message for no order history results
-        $("#cart").text("");
-        $("#cart").append("<tr><td><p class='pink-text center-align small'>Please select an item from products or order history.</p></td></tr>");
+  //   } else {
+
+  //     // Create message for no order history results
+  //     $("#cart").text("");
+  //     $("#cart").append("<tr><td><p class='pink-text center-align small'>Please select an item from products or order history.</p></td></tr>");
+  //   }
+
+  // };
+
+  function getCartItems() {
+
+    $("#cart").text("");
+
+    if (cartArray.length > 0) {
+      $("#cart").text("");
+      $("#cart").append("<table><thead><tr>")
+      $("#cart").append("<th>Item No.</th><th>Description</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
+      $("#cart").append("</thead><tbody>");
+      var cartItems;
+      for (var i = 0; i < cartArray.length; i++) {
+        cartItems = $("<tr>");
+        cartItems.append("<td>" + cartArray[i].item_no + "</td>");
+        cartItems.append("<td>" + cartArray[i].prod_name + "</td>");
+        cartItems.append("<td>" + cartArray[i].size + "</td>");
+        cartItems.append("<td class='right-align'>" + cartArray[i].price + "</td>");
+        cartItems.append("<td class='center-align'>" + cartArray[i].qty + "</td>");
+        cartItems.append("<button class='btn-flat rfc' type='submit' id='" + cartArray[i].item_no + "'><i class='small material-icons'>clear</i></button></td>");
+        cartItems.append("</tr>");
+        $("#cart").append(cartItems);
       }
-    
-};
+      cartItems.append("</tbody></table><br>");
 
-// Call getCartItems() function
-getCartItems();
+
+    } else {
+
+      // Create message for no order history results
+      $("#cart").text("");
+      $("#cart").append("<tr><td><p class='pink-text center-align small'>Please select an item from products or order history.</p></td></tr>");
+    }
+
+  };
+
+  // Call getCartItems() function
+  getCartItems();
 
 
   // Delete item from cartArray in menu.handlebars
@@ -678,31 +711,31 @@ getCartItems();
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
 
-$(document).on("click", ".rfc", function (event){
+  $(document).on("click", ".rfc", function (event) {
 
-  // Prevent double-click
-  event.stopImmediatePropagation();
+    // Prevent double-click
+    event.stopImmediatePropagation();
 
-  // Prevent default action
-  event.preventDefault();
+    // Prevent default action
+    event.preventDefault();
 
-  // Delete Array Item based on Order Item id
-  var findItem = parseInt(this.id) - 1;
-  cartArray.splice(findItem,1);
+    // Delete Array Item based on Order Item id
+    var findItem = parseInt(this.id) - 1;
+    cartArray.splice(findItem, 1);
 
-  // Renumber Order Item No. for remaining items
-  for (var i = 0; i<cartArray.length;i++){
-    cartArray[i].item_no = i+1;
-  }
-  
-  // Update itemCounter to reflect the delete
-  itemCounter = cartArray.length;
+    // Renumber Order Item No. for remaining items
+    for (var i = 0; i < cartArray.length; i++) {
+      cartArray[i].item_no = i + 1;
+    }
 
-  localStorage.setItem('cart', JSON.stringify(cartArray));
+    // Update itemCounter to reflect the delete
+    itemCounter = cartArray.length;
 
-  getCartItems();
+    localStorage.setItem('cart', JSON.stringify(cartArray));
 
-});
+    getCartItems();
+
+  });
 
   // Cart submit button in menu.handlebars
   // ------------------------------------------
@@ -710,20 +743,20 @@ $(document).on("click", ".rfc", function (event){
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
 
-  $(document).on("click", "#submitCart", function (event){
+  $(document).on("click", "#submitCart", function (event) {
 
     // Prevent double-click
     event.stopImmediatePropagation();
-  
+
     // Prevent default action
     event.preventDefault();
 
-    if (cartArray.length>0){
-          // Put cartArray in localstorage
-    localStorage.setItem('cart', JSON.stringify(cartArray));
+    if (cartArray.length > 0) {
+      // Put cartArray in localstorage
+      localStorage.setItem('cart', JSON.stringify(cartArray));
 
-    // Navigate to checkout.handlebars
-    window.location.href = "/checkout";
+      // Navigate to checkout.handlebars
+      window.location.href = "/checkout";
 
     } else {
       alert("Please add at least one item to your cart.")
@@ -736,27 +769,68 @@ $(document).on("click", ".rfc", function (event){
   // Completed: 03/__/2020 by: Nida/Hebah
   // Tested: 03/__/2020 by: _____
   // ------------------------------------------
-  function checkout(){
+  function checkout() {
 
     // Retrieve Customer info from local storage on checkout page
-      // custId = JSON.parse(localStorage.getItem('cid'));
-            // console.log("--custId from Local Storage-");
-            // console.log(custId);
-      // orderName = JSON.parse(localStorage.getItem('name'));
-            // console.log("--orderName from Local Storage-");
-            // console.log(orderName);
-      // orderId = JSON.parse(localStorage.getItem('oid'));
-            // console.log("--orderId from Local Storage-");
-            // console.log(orderId);
+    // custId = JSON.parse(localStorage.getItem('cid'));
+    // console.log("--custId from Local Storage-");
+    // console.log(custId);
+    // orderName = JSON.parse(localStorage.getItem('name'));
+    // console.log("--orderName from Local Storage-");
+    // console.log(orderName);
+    // orderId = JSON.parse(localStorage.getItem('oid'));
+    // console.log("--orderId from Local Storage-");
+    // console.log(orderId);
 
-  // Retrieve Cart from local storage on checkout page
-      // var retrievedCart = localStorage.getItem("cart");
-      // var finalCart = JSON.parse(retrievedCart);
-      // console.log("--Final from Local Storage-");
-      // console.log(finalCart);
+    // Retrieve Cart from local storage on checkout page
+    // var retrievedCart = localStorage.getItem("cart");
+    // var finalCart = JSON.parse(retrievedCart);
+    // console.log("--Final from Local Storage-");
+    // console.log(finalCart);
 
 
   }
+
+
+  // Employee-side orders / Status update
+  $(".rtg").on("click", function (event) {
+    // alert(this.id)
+   // alert("button working")
+    event.preventDefault();
+    itemId = this.id; 
+    console.log(this.id);
+    var statusInfo = {
+     status: "ready",
+     ready: 1,
+    };
+    $.ajax({
+     type: "PUT",
+     url: "/api/orderitems/" + itemId,
+     data: statusInfo
+    }).then(function (data) {
+      location.reload();
+    });
+   }); 
+   $(".com").on("click", function (event) {
+    // alert(this.id)
+    // alert("button working")
+     event.preventDefault();
+    
+     itemId = this.id; 
+     console.log(this.id);
+    
+     var statusInfo = {
+      status: "complete",
+      complete: 1,
+     };
+     $.ajax({
+      type: "PUT",
+      url: "/api/orderitems/" + itemId,
+      data: statusInfo
+     }).then(function (data) {
+      location.reload();
+     });
+    });
 
   // Spotify in checkout.handlebars
   // ------------------------------------------
@@ -772,47 +846,66 @@ $(document).on("click", ".rfc", function (event){
     $.post("/api/spotify", song, function (data) {
       $(".dropdown-trigger").dropdown({ hover: true, constrainWidth: false });
       console.log("post request");
-
-      // console.log("songToSearch is " + songToSearch);
+      console.log("songToSearch is " + songToSearch);
       $.post("/api/spotify", song, function (data) {
-        // console.log("data is below");
-        // console.log("----------------------------")
+        console.log("data is below");
         console.log(data)
+        var songData = [];
         $(".dropdown-trigger").dropdown({ hover: true, constrainWidth: false });
-
         for (var i = 0; i < 5; i++) {
           var songName = data.tracks.items[i].name;
-          var artist = data.tracks.items[i].artists[0].name;
-          var songInfo = songName + " by " + artist;
+          var songArtist = data.tracks.items[i].artists[0].name;
+          var songURL = data.tracks.items[i].preview_url;
+          var songInfo = songName + " by " + songArtist;
+          var trackInfo = {
+            name: songName,
+            artist: songArtist,
+            url: songURL
+          };
+          songData.push(trackInfo)
           var songMenu = $("<li><a>");
           songMenu.text(songInfo);
           songMenu.addClass("songChoice");
-          songMenu.attr("dataVal", songInfo);
+          songMenu.attr("song", songName);
+          songMenu.attr("artist", songArtist);
+          songMenu.attr("url", songURL)
           var divider = $("<li>");
           divider.addClass("divider");
           $("#dropdown1").append(songMenu);
           $("#dropdown1").append(divider);
         }
+        console.log("songData: " + songData)
       });
     });
   });
 
   $(document).on("click", ".songChoice", function (event) {
     event.preventDefault();
-    var usersSong = $(this).attr("dataval");
-    console.log("usersong is below");
-    $.post("api/songs", { song: usersSong }).then(function(req, res){
-
+    var usersSong = $(this).attr("song");
+    var usersArtist = $(this).attr("artist");
+    var usersURL = $(this).attr("url")
+    var newTrack = {
+      song_name: usersSong,
+      song_url: usersURL,
+      artist: usersArtist
+    };
+    console.log("a piece of hte object is " + newTrack.song_name)
+    console.log("url from newTrack object is " + newTrack.song_url)
+    $.post("api/songs", newTrack).then(function (req, res) {
+      console.log("req.body is below")
+      console.log(req.body)
     });
   });
 
-  $(".songChoice").on("click", function () {
-    var usersSong = this.text();
-    console.log("usersong is below");
-    console.log(usersSong);
-  });
+  $("#")
 
-  
+  // $(".songChoice").on("click", function () {
+  //   var usersSong = this.text();
+  //   console.log("usersong is below");
+  //   console.log(usersSong);
+  // });
+
+
 
   //---------------------------------------------
   // End of drinks.js

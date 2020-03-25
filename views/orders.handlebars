@@ -32,10 +32,14 @@
                                     <th>Size</th>
                                     <th>Price</th>
                                     <th>Qty</th>
+                                    <th>Status</th>
+                                    <th>Ready</th>
+                                    <th>Complete</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {{#each orders}}
+
                                 <tr>
                                     <td>{{this.order}}</td>
                                     <td>{{this.customer}}</td>
@@ -44,6 +48,11 @@
                                     <td>{{this.size}}</td>
                                     <td>{{this.price}}</td>
                                     <td>{{this.qty}}</td>
+                                    <td>{{this.status}}</td>
+                                    <td><button class='btn-flat rtg' type="submit" id='{{this.item_no}}'><i
+                                                class="small material-icons">add_box</i></button></td>
+                                    <td><button class='btn-flat com' type="submit" id='{{this.item_no}}'><i
+                                                class="small material-icons">add_box</i></button></td>
                                 </tr>
                                 {{/each}}
                             </tbody>
@@ -60,4 +69,4 @@
 <!-- Materialize JavaScript-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <!-- Team JavaScript -->
-<script src="/assets/js/drinks.js"></script>
+{{!-- <script src="/assets/js/drinks.js"></script> --}}
