@@ -2,12 +2,12 @@
 // * Team JS File
 // ******************************************************************************************************
 
-// import { check } from "prettier";
-
-// Global Variables
+// Required
 // ------------------------------------------
 // require("dotenv").config();
 
+// Global Variables
+// ------------------------------------------
 // ------------------------------------------
 
 // Form Variables
@@ -31,6 +31,8 @@ var ordersArray = [];
 var orderId;
 var orderName;
 var orderDate;
+var cust_code="";
+var orderCreated=0;
 
 // Cart Variables
 // ------------------------------------------
@@ -52,6 +54,8 @@ var songUrl;
 var songStatus = "pending";
 var songArtist;
 // Include contents of custId in Song Array
+
+
 
 // Logic
 // ------------------------------------------
@@ -98,10 +102,10 @@ $(document).ready(function () {
   function handleCreateNewCustomerCallback(status) {
     if (status == "yes") {
       errCheck3 = true; // duplicate found
-      alert("Duplicate email address found.");
+      alert("This Email Address already exists in our database. Please login as a returning customer");
     }
     else if (status == "no") {
-      alert("No duplicate email address found.");
+      alert("Thank you for signing up.");
       errCheck3 = false; // duplicate not found
     }
     else if (status == "undefined") {
@@ -112,10 +116,16 @@ $(document).ready(function () {
     }
 
     //alert("flags >>>> (valid_name, valid_email, duplicate_email) " + errCheck1 + " " + errCheck2 + " " + errCheck3);
+    var newName = $("#newName")
+      .val()
+      .trim();
+      // var newEmail = $("#newEmail")
+      //    .val()
+      //    .trim();
 
     // if everything is Ok, then add the new record to the database
-    if (errCheck1 == false && errCheck2 == false && errCheck3 == false) {
-      console.log("if statement is thereeeeee")
+    if  ( errCheck1 == false && errCheck2 == false && errCheck3 == false) {
+      // console.log("if statement is thereeeeee")
       var newCustomer = {
         cust_name: $("#newName")
           .val()
@@ -137,17 +147,69 @@ $(document).ready(function () {
 
         // SEE LINES 257-285 BELOW re orderName and passing data via localstorage (MUST BE DONE HERE AS WELL)
         if (res) {
+  
           // for customer that doesn't exist yet
           custName = newName;
-          orderName = custName;
+          // orderName = custName;
 
-          localStorage.setItem('cid', JSON.stringify(custId));
-          localStorage.setItem('name', JSON.stringify(custName));
-          localStorage.setItem('oid', JSON.stringify(orderId));
+          
+          // localStorage.setItem('cid', JSON.stringify(custId));
+          // localStorage.setItem('name', JSON.stringify(custName));
+          // localStorage.setItem('oid', JSON.stringify(orderId));
 
-          custName = "";
-          custEmail = "";
-          custId = 0;
+          // custName = "";
+          // custEmail = "";
+        // Clear Local Storage
+        localStorage.removeItem('cid')
+        localStorage.removeItem('name')
+        localStorage.removeItem('oid')
+    
+        // Clear Customer variables
+        custName = "";
+        custEmail = "";
+        custId=0;
+    
+         // Create an Order
+         // TEST
+         var newEmail = $("#newEmail")
+         .val()
+         .trim();
+         $.get("/api/customers/" + newEmail, function (data) { })
+        .then(function (data) {
+          console.log("--Results after db search for newEmail match--")
+          console.log(data);
+          if (data !== null) {
+            custName = data.cust_name;
+            custEmail = data.cust_email;
+            custId = data.cid
+            console.log("---Email address in DB with these values---")
+            console.log(custName);
+            console.log(custEmail);
+            console.log(custId);
+
+            // createOrder();
+        //     localStorage.setItem('cid', JSON.stringify(custId));
+         localStorage.setItem('name', JSON.stringify(custName));
+        //  localStorage.setItem('oid', JSON.stringify(orderId));
+
+        orderName = custName;
+
+            createOrder();
+          }
+
+
+         } );
+         // TEST
+        
+        //  localStorage.setItem('cid', JSON.stringify(custId));
+        //  localStorage.setItem('name', JSON.stringify(custName));
+        //  localStorage.setItem('oid', JSON.stringify(orderId));
+         
+        // Create an Order
+      
+
+      // // Create an Order
+      // createOrder();
 
           window.location.href = "/menu"
         }
@@ -157,12 +219,15 @@ $(document).ready(function () {
     else {
       // already exisiting customer
       custName = newName;
-      orderName = custName;
+      //orderName = custName;
 
       // TODO: pass correct cusId and name to the next page
       // currently not working...
+      localStorage.setItem('cid', JSON.stringify(custId));
+      localStorage.setItem('name', JSON.stringify(custName));
+      localStorage.setItem('oid', JSON.stringify(orderId));
 
-      window.location.href = "/menu"
+      window.location.href = "/"
     }
   }
 
@@ -171,12 +236,18 @@ $(document).ready(function () {
     $.get("/api/customers/" + newEmail, function (data) {
       if (data == null) {
         callback("no"); // no duplicate email found
+      }else {
+        //custId = data.cid;
       }
     }).then(function (data) {
       console.log("------for data-----");
       console.log(data)
       console.log("------for data-----");
       var emailReceived = data.cust_email;
+      custName = data.cust_name;
+      custEmail = data.cust_email;
+      custId = data.cid;
+      //orderName = custName;
 
       console.log(emailReceived);
       if (emailReceived === newEmail) {
@@ -301,13 +372,15 @@ $(document).ready(function () {
             console.log(custId);
             console.log("--custName in index--");
             console.log(custName);
-
+            console.log("--orderId in index--");
+            console.log(orderId);
 
             // Pam's Test Data until OID functionality is available
-            orderId = 6
+            // orderId = 6
 
             // Set orderName = custName variable
             orderName = custName;
+
 
             // CREATE AN ORDER in Orders Table
             // var orderTable = {
@@ -324,17 +397,29 @@ $(document).ready(function () {
             localStorage.setItem('name', JSON.stringify(orderName));
             localStorage.setItem('oid', JSON.stringify(orderId));
 
-            custName = "";
-            custEmail = "";
-            custId = 0;
+            
+            console.log("--orderName in index--");
+            console.log(orderName);
 
-            // Navigate to menu.handlebars
-            window.location.href = "/menu"
+
+            // Create an Order
+            createOrder();
+
+            if (orderId !== 0) {
+              // Navigate to menu.handlebars
+              window.location.href = "/menu"
+            } else {
+              alert("There was an issue with login, please try again.")
+            }
 
           } else {
             custName = "";
             custEmail = "";
             custId = 0;
+            // Clear Local Storage
+            localStorage.removeItem('cid');
+            localStorage.removeItem('name');
+            localStorage.removeItem('oid');
           }
         });
     }
@@ -391,6 +476,7 @@ $(document).ready(function () {
       // Set orderName = guestInput variable
       orderName = guestInput;
 
+
       // CREATE AN ORDER in Orders Table
       // using custId and orderName
       // RETRIEVE new oid FROM DATABASE
@@ -406,21 +492,101 @@ $(document).ready(function () {
       custEmail = "";
       custId = 0;
 
-      // Navigate to menu.handlebars
-      window.location.href = "/menu"
+       // Create an Order
+       createOrder();
+
+
+       if (orderId !== 0) {
+         // Navigate to menu.handlebars
+         window.location.href = "/menu"
+       } else {
+         alert("There was an issue with login, please try again.")
+       }
 
     } else {
       // Clear customer variables
       custName = "";
       custEmail = "";
       custId = 0;
+      // Clear Local Storage
+      localStorage.removeItem('cid');
+      localStorage.removeItem('name');
+      localStorage.removeItem('oid');
     }
   });
 
+  // Generate Random Code for Orders
+  // Code found on Stack Overflow (Generate random string/characters in JavaScript)
+  // ------------------------------------------
+  // Tested: 03/24/2020 by: PLK
+  // ------------------------------------------
+  function genCode(length) {
+    cust_code="";
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result
+ }
+
+
+  // Create an Order
+  // ------------------------------------------
+  // Completed: 03/24/2020 by: Pam
+  // Tested:  03/___/2020 by: _____
+  // ------------------------------------------
+  function createOrder() {
+  // Reset cust_code variable - it should be unique each time
+  cust_code = "";
+  // Generate a new random number and assign to cust_code
+  cust_code=genCode(15);
+
+  // Create a New Order with cust_code
+  var newOrder = {
+    cid: custId,
+    order_name: orderName,
+    cust_code: cust_code
+  };
+
+  $.post("api/orders", newOrder)
+  .then(function (req, res) {
+    });
+
+    // Retrieve order number based on cust_code
+    $.get("api/orders/" + cust_code, function (data) {})
+
+    .then(function (data) {
+      if (data){
+        // Set orderId to returned value
+        orderId = data.oid;
+        console.log("---data--")
+        console.log(data);
+        console.log("---oid--")
+        console.log(data.oid);
+        console.log("---orderId--")
+        console.log(orderId);
+
+              // Pass custId, custName, and orderId via localstorage
+
+      localStorage.setItem('cid', JSON.stringify(custId));
+      localStorage.setItem('name', JSON.stringify(orderName));
+      localStorage.setItem('oid', JSON.stringify(orderId));
+
+    
+        } else {
+          orderId=0;
+        }
+      
+      });
+    
+ }
+
   // Customize Header in menu.handlebars
   // ------------------------------------------
-  // Completed: 03/__/2020 by: Pam
-  // Tested: 03/__/2020 by: _____
+  // Completed: 03/22/2020 by: Pam
+  // Tested:  03/24/2020 by: Pam
   // ------------------------------------------
 
 
@@ -436,17 +602,16 @@ $(document).ready(function () {
     orderId = 0;
 
     // Pull Customer info from local storage
-    custId = JSON.parse(localStorage.getItem('cid'));
-    orderName = JSON.parse(localStorage.getItem('name'));
-    orderId = JSON.parse(localStorage.getItem('oid'));
+       custId = JSON.parse(localStorage.getItem('cid'));
+       orderName = JSON.parse(localStorage.getItem('name'));
+       orderId = JSON.parse(localStorage.getItem('oid'));
 
-    console.log("--custId in menu--");
-    console.log(custId);
-    console.log("--orderName in menu--");
-    console.log(orderName);
-    console.log("--orderId in menu--");
-    console.log(orderId);
-
+       console.log("--custId from localStorage");
+        console.log(custId);
+        console.log("--orderName from localStorage");
+        console.log(orderName);
+        console.log("--orderId from localStorage");
+        console.log(orderId);
 
     // Put Welcome message and OrderName in the header
     var profile = $("#profile");
@@ -528,7 +693,7 @@ $(document).ready(function () {
     itemProdId = this.id;
 
     // Pam's Test Data until oid functionality is available
-    itemOrderId = 6;
+    // itemOrderId = 6;
 
     $.get("/api/products/" + itemProdId, function (data) {
       // Increment Item Counter by 1
@@ -751,9 +916,11 @@ $(document).ready(function () {
     // Prevent default action
     event.preventDefault();
 
-    if (cartArray.length > 0) {
-      // Put cartArray in localstorage
-      localStorage.setItem('cart', JSON.stringify(cartArray));
+
+    if (cartArray.length>0){
+    // Put cartArray in localstorage
+    localStorage.setItem('cart', JSON.stringify(cartArray));
+
 
       // Navigate to checkout.handlebars
       window.location.href = "/checkout";
@@ -905,6 +1072,35 @@ $(document).ready(function () {
   //   console.log(usersSong);
   // });
 
+
+
+
+  // Employee Page
+  // ----------------------------------------------
+  // Spotify (pending)
+  // Changing status
+  
+  // Status Page
+  // ---------------------------------------------
+  // Spotify (pending)
+  // DIV for the Song Playing Now
+  // Posting to Spotify table??
+
+  // Checkout Page
+  // ----------------------------------------------
+  // Display the Cart
+  // Copy the cart
+  // Sum of Cart
+  // Post Order Items to the OrderItems table
+
+  // Sliding Pages
+  // ----------------------------------------------
+  // Getting them done
+
+  // Less important
+  // ----------------------------------------------
+  // Update button on the Order History
+  // Changing the QTY on OrderItem
 
 
   //---------------------------------------------
