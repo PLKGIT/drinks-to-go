@@ -116,7 +116,7 @@ $(document).ready(function () {
       return;
     }
 
-    //alert("flags >>>> (valid_name, valid_email, duplicate_email) " + errCheck1 + " " + errCheck2 + " " + errCheck3);
+    //alert("flags (valid_name, valid_email, duplicate_email) " + errCheck1 + " " + errCheck2 + " " + errCheck3);
     var newName = $("#newName")
       .val()
       .trim();
@@ -212,11 +212,7 @@ $(document).ready(function () {
           // // Create an Order
           // createOrder();
 
-<<<<<<< Updated upstream
           window.location.href = "/article"
-=======
-          window.location.href = "/menu"
->>>>>>> Stashed changes
         }
         // window.location.replace("/menu")
       });
@@ -503,11 +499,7 @@ $(document).ready(function () {
 
       if (orderId !== 0) {
         // Navigate to menu.handlebars
-<<<<<<< Updated upstream
         window.location.href = "/article"
-=======
-        window.location.href = "/menu"
->>>>>>> Stashed changes
       } else {
         alert("There was an issue with login, please try again.")
       }
@@ -649,7 +641,7 @@ $(document).ready(function () {
         // console.log("----Data Length---");
         // console.log(data.length);
 
-        if (data.length > 0) {
+        if (data.length > 0 && custId !== 1) {
           $("#ordHistory").text("");
           $("#ordHistory").append("<table><thead><tr>")
           $("#ordHistory").append("<th>Order</th><th>Product</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
@@ -854,38 +846,6 @@ $(document).ready(function () {
   // ------------------------------------------
 
 
-<<<<<<< Updated upstream
-  // $(document).on("click", ".atch", function (event) {
-
-  //   // Prevent double-click
-  //   event.stopImmediatePropagation();
-  //   // Prevent default action
-  //   event.preventDefault();
-  //   // Increment Item Counter by 1
-  //   // Set Item No variable to ItemCounter
-  //   // Grab the orderItems table's id from the button
-  //   // Search orderItems table by the id
-  //   // Grab product id from orderItems table
-  //   // Search product table by product id
-  //   // Set itemProdName, itemSize, and itemPrice from database
-  //   // itemProdName = data.prod_name;
-  //   // itemSize = data.size;
-  //   // itemPrice = data.price;
-  //   // Create Cart Item
-  //   // var newCartItem = {
-  //   // oid: orderId,
-  //   // cid: custId,
-  //   // order_name: orderName,
-  //   // item_no: itemNo,
-  //   // pid: itemProdId,
-  //   // prod_name: itemProdName,
-  //   // size: itemSize,
-  //   // price: itemPrice,
-  //   // qty: itemQty
-  //   // Push OrderItem Object to Cart Array
-  //   // Append Cart to the DOM
-  // });
-=======
   $(document).on("click", ".atch", function (event) {
 
     // Prevent double-click
@@ -983,7 +943,6 @@ $(document).ready(function () {
 
 
   });
->>>>>>> Stashed changes
 
   // Display the Cart in menu.handlebars
   // ------------------------------------------
