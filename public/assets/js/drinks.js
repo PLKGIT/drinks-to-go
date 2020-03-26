@@ -53,9 +53,6 @@ var songName;
 var songUrl;
 var songStatus = "pending";
 var songArtist;
-// Include contents of custId in Song Array
-
-
 
 // Logic
 // ------------------------------------------
@@ -84,7 +81,7 @@ $(document).ready(function () {
   }
 
   // Check if form email address input is valid
-    // ------------------------------------------
+  // ------------------------------------------
   function isValidEmail(email) {
     if (email.length < 1) {
       return false;
@@ -99,7 +96,8 @@ $(document).ready(function () {
 
     return true;
   }
-    // ------------------------------------------
+
+  // New Customer Callback
   // ------------------------------------------
   function handleCreateNewCustomerCallback(status) {
     if (status == "yes") {
@@ -185,13 +183,7 @@ $(document).ready(function () {
       });
     }
     else {
-      // already exisiting customer
       custName = newName;
-
-      // localStorage.setItem('cid', JSON.stringify(custId));
-      // localStorage.setItem('name', JSON.stringify(custName));
-      // localStorage.setItem('oid', JSON.stringify(orderId));
-
       window.location.href = "/"
     }
   }
@@ -411,13 +403,13 @@ $(document).ready(function () {
       // console.log(guestInput);
     } else {
       errCheck = true;
-      custId = 0;
       // console.log("--Checking for valid name, errors found--")
       // console.log(errCheck);
     }
     if (errCheck === true) {
       // console.log("--errCheck after name validation with errors--")
       // console.log(errCheck);
+      custId = 0;
       alert("Please enter a valid name");
     }
 
@@ -432,13 +424,8 @@ $(document).ready(function () {
       localStorage.setItem('name', JSON.stringify(orderName));
       localStorage.setItem('oid', JSON.stringify(orderId));
 
-      custName = "";
-      custEmail = "";
-      custId = 0;
-
       // Create an Order
       createOrder();
-
 
       if (orderId !== 0) {
         // Navigate to menu.handlebars
@@ -513,7 +500,6 @@ $(document).ready(function () {
           localStorage.setItem('name', JSON.stringify(orderName));
           localStorage.setItem('oid', JSON.stringify(orderId));
 
-
         } else {
           orderId = 0;
         }
@@ -540,13 +526,6 @@ $(document).ready(function () {
     custId = JSON.parse(localStorage.getItem('cid'));
     orderName = JSON.parse(localStorage.getItem('name'));
     orderId = JSON.parse(localStorage.getItem('oid'));
-
-    // console.log("--custId from localStorage");
-    // console.log(custId);
-    // console.log("--orderName from localStorage");
-    // console.log(orderName);
-    // console.log("--orderId from localStorage");
-    // console.log(orderId);
 
     // Put Welcome message and OrderName in the header
     var profile = $("#profile");
@@ -608,10 +587,6 @@ $(document).ready(function () {
     console.log("order history button is clicked")
     getOrderHistory();
   })
-  // Need a button on Modal that calls getOrderHistory to refresh data
-  // getOrderHistory()
-
-
 
 
   // Add to Cart from Menu in menu.handlebars
@@ -620,9 +595,6 @@ $(document).ready(function () {
 
     // Prevent default action
     event.preventDefault();
-
-    // console.log("--this.id--");
-    // console.log(this.id);
 
     // Set Product variables by searching product by PID in button
     itemProdId = this.id;
@@ -694,16 +666,13 @@ $(document).ready(function () {
     // Prevent default action
     event.preventDefault();
 
-    // console.log("--this.id--");
-    // console.log(this.id);
-
     // Set Product variables by searching product by PID in button
     itemProdId = this.id;
     // console.log("itemprodid from outside the .get is " + itemProdId)
 
     $.get("/api/orderitemsid/" + itemProdId, function (data) {
-      console.log("itemprodid from inside the .get " + itemProdId)
-      // Increment Item Counter by 1
+      // console.log("itemprodid from inside the .get " + itemProdId)
+      // // Increment Item Counter by 1
       itemCounter++;
 
       // Set Item No variable to ItemCounter
@@ -763,106 +732,6 @@ $(document).ready(function () {
 
       getCartItems()
     });
-
-  });
-  // Add to Cart from Order History in menu.handlebars
-  // ------------------------------------------
-  // Completed: 03/__/2020 by: Pam
-  // Tested: 03/__/2020 by: _____
-  // ------------------------------------------
-
-
-  $(document).on("click", ".atch", function (event) {
-
-    // Prevent double-click
-    event.stopImmediatePropagation();
-    // Prevent default action
-    event.preventDefault();
-
-    // Grab the orderItems table's id from the button
-    itemOrderItemId = this.id;
-    // console.log("--orderItemId from Order History");
-    // console.log(this.id);
-
-    // Search orderItems table by the itemOrderItemId
-    $.get("/api/orderitemsid/" + itemOrderItemId, function (data) { })
-      .then(function (data) {
-        // Grab product id from orderItems table
-
-        // console.log("--data from search of orderitems table on itemOrderItemId--");
-        // console.log(data);
-        // console.log("--pid--");
-        // console.log(data.pid);
-        // console.log("--itemProdId--");
-        itemProdId = data.pid;
-
-        $.get("api/products/" + itemProdId, function (data) {
-          // Increment Item Counter by 1
-          itemCounter++;
-
-          // Set Item No variable to ItemCounter
-          itemNo = itemCounter;
-
-          // console.log("--Data--");
-          // console.log(data);
-          // Set itemProdName, itemSize, and itemPrice from database
-          // console.log("--itemProdName--");
-          itemProdName = data.prod_name;
-          // console.log("--itemSize--");
-          itemSize = data.size;
-          // console.log("--itemPrice--");
-          itemPrice = data.price;
-
-        }).then(function (data) {
-
-          // Console Logs for Testing
-          // console.log("--Data--");
-          // console.log(data);
-          // console.log("--itemProdName--");
-          // console.log(itemProdName);
-          // console.log("--itemSize--");
-          // console.log(itemSize);
-          // console.log("--itemPrice--");
-          // console.log(itemPrice);
-          // console.log("--orderId--");
-          // console.log(orderId);
-          // console.log("--custId--");
-          // console.log(custId);
-          // console.log("--orderName--");
-          // console.log(orderName);
-          // console.log("--itemNo--");
-          // console.log(itemNo);
-          // console.log("--itemProdId--");
-          // console.log(itemProdId);
-          // console.log("--itemProdName--");
-          // console.log(itemProdName);
-          // console.log("--itemQty--");
-          // console.log(itemQty);
-
-          // Create Cart Item
-          var newCartItem = {
-            oid: orderId,
-            cid: custId,
-            order_name: orderName,
-            item_no: itemNo,
-            pid: itemProdId,
-            prod_name: itemProdName,
-            size: itemSize,
-            price: itemPrice,
-            qty: itemQty
-          };
-          // console.log("--newCartItem--");
-          // console.log(newCartItem);
-
-          // Push OrderItem Object to Cart Array
-          cartArray.push(newCartItem);
-
-          // console.log("--cartArray--");
-          // console.log(cartArray);
-
-          getCartItems()
-        });
-      });
 
   });
 
@@ -973,7 +842,6 @@ $(document).ready(function () {
     if (finalCart.length > 0) {
       $("#itemsOrdered").text("");
       $("#itemsOrdered").append("<table><thead><tr>")
-      // $("#itemsOrdered").append("<th>Item No.</th><th>Description</th><th>Size</th><th>Price</th><th>Qty</th><th> </th></tr>")
       $("#itemsOrdered").append("</thead><tbody>");
       var cartItems;
       var totalPrice = 0;
@@ -988,17 +856,15 @@ $(document).ready(function () {
         cartItems.append("<td>" + finalCart[i].item_no + "</td>");
         cartItems.append("<td>" + finalCart[i].prod_name + "</td>");
         cartItems.append("<td>" + finalCart[i].size + "</td>");
-        // cartItems.append("<td class='right-align'>" + finalCart[i].price + "</td>");
-        // cartItems.append("<td class='center-align'>" + finalCart[i].qty + "</td>");
-        // cartItems.append("<button class='btn-flat rfc' type='submit' id='" + finalCart[i].item_no + "'><i class='small material-icons'>clear</i></button></td>");
         cartItems.append("</tr>");
         $("#itemsOrdered").append(cartItems);
       }
       $("#total").append(totalPrice.toFixed(2));
 
-      // cartItems.append("<tr class='center-align'>" + totalPrice + "</tr>")
       console.log(totalPrice);
       cartItems.append("</tbody></table><br>");
+      $("#thanks").append(orderName);
+      $("#orderNum").append(orderId);
     }
   }
 

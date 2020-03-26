@@ -51,7 +51,7 @@ module.exports = function (app) {
           type: dataProduct[i].dataValues.type,
           temp: dataProduct[i].dataValues.temp,
           check_hot: dataProduct[i].dataValues.check_hot,
-          // popular: dataProduct[i].dataValues.popular
+          check_pop: dataProduct[i].dataValues.check_pop
         };
         productsList.products.push(currentProduct);
       };
@@ -70,15 +70,11 @@ module.exports = function (app) {
   });
 
   // Orders HTML Route
-  // Orders HTML Route
   app.get("/orders", function (req, res) {
     var ordersList = {
       orders: []
     };
     db.OrderItem.findAll({
-      // where: {
-      //   complete: 0
-      // }
     }).then(function (dataOrders) {
       for (var i = 0; i < dataOrders.length; i++) {
         var currentOrder = {
@@ -116,7 +112,7 @@ module.exports = function (app) {
           type: dataProduct[i].dataValues.type,
           temp: dataProduct[i].dataValues.temp,
           check_hot: dataProduct[i].dataValues.check_hot,
-          // popular: dataProduct[i].dataValues.popular
+          check_pop: dataProduct[i].dataValues.check_pop
         };
         productsList.products.push(currentProduct);
       };
@@ -162,12 +158,6 @@ module.exports = function (app) {
     };
 
     db.Song.findAll({}).then(function (dataSong) {
-      // console.log(dataSong[7].dataValues)
-      // console.log(dataSong[7].dataValues.song_name)
-      // console.log(dataSong[7].dataValues.artist)
-      // console.log(dataSong[7].dataValues.song_url)
-      // console.log(dataSong[7].dataValues.requested)
-      // console.log(dataSong[7].dataValues.status)
       for (var i = 0; i < dataSong.length; i++) {
         var currentSong = {
           song_name: dataSong[i].dataValues.song_name,
@@ -182,10 +172,6 @@ module.exports = function (app) {
     });
   });
 
-
-  // app.get("/article", function (req, res) {
-  //   res.render("article");
-  // });
 
   app.get("/article", function (req, res) {
 
@@ -203,7 +189,8 @@ module.exports = function (app) {
           price: dataProduct[i].dataValues.price,
           type: dataProduct[i].dataValues.type,
           temp: dataProduct[i].dataValues.temp,
-          check_hot: dataProduct[i].dataValues.check_hot
+          check_hot: dataProduct[i].dataValues.check_hot,
+          check_pop: dataProduct[i].dataValues.check_pop
         };
         productsList.products.push(currentProduct);
       };

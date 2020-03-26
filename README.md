@@ -1,14 +1,11 @@
-# Group 2 Project No. 2
+# Group 2 | Project No. 2
 
-## Overview
-The team will design and build its first full-stack web application using the MVC paradigm.  Project 2 will use Node, Express,  MySQL, and Heroku.
+## Project
+Coffee Rxpress
 
-### Due
-Wednesday, March 25, 2020
+![](https://res.cloudinary.com/damplk/image/upload/v1585253897/portal/grp_project_02_gilded.png)
 
-## Project Details
-
-### Development Team 
+## Development Team 
 
 1. Sonal Bhoraniya
 2. Jyochsna Gongal
@@ -16,38 +13,57 @@ Wednesday, March 25, 2020
 4. Hebah Memon
 5. Nida Memon
 
-### Project Title
-TBD
+## Project Details
 
 ### Description
-TBD
+Coffee Express is a Web application designed to be implemented at self-serve kiosks in coffee shops to speed up and simplify the order process.  The primary objectives are to:
+* Shorten lines 
+* Remove confusion while ordering
+* Simplify order pickup
 
-### Team Assets
+Customers can order from one of many iPads in the shop, logs in with their account credentials.  Once logged in, the customer sees a menu of options, including popular drinks. There is also an option to click a button to see a list of their orders.The customer can order from the menu or reorder items from a previous order. For customers without an account, there is are options to order as a Guest and to create an account.
+
+During the checkout process, customers can search for and submit a song from Spotify to be played in the coffee shop.  Cofee shop employees control and manage what is played from customer requested song list.
+
+Coffee Express also includes an "Order Status" component that displays open orders on a big screen that everyone in the coffee shop can view. The screen displays all "pending" and "ready" orders. Once a customer places an order, their name, order number, and drink details are displayed in the “Pending” list on the status board.  When a customer's order is made, their order information moves to the "Ready" section of the screen.  Once the customer picks up the order, an employee will set the order status to "Complete" and the order details will drop from the status board.
+
+Finally, there is an "Employee" page in the app that allows employees to manage orders and song requests as well as view products, customers, and order history.
+
+#### Proposed Future Developments
+    * Text Notifications
+    * Payment Handling
+    * Mobile App using React
+    * Add Survey Feedback
+    * Incorporate Discounts and Coupons
+    * Addition of Food Items
+    * Drink Customization
+    * UI Refinements
+
+### Project Assets
 
 **Application URL**
-TBD
+https://secret-ocean-08123.herokuapp.com/
 
-**HTML**
-TBD
-
-**Handlebars**
-TBD
-
-**Images**
-TBD
-
-**CSS**
-TBD
-
-**JavaScript**
-TBD
-
+**Application File Structure**
+├───config
+├───models
+├───public
+│   └───assets
+│       ├───css
+│       ├───img
+│       └───js
+├───routes
+└───views
+    ├───layouts
+    └───partials
+        └───drinks
+        └───articles
 
 ### Application Programming Interfaces (APIs) Used
 
-**Name**
-URL
-Use: Description
+**Node Spotify API**
+https://www.npmjs.com/package/node-spotify-api
+Use: Used to allow customers to search for and select songs from Spotify to be played in the coffee house.
 
 ### Technologies, Libraries, and Tools Used**
 
@@ -55,32 +71,102 @@ Use: Description
 https://github.com/PLKGIT/drinks-to-go
 Use: Version control system
 
-**Name**
-URL
-Use: Description
+**HTML and CSS**
+Use: UI design and styling and frontend content
+
+**Google Fonts**
+https://fonts.googleapis.com/ 
+Font Families: Pacifico and Spinnaker
+
 
 ### Frameworks and Libraries
 
-**Name**
-URL
-Use: Description
+**Model-View-Controller (MVC)**
+Use: Application architecture pattern.
 
+**Nodejs**
+https://nodejs.org/en/
+Use: Asynchronous event-driven JavaScript runtime server environment.
+
+**Asynchronous JavaScript and XML (AJAX)**
+Use: Interactivity.
+
+**jQuery**
+https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js 
+Use: JavaScript library wrapper, including DOM traversal and manipulation, event handling, and AJAX calls
+
+**Express**
+https://expressjs.com/
+Use: Web application framework for Node JS.
+
+**Handlebars**
+https://github.com/jneen/express-handlebars
+Use: HTML templating for Node JS.
+
+**Materialize**
+https://materializecss.com/
+Use: UI design and styling, including cards, buttons, tables, form, and modals
+
+**MySQL**
+https://www.mysql.com/
+Use: Backend database.
+
+**Sequelize**
+https://sequelize.org/
+Use: Promise-based Node.js object-relational mapping (ORM) for MySQL.
+
+**Dotenv**
+https://www.npmjs.com/package/dotenv
+Use: Stores configuration information in the environment separate from code.
 
 ### Other Tools
 
-**MeyerWeb CSS Reset**
-https://meyerweb.com/eric/tools/css/reset/ 
-Use: Styles reset
+**Regular Expressions (RegEx)**
+Use: Data validation.
 
-**Name**
-URL
-Use: Description
+**Specialized Dataset**
+https://www.kaggle.com/starbucks/starbucks-menu 
+Use: Starbucks drinks dataset.
 
+**Scrolling Panes UI**
+https://medium.com/samsung-internet-dev/horizontally-scrolling-panes-with-clean-html-and-modern-css-7372596932c7
+Use: Scrolling horizontal panes for the UI.
+
+**ESLint**
+https://www.npmjs.com/package/eslint
+Use:  Tool that analyzes programming code for potential errors. 
+
+
+### MySQL Database
+
+**Schemas**
+    * drinkstogo_db
+    * bbk0phd05y8qzfwo (Heroku)
+
+**Tables**
+    * Customers
+    * Orders
+    * OrderItems
+    * Products
+    * Songs
+
+**Schema and Seed Files**
+
+\models\schema.sql
+\models\seeds.sql
+\models\seeds_sequelize.sql
+
+## Requirements
+
+The project team is to design and build a full-stack web application using the Model-View-Controller (MVC) paradigm.  The application must use Node, Express, and MySQL and be deployed to Heroku.
+
+### Due
+Wednesday, March 25, 2020
 
 ## Completed Project URLs
 ### Github Repository
 [Github Link](https://github.com/PLKGIT/drinks-to-go/) at https://github.com/PLKGIT/drinks-to-go/.
 ### Deployed App
-[Project 2](URL) deployed at URL.
+[Coffee Express](https://secret-ocean-08123.herokuapp.com/) deployed at https://secret-ocean-08123.herokuapp.com/.
 
-Copyright &copy; 2020 | Group 2
+Copyright &copy; 2020 | Sonal Bhoraniya, Jyochsna Gongal, Pam Kelly, Hebah Memon, and Nida Memon

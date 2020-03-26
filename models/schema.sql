@@ -28,7 +28,7 @@ CREATE TABLE products (
     size VARCHAR(10) NOT NULL,
     price DECIMAL(10 , 2 ) NOT NULL,
     check_hot BOOLEAN (1) NOT NULL,
-    -- popular BOOLEAN (1) NOT NULL DEFAULT 0,
+    check_pop BOOLEAN (1) NOT NULL,
     PRIMARY KEY (pid),
     UNIQUE KEY pid_UNIQUE (pid)
 );

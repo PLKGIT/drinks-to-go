@@ -14,6 +14,10 @@ module.exports = function (sequelize, Sequelize) {
       type: Sequelize.STRING(50),
       allowNull: false
     },
+    check_pop: {
+      type: Sequelize.TINYINT(1),
+      allowNull: false
+    },
     type: {
       type: Sequelize.STRING(10),
       allowNull: false
@@ -34,11 +38,6 @@ module.exports = function (sequelize, Sequelize) {
       type: Sequelize.TINYINT(1),
       allowNull: false
     }
-    // popular: {
-    //   type: Sequelize.TINYINT(1),
-    //   allowNull: false
-    // }
   }, { timestamps: false });
-
   return Product;
 };
