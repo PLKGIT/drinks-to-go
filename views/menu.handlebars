@@ -30,12 +30,45 @@
         </div>
     </div>
 </div>
+       <div class="col s6">
+            <div class="card white">
+                <div class="card-content black-text">
+                    <span class="card-title">Popular Drinks</span>
+                    <div id="menu">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Product</th>
+                                    <th>Size</th>
+                                    <th></th>
+                                    <th>Price</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {{#each products}}
+                                <tr>
+                                    {{#if check_pop}}
+                                    {{> drinks/menu-popular}}
+                                    {{/if}}
+                                    {{/each}}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <div class="col s6">
             <div class="card white">
                 <div class="card-content black-text">
-                    <span class="card-title">Drink Menu (Cold)</span>
+                    <span class="card-title">Cold Drinks</span>
                     <div id="menu">
                         <table>
                             <thead>
@@ -65,7 +98,7 @@
         <div class="col s6">
             <div class="card white">
                 <div class="card-content black-text">
-                    <span class="card-title">Drink Menu (Hot)</span>
+                    <span class="card-title">Hot Drinks</span>
                     <div id="menu">
                         <table>
                             <thead>

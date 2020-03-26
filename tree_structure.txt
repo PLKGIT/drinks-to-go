@@ -12,3 +12,4 @@ C:.
     ├───layouts
     └───partials
         └───drinks
+        └───articles

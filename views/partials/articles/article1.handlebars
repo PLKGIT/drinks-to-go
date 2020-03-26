@@ -1,29 +1,24 @@
-<div class="container text-brown darken-4">
-  {{!-- <span class="card-title">Drink Menu (Hot)</span> --}}
+<div class="container">
   <h4>Popular Drinks</h4>
   <div id="menu">
     <table>
       <thead>
         <tr>
-          <th>Id</th>
+          {{!-- <th>ID</th> --}}
           <th>Product</th>
           <th>Size</th>
-          {{!-- <th></th> --}}
           <th>Price</th>
-          <th></th>
+          {{!-- <th></th> --}}
         </tr>
       </thead>
-
       <tbody>
         {{#each products}}
         <tr>
-          {{#if check_hot}}
-          <td>{{this.pid}}</td>
+          {{#if check_pop}}
+           {{!-- <td>{{this.pid}}</td> --}}
           <td>{{this.prod_name}}</td>
           <td>{{this.size}}</td>
           <td>{{this.price}}</td>
-          {{!-- <td>{{this.type}}</td> --}}
-          {{!-- <td>{{this.temp}}</td> --}}
           <td><button class='btn-flat atcm' type="submit" id='{{this.pid}}'><i
                 class="small material-icons">add_box</i></button></td>
           {{/if}}
@@ -33,5 +28,3 @@
     </table>
   </div>
 </div>
-
-

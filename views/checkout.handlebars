@@ -15,19 +15,13 @@
     </div>
     <!--_____________-->
 
-    <!-- ******************* -->
     <br>
-    {{!-- <button id="getCart" class="btn brown darken-4 waves-effect modal-trigger">Get Cart
-        <i class="material-icons right">send</i>
-    </button> --}}
-
-    <!-- ******************* -->
 
     <!-- Order Total -->
     <div class="row">
         <div class="col s6 offset-s3">
             <div class="row">
-                <h2 class="center-align text-brown darken-4">Your order includes: 
+                <h2 class="center-align text-brown darken-4">Your order includes:
                     <br><span id="itemsOrdered"></span>
                 </h2>
                 <h3 class="center-align text-brown darken-4">Your total is: $<span id="total"></span></h3>
@@ -48,7 +42,8 @@
             <i class="material-icons music prefix text-brown darken-4">audiotrack</i>
             <input id="songName" type="text" class="validate">
             <label class="active" for="songName">Song Name</label>
-            <button data-target="requestSong" class="btn brown darken-4 waves-effect modal-trigger" id="songButton">Search Song
+            <button data-target="requestSong" class="btn brown darken-4 waves-effect modal-trigger"
+                id="songButton">Search Song
                 <i class="material-icons right">audiotrack</i>
             </button>
         </div>
@@ -56,11 +51,11 @@
 
     <div class="center-align">
         <!-- Dropdown Trigger -->
-        <a class="dropdown-trigger btn brown darken-4 waves-effect modal-trigger" id="selectSong" href="#" data-target="dropdown1">Select Song</a>
+        <a class="dropdown-trigger btn brown darken-4 waves-effect modal-trigger" id="selectSong" href="#"
+            data-target="dropdown1">Select Song</a>
 
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content" style="width: 500px">
-            {{!-- <li><a href="#!">one</a></li> --}}
         </ul>
     </div>
 
@@ -87,8 +82,9 @@
     <!-- Modal Structure -->
     <div id="orderConfirm" class="modal">
         <div class="modal-content center-align">
-            <h4>Thank you for your order!</h4>
-            {{!-- <h4>Your order # is: <span id="orderNum"></span></h4> --}}
+            {{!-- <h4>Thank you for your order!</h4> --}}
+            <h4>Thank you <span id="thanks"></span>!</h4><br>
+            <h4>Your order # is: <span id="orderNum"></span></h4>
         </div>
         <div class="modal-footer">
             <hr>
@@ -98,10 +94,8 @@
     <!--_________________-->
 
 </div>
-</div>
+<div class="container"></div>
 <!-- jQuery JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Materialize JavaScript-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<!-- Team JavaScript -->
-{{!-- <script src="/assets/js/drinks.js"></script> --}}

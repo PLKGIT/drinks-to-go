@@ -20,26 +20,11 @@ body {
       height: 45px;
       text-align: center;
       width: 100%;
-
-      /* background-color: #BFA396; */
-     
-   
       padding-top:10px;
       text-align: center;
       margin-top:-10px;
       clear: both;
-      /* border-top: 5px solid #00970C; */
-
-
-      /* position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-      padding-bottom: 10px; */
 }
-
-
 
 
 #index {
@@ -166,18 +151,6 @@ label:active {
       line-height: .5em;
 }
 
-
-
-/* html,body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-  } */
-  /* body {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: min-content min-content 1fr;
-  } */
   main {
       display: grid;
       grid-template-rows: 1fr;
@@ -215,55 +188,3 @@ label:active {
  tbody {
       font-family: 'Spinnaker', sans-serif;
  }
- 
-  /* * {
-      box-sizing: border-box;
-  } */
-  
-  /* body { 
-    background: url("../img/coffeebackground.png") no-repeat fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: rgb(58, 37, 37);
-  } */
-  
-  /* .footer-copyright {
-      padding: 10px;
-      text-align: center;
-  } */
-  
-  /* #index {
-      background: url("../img/smile.jpg") no-repeat center fixed;
-      background-size: cover;
-      padding: 20px 20px 80px 20px;
-  } */
-  
-  /* h1, h2 {
-      color:white;
-      text-align: center;
-      font-family: 'Lobster', cursive;
-      font-weight: bolder;
-  }
-  
-  h5 {
-      color:white;
-      text-align: center;
-      font-family: 'Lobster', cursive;
-  } */
-  
-  /* .login {
-     padding:20px;
-     margin-left: 60px;
-  } */
-  
-  /* .btn {
-      margin-top: 10px;
-  }
-  
-  .modal-close{
-    color:white;
-  } */
-
-  

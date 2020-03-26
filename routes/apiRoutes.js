@@ -34,11 +34,10 @@ module.exports = function (app) {
       .catch(function (err) {
         res.json(err);
       });
-
-      console.log("------- no emails found ---------");
-      return null;
+    console.log("------- no emails found ---------");
+    return null;
   });
- 
+
   // Orders API Get Route
   app.get("/api/orders", function (req, res) {
     db.Order.findAll({}).then(function (data) {
@@ -59,8 +58,6 @@ module.exports = function (app) {
     });
   });
 
-
-
   // Orders API Post Route with cust_code
   app.post("/api/orders/", function (req, res) {
     db.Order.create({
@@ -72,9 +69,6 @@ module.exports = function (app) {
       res.json(data);
     });
   });
-
-
-
 
   // Order Items API Get Route
   app.get("/api/orderitems/", function (req, res) {
@@ -131,10 +125,12 @@ module.exports = function (app) {
 
   // Products API Get Route
   app.get("/api/products", function (req, res) {
-    db.Product.findAll({}).then(function (data) {
+    db.Product.findAll({
+    }).then(function (data) {
       res.json(data);
       console.log(data);
     });
+
   });
 
 
@@ -185,19 +181,19 @@ module.exports = function (app) {
   });
 
   // Order Items API Put Route
- app.put("/api/orderitems/:id", function (req, res) {
-   console.log("req.body from put on order items")
-   console.log(req.body.status)
-  db.OrderItem.update(req.body, {
-   where: {
-    id: req.params.id
-   }
-  }).then(function (data) {
-   res.json(data);
-   console.log("put on orderitems is getting hit")
-   console.log(data)
+  app.put("/api/orderitems/:id", function (req, res) {
+    console.log("req.body from put on order items")
+    console.log(req.body.status)
+    db.OrderItem.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    }).then(function (data) {
+      res.json(data);
+      console.log("put on orderitems is getting hit")
+      console.log(data)
+    });
   });
- });
 
   app.post("/api/spotify", function (req, res) {
     console.log("req.body from POST is below");
@@ -213,7 +209,7 @@ module.exports = function (app) {
   // Songs API Post Route
   app.post("/api/songs", function (req, res) {
     db.Song.create({
-      song_name: req.body.song_name, 
+      song_name: req.body.song_name,
       song_url: req.body.song_url,
       artist: req.body.artist
     }).then(function (data) {
@@ -244,5 +240,5 @@ module.exports = function (app) {
     });
     // res.json(req.body)
   });
-  
+
 };
