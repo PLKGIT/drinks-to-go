@@ -63,6 +63,10 @@ h6 {
       font-size: 2em;
 }
 
+#profile h3 {
+      font-size: 3em;
+}
+
 p {
       font-size: 2em;
 }
@@ -93,6 +97,10 @@ p {
       font-size: .65em;
 }
 
+.print-text {
+      font-family: 'Spinnaker', sans-serif;
+}
+
 .back-btn {
       float: left;
       top: 50px;
@@ -101,6 +109,10 @@ p {
 
 .modal-close{
       color:white;
+}
+
+.hidden {
+      visibility: hidden;
 }
 
 .music, .input-field input[type=text]:focus + label, .input-field input[type=email]:focus + label {
@@ -166,6 +178,9 @@ label:active {
       line-height: .5em;
 }
 
+#orderHistory {
+      margin-bottom: 5px;
+}
 
 
 /* html,body {

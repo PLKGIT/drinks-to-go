@@ -1236,7 +1236,21 @@ $(document).ready(function () {
   //   console.log(usersSong);
   // });
 
+  $("#songButton").on("click", function() {
+    $("#selectSong").removeClass("hidden");
+  })
 
+  // var returnHome = function() {
+  //   window.location.href = "/";
+  // } 
+
+
+  $("#att").on("click", function() {
+    setTimeout(function(){ 
+      window.location.href = "/"; }, 2500);
+    
+  })
+  
 
   //---------------------------------------------
   // End of drinks.js
