@@ -162,12 +162,12 @@ module.exports = function (app) {
     };
 
     db.Song.findAll({}).then(function (dataSong) {
-      console.log(dataSong[7].dataValues)
-      console.log(dataSong[7].dataValues.song_name)
-      console.log(dataSong[7].dataValues.artist)
-      console.log(dataSong[7].dataValues.song_url)
-      console.log(dataSong[7].dataValues.requested)
-      console.log(dataSong[7].dataValues.status)
+      // console.log(dataSong[7].dataValues)
+      // console.log(dataSong[7].dataValues.song_name)
+      // console.log(dataSong[7].dataValues.artist)
+      // console.log(dataSong[7].dataValues.song_url)
+      // console.log(dataSong[7].dataValues.requested)
+      // console.log(dataSong[7].dataValues.status)
       for (var i = 0; i < dataSong.length; i++) {
         var currentSong = {
           song_name: dataSong[i].dataValues.song_name,

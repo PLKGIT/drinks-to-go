@@ -106,7 +106,7 @@ module.exports = function (app) {
 
   // Order Items API Get Route by Order Items Id
   app.get("/api/orderitemsid/:id", function (req, res) {
-    db.OrderItem.findAll({
+    db.OrderItem.findOne({
       where: {
         id: req.params.id
       }
