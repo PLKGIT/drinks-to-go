@@ -1118,6 +1118,19 @@ $(document).ready(function () {
   });
 
 
+  $("#songButton").on("click", function() {
+    $("#selectSong").removeClass("hidden");
+  })
+
+
+
+  $("#att").on("click", function() {
+    setTimeout(function(){ 
+      window.location.href = "/"; }, 2500);
+    
+  })
+  
+
   //---------------------------------------------
   // End of drinks.js
   //---------------------------------------------
