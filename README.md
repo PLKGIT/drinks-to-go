@@ -1,7 +1,7 @@
 # Group 2 | Project No. 2
 
 ## Project
-Coffee Rxpress
+Coffee Express
 
 ![](https://res.cloudinary.com/damplk/image/upload/v1585253897/portal/grp_project_02_gilded.png)
 
