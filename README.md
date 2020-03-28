@@ -30,14 +30,14 @@ Coffee Express also includes an "Order Status" component that displays open orde
 Finally, there is an "Employee" page in the app that allows employees to manage orders and song requests as well as view products, customers, and order history.
 
 #### Proposed Future Developments
-    * Text Notifications
-    * Payment Handling
-    * Mobile App using React
-    * Add Survey Feedback
-    * Incorporate Discounts and Coupons
-    * Addition of Food Items
-    * Drink Customization
-    * UI Refinements
+  * Text Notifications
+  * Payment Handling
+  * Mobile App using React
+  * Add Survey Feedback
+  * Incorporate Discounts and Coupons
+  * Addition of Food Items
+  * Drink Customization
+  * UI Refinements
 
 ### Project Assets
 
@@ -45,37 +45,43 @@ Finally, there is an "Employee" page in the app that allows employees to manage 
 https://secret-ocean-08123.herokuapp.com/
 
 **Application File Structure**
-├───config
-├───models
-├───public
-│   └───assets
-│       ├───css
-│       ├───img
-│       └───js
-├───routes
-└───views
-    ├───layouts
-    └───partials
-        └───drinks
-        └───articles
+  * \config
+  * \models
+  * \public
+  * \public\assets
+  * \public\assets\css
+  * \public\assets\img
+  * \public\assets\js
+  * \routes
+  * \views
+  * \views\layouts
+  * \views\partials
+  * \views\partials\drinks
+  * \views\partials\articles
 
 ### Application Programming Interfaces (APIs) Used
 
 **Node Spotify API**
+
 https://www.npmjs.com/package/node-spotify-api
+
 Use: Used to allow customers to search for and select songs from Spotify to be played in the coffee house.
 
 ### Technologies, Libraries, and Tools Used**
 
 **GitHub**
+
 https://github.com/PLKGIT/drinks-to-go
+
 Use: Version control system
 
 **HTML and CSS**
 Use: UI design and styling and frontend content
 
 **Google Fonts**
+
 https://fonts.googleapis.com/ 
+
 Font Families: Pacifico and Spinnaker
 
 
@@ -86,75 +92,88 @@ Use: Application architecture pattern.
 
 **Nodejs**
 https://nodejs.org/en/
+
 Use: Asynchronous event-driven JavaScript runtime server environment.
 
 **Asynchronous JavaScript and XML (AJAX)**
+
 Use: Interactivity.
 
 **jQuery**
 https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js 
+
 Use: JavaScript library wrapper, including DOM traversal and manipulation, event handling, and AJAX calls
 
 **Express**
 https://expressjs.com/
+
 Use: Web application framework for Node JS.
 
 **Handlebars**
 https://github.com/jneen/express-handlebars
+
 Use: HTML templating for Node JS.
 
 **Materialize**
 https://materializecss.com/
+
 Use: UI design and styling, including cards, buttons, tables, form, and modals
 
 **MySQL**
 https://www.mysql.com/
+
 Use: Backend database.
 
 **Sequelize**
 https://sequelize.org/
+
 Use: Promise-based Node.js object-relational mapping (ORM) for MySQL.
 
 **Dotenv**
 https://www.npmjs.com/package/dotenv
+
 Use: Stores configuration information in the environment separate from code.
 
 ### Other Tools
 
 **Regular Expressions (RegEx)**
+
 Use: Data validation.
 
 **Specialized Dataset**
 https://www.kaggle.com/starbucks/starbucks-menu 
+
 Use: Starbucks drinks dataset.
 
 **Scrolling Panes UI**
 https://medium.com/samsung-internet-dev/horizontally-scrolling-panes-with-clean-html-and-modern-css-7372596932c7
+
 Use: Scrolling horizontal panes for the UI.
 
 **ESLint**
 https://www.npmjs.com/package/eslint
+
 Use:  Tool that analyzes programming code for potential errors. 
 
 
 ### MySQL Database
 
 **Schemas**
-    * drinkstogo_db
-    * bbk0phd05y8qzfwo (Heroku)
+  * drinkstogo_db
+  * bbk0phd05y8qzfwo (Heroku)
 
 **Tables**
-    * Customers
-    * Orders
-    * OrderItems
-    * Products
-    * Songs
+  * Customers
+  * Orders
+  * OrderItems
+  * Products
+  * Songs
 
 **Schema and Seed Files**
 
-\models\schema.sql
-\models\seeds.sql
-\models\seeds_sequelize.sql
+  * \models\schema.sql
+  * \models\seeds.sql
+  * \models\seeds_sequelize.sql
 
 ## Requirements
 
