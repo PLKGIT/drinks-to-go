@@ -16,7 +16,6 @@ var errCheck = false;
 var errCheck1 = false;
 var errCheck2 = false;
 var errCheck3 = false;
-var errFlag = 1;
 
 // Customer Variables
 // ------------------------------------------
@@ -31,7 +30,6 @@ var orderId;
 var orderName;
 var orderDate;
 var cust_code = "";
-var orderCreated = 0;
 
 // Cart Variables
 // ------------------------------------------
@@ -133,7 +131,6 @@ $(document).ready(function () {
 
       };
 
-
       $.post("api/customers", newCustomer).then(function (req, res) {
         //  console.log(data);
 
@@ -148,9 +145,9 @@ $(document).ready(function () {
           localStorage.removeItem('oid')
 
           // Clear Customer variables
-          custName = "";
-          custEmail = "";
-          custId = 0;
+          // custName = "";
+          // custEmail = "";
+          // custId = 0;
 
           // Pulling New Customer Information from Customers table
           var newEmail = $("#newEmail")
@@ -170,14 +167,14 @@ $(document).ready(function () {
                 // console.log(custId);
 
                 // createOrder();
-                localStorage.setItem('cid', JSON.stringify(custId));
-                localStorage.setItem('name', JSON.stringify(custName));
                 orderName = custName;
-
+                orderId = 0;
                 createOrder();
+                localStorage.setItem('cid', JSON.stringify(custId));
+                localStorage.setItem('name', JSON.stringify(orderName));
+                localStorage.setItem('oid', JSON.stringify(orderId));
               }
             });
-
           window.location.href = "/article"
         }
       });
@@ -215,10 +212,10 @@ $(document).ready(function () {
 
   // Create New Customer and Login
   $(document).on("click", "#newSubmit", function (event) {
-    // Prevent double-click
-    event.stopImmediatePropagation();
     // Prevent default action
     event.preventDefault();
+    // Prevent double-click
+    event.stopPropagation();
 
     var newName = $("#newName")
       .val()
@@ -259,11 +256,10 @@ $(document).ready(function () {
   // Existing Customer Login
   // ------------------------------------------
   $(document).on("click", "#custSubmit", function (event) {
-
-    // Prevent double-click
-    event.stopImmediatePropagation();
     // Prevent default action
     event.preventDefault();
+    // Prevent double-click
+    event.stopPropagation();
 
     // Clear Local Storage
     localStorage.removeItem('cid')
@@ -331,15 +327,6 @@ $(document).ready(function () {
 
             // Set orderName = custName variable
             orderName = custName;
-
-
-            // Pass custId, custName, and orderId via localstorage
-
-            localStorage.setItem('cid', JSON.stringify(custId));
-            localStorage.setItem('name', JSON.stringify(orderName));
-            localStorage.setItem('oid', JSON.stringify(orderId));
-
-
             // console.log("--orderName in index--");
             // console.log(orderName);
 
@@ -348,6 +335,10 @@ $(document).ready(function () {
             createOrder();
 
             if (orderId !== 0) {
+              // Pass custId, custName, and orderId via localstorage
+              localStorage.setItem('cid', JSON.stringify(custId));
+              localStorage.setItem('name', JSON.stringify(orderName));
+              localStorage.setItem('oid', JSON.stringify(orderId));
               // Navigate to menu.handlebars
               window.location.href = "/article"
             } else {
@@ -371,10 +362,10 @@ $(document).ready(function () {
   // Guest Login
 
   $("#guestSubmit").on("click", function (event) {
-    // Prevent double-click
-    event.stopImmediatePropagation();
     // Prevent default action
     event.preventDefault();
+    // Prevent double-click
+    event.stopPropagation();
 
     // Clear Customer Variables
     custName = "";
@@ -398,17 +389,17 @@ $(document).ready(function () {
 
       // Set custId to the guest user's cid
       custId = 1;
-      // console.log("--Checking for valid name, no errors found--")
-      // console.log(errCheck);
-      // console.log(guestInput);
+      console.log("--Checking for valid name, no errors found--")
+      console.log(errCheck);
+      console.log(guestInput);
     } else {
       errCheck = true;
-      // console.log("--Checking for valid name, errors found--")
-      // console.log(errCheck);
+      console.log("--Checking for valid name, errors found--")
+      console.log(errCheck);
     }
     if (errCheck === true) {
-      // console.log("--errCheck after name validation with errors--")
-      // console.log(errCheck);
+      console.log("--errCheck after name validation with errors--")
+      console.log(errCheck);
       custId = 0;
       alert("Please enter a valid name");
     }
@@ -417,17 +408,11 @@ $(document).ready(function () {
     if (custId !== 0) {
       // Set orderName = guestInput variable
       orderName = guestInput;
-
-      // Pass custId, custName, and orderId via localstorage
-
-      localStorage.setItem('cid', JSON.stringify(custId));
-      localStorage.setItem('name', JSON.stringify(orderName));
-      localStorage.setItem('oid', JSON.stringify(orderId));
-
       // Create an Order
       createOrder();
 
       if (orderId !== 0) {
+
         // Navigate to menu.handlebars
         window.location.href = "/article"
       } else {
@@ -465,7 +450,7 @@ $(document).ready(function () {
   // ------------------------------------------
   function createOrder() {
     // Reset cust_code variable - it should be unique each time
-    cust_code = "";
+    cust_code.length = 0;
     // Generate a new random number and assign to cust_code
     cust_code = genCode(15);
 
@@ -487,12 +472,12 @@ $(document).ready(function () {
         if (data) {
           // Set orderId to returned value
           orderId = data.oid;
-          // console.log("---data--")
-          // console.log(data);
-          // console.log("---oid--")
-          // console.log(data.oid);
-          // console.log("---orderId--")
-          // console.log(orderId);
+          console.log("---data--")
+          console.log(data);
+          console.log("---oid--")
+          console.log(data.oid);
+          console.log("---orderId--")
+          console.log(orderId);
 
           // Pass custId, custName, and orderId via localstorage
 
@@ -515,7 +500,7 @@ $(document).ready(function () {
 
     // Clear cart
     cartArray.length = 0;
-  
+
 
     // Clear customer variables
     custId = 0;
@@ -613,26 +598,6 @@ $(document).ready(function () {
       // Console Logs for Testing
       // console.log("--Data--");
       // console.log(data);
-      // console.log("--itemProdName--");
-      // console.log(itemProdName);
-      // console.log("--itemSize--");
-      // console.log(itemSize);
-      // console.log("--itemPrice--");
-      // console.log(itemPrice);
-      // console.log("--orderId--");
-      // console.log(orderId);
-      // console.log("--custId--");
-      // console.log(custId);
-      // console.log("--orderName--");
-      // console.log(orderName);
-      // console.log("--itemNo--");
-      // console.log(itemNo);
-      // console.log("--itemProdId--");
-      // console.log(itemProdId);
-      // console.log("--itemProdName--");
-      // console.log(itemProdName);
-      // console.log("--itemQty--");
-      // console.log(itemQty);
 
       // Create Cart Item
       var newCartItem = {
@@ -660,78 +625,78 @@ $(document).ready(function () {
   });
 
   // Add items to cart from Order History
-    // ------------------------------------------
+  // ------------------------------------------
   $(document).on("click", ".atch", function (event) {
 
+    // Prevent double-click
+    event.stopImmediatePropagation();
     // Prevent default action
     event.preventDefault();
 
-    // Set Product variables by searching product by PID in button
-    itemProdId = this.id;
-    // console.log("itemprodid from outside the .get is " + itemProdId)
+    // Grab the orderItems table's id from the button
+    itemOrderItemId = this.id;
+    // console.log("--orderItemId from Order History");
+    // console.log(this.id);
 
-    $.get("/api/orderitemsid/" + itemProdId, function (data) {
-      // console.log("itemprodid from inside the .get " + itemProdId)
-      // // Increment Item Counter by 1
-      itemCounter++;
+    // Search orderItems table by the itemOrderItemId
+    $.get("/api/orderitemsid/" + itemOrderItemId, function (data) { })
+      .then(function (data) {
+        // Grab product id from orderItems table
 
-      // Set Item No variable to ItemCounter
-      itemNo = itemCounter;
-      // Set itemProdName, itemSize, and itemPrice from database
-      // itemProdName = data.prod_name;
-      // itemSize = data.size;
-      // itemPrice = data.price;
-    }).then(function (data) {
-      // Console Logs for Testing
-      // console.log("--Data--");
-      // console.log(data);
-      // console.log("--itemProdName--");
-      itemProdName = data[0].prod_name;
-      // console.log(itemProdName);
-      // console.log("--itemSize--");
-      itemSize = data[0].size;
-      // console.log(itemSize);
-      // console.log("--itemPrice--");
-      itemPrice = data[0].price;
-      // console.log(itemPrice);
-      // console.log("--orderId--");
-      // console.log(orderId);
-      // console.log("--custId--");
-      // console.log(custId);
-      // console.log("--orderName--");
-      // console.log(orderName);
-      // console.log("--itemNo--");
-      // console.log(itemNo);
-      // console.log("--itemProdId--");
-      // console.log(itemProdId);
-      // console.log("--itemProdName--");
-      // console.log(itemProdName);
-      // console.log("--itemQty--");
-      // console.log(itemQty);
+        // console.log("--data from search of orderitems table on itemOrderItemId--");
+        // console.log(data);
+        // console.log("--pid--");
+        // console.log(data.pid);
+        // console.log("--itemProdId--");
+        itemProdId = data.pid;
 
-      // Create Cart Item
-      var newCartItem = {
-        oid: orderId,
-        cid: custId,
-        order_name: orderName,
-        item_no: itemNo,
-        pid: itemProdId,
-        prod_name: itemProdName,
-        size: itemSize,
-        price: itemPrice,
-        qty: itemQty
-      };
-      // console.log("--newCartItem--");
-      // console.log(newCartItem);
+        $.get("api/products/" + itemProdId, function (data) {
+          // Increment Item Counter by 1
+          itemCounter++;
 
-      // Push OrderItem Object to Cart Array
-      cartArray.push(newCartItem);
+          // Set Item No variable to ItemCounter
+          itemNo = itemCounter;
 
-      // console.log("--cartArray--");
-      // console.log(cartArray);
+          // console.log("--Data--");
+          // console.log(data);
+          // Set itemProdName, itemSize, and itemPrice from database
+          // console.log("--itemProdName--");
+          itemProdName = data.prod_name;
+          // console.log("--itemSize--");
+          itemSize = data.size;
+          // console.log("--itemPrice--");
+          itemPrice = data.price;
 
-      getCartItems()
-    });
+        }).then(function (data) {
+
+          // Console Logs for Testing
+          // console.log("--Data--");
+          // console.log(data);
+
+          // Create Cart Item
+          var newCartItem = {
+            oid: orderId,
+            cid: custId,
+            order_name: orderName,
+            item_no: itemNo,
+            pid: itemProdId,
+            prod_name: itemProdName,
+            size: itemSize,
+            price: itemPrice,
+            qty: itemQty
+          };
+          // console.log("--newCartItem--");
+          // console.log(newCartItem);
+
+          // Push OrderItem Object to Cart Array
+          cartArray.push(newCartItem);
+
+          // console.log("--cartArray--");
+          // console.log(cartArray);
+
+          getCartItems()
+        });
+      });
 
   });
 
@@ -870,16 +835,43 @@ $(document).ready(function () {
 
 
   // Submit button in checkout.handlebars
-  // $("#att").on("click", function (event) {
-  //   event.preventDefault();
-  //   var retrievedCart = localStorage.getItem("cart");
-  //   var finalCart = JSON.parse(retrievedCart);
-  //   console.log("final cart is... ", finalCart);
-  //   $.post("/api/orderitems", finalCart)
-  //     .then(function (req, res) {
-  //       console.log(finalCart);
-  //     })
-  // })
+  $("#att").on("click", function (event) {
+
+    // Prevent Default button action
+    event.preventDefault();
+
+    var retrievedCart = localStorage.getItem("cart");
+    console.log("--Retrieved Cart--");
+    console.log(retrievedCart);
+
+    var finalCart = JSON.parse(retrievedCart);
+    console.log("final cart is... ", finalCart);
+
+    for (var i = 0; i < finalCart.length; i++) {
+      var pushItems = {
+        oid: finalCart[i].oid,
+        cid: finalCart[i].cid,
+        pid: finalCart[i].pid,
+        prod_name: finalCart[i].prod_name,
+        status: "Pending",
+        price: finalCart[i].price,
+        size: finalCart[i].size,
+        item_no: finalCart[i].item_no,
+        qty: finalCart[i].qty,
+        order_name: finalCart[i].order_name,
+        complete: 0,
+        ready: 0
+      }
+      $.post("/api/orderitems", pushItems)
+        .then(function (req, res) {
+
+        })
+    }
+    setTimeout(function () {
+      window.location.href = "/";
+    }, 2500);
+
+  })
 
 
   // Employee-side orders / Status update
@@ -984,18 +976,18 @@ $(document).ready(function () {
   });
 
 
-  $("#songButton").on("click", function() {
+  $("#songButton").on("click", function () {
     $("#selectSong").removeClass("hidden");
   })
 
 
 
-  $("#att").on("click", function() {
-    setTimeout(function(){ 
-      window.location.href = "/"; }, 2500);
-    
-  })
-  
+  // $("#att").on("click", function() {
+  //   setTimeout(function(){ 
+  //     window.location.href = "/"; }, 2500);
+
+  // })
+
 
   //---------------------------------------------
   // End of drinks.js

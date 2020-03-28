@@ -175,7 +175,20 @@ module.exports = function (app) {
 
   // Order Items API Post Route
   app.post("/api/orderitems", function (req, res) {
-    db.OrderItem.create(req.body).then(function (data) {
+    db.OrderItem.create({
+      oid: req.body.oid,
+      cid: req.body.cid,
+      pid: req.body.pid,
+      prod_name: req.body.prod_name,
+      status: req.body.status,
+      price: req.body.price,
+      size: req.body.size,
+      item_no: req.body.item_no,
+      qty: req.body.qty,
+      order_name: req.body.order_name,
+      complete: req.body.complete,
+      ready: req.body.ready
+    }).then(function (data) {
       res.json(data);
     });
   });
@@ -219,19 +232,6 @@ module.exports = function (app) {
 
     console.log(req.body.song)
   });
-
-  // Songs API Put Route
-
-  // app.put("/api/songs", function (req, res) {
-  //   db.Spotify.update(req.body, {
-  //     where: {
-  //       id: req.body.id
-  //     }
-  //   }).then(function (data) {
-  //     res.json(data);
-  //   });
-  // });
-
 
   // Songs API Get Route
   app.get("/api/songs", function (req, res) {
