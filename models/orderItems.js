@@ -48,15 +48,18 @@ module.exports = function (sequelize, Sequelize) {
     },
     status: {
       type: Sequelize.STRING(10),
-      allowNull: false
+      allowNull: false,
+      defaultValue : "Pending"
     },
     complete: {
       type: Sequelize.TINYINT(1),
-      allowNull: false
+      allowNull: false,
+      defaultValue : 0
     },
     ready: {
       type: Sequelize.TINYINT(1),
-      allowNull: false
+      allowNull: false,
+      defaultValue : 0
     }
   }, { timestamps: false });
 

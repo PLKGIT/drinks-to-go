@@ -16,7 +16,8 @@ module.exports = function (sequelize, Sequelize) {
     },
     check_pop: {
       type: Sequelize.TINYINT(1),
-      allowNull: false
+      allowNull: false,
+      defaultValue : 0
     },
     type: {
       type: Sequelize.STRING(10),
@@ -36,7 +37,8 @@ module.exports = function (sequelize, Sequelize) {
     },
     check_hot: {
       type: Sequelize.TINYINT(1),
-      allowNull: false
+      allowNull: false,
+      defaultValue : 0
     }
   }, { timestamps: false });
   return Product;

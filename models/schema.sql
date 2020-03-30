@@ -38,7 +38,7 @@ CREATE TABLE products (
 CREATE TABLE orders (
     oid INT(11) NOT NULL AUTO_INCREMENT,
     cid INT(11) NOT NULL,
-    cust_code VARCHAR(25) NOT NULL,
+    cust_code VARCHAR(20) NOT NULL,
     order_name VARCHAR(50),
 	ordered DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (oid),

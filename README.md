@@ -45,19 +45,32 @@ Finally, there is an "Employee" page in the app that allows employees to manage 
 https://secret-ocean-08123.herokuapp.com/
 
 **Application File Structure**
-  * \config
-  * \models
-  * \public
-  * \public\assets
-  * \public\assets\css
-  * \public\assets\img
-  * \public\assets\js
-  * \routes
-  * \views
-  * \views\layouts
-  * \views\partials
-  * \views\partials\drinks
-  * \views\partials\articles
+
+\config
+
+\models
+
+\public
+
+\public\assets
+
+\public\assets\css
+
+\public\assets\img
+
+\public\assets\js
+
+\routes
+
+\views
+
+\views\layouts
+
+\views\partials
+
+\views\partials\drinks
+
+\views\partials\articles
 
 ### Application Programming Interfaces (APIs) Used
 
@@ -76,6 +89,7 @@ https://github.com/PLKGIT/drinks-to-go
 Use: Version control system
 
 **HTML and CSS**
+
 Use: UI design and styling and frontend content
 
 **Google Fonts**
@@ -88,9 +102,11 @@ Font Families: Pacifico and Spinnaker
 ### Frameworks and Libraries
 
 **Model-View-Controller (MVC)**
+
 Use: Application architecture pattern.
 
 **Nodejs**
+
 https://nodejs.org/en/
 
 Use: Asynchronous event-driven JavaScript runtime server environment.
@@ -100,36 +116,43 @@ Use: Asynchronous event-driven JavaScript runtime server environment.
 Use: Interactivity.
 
 **jQuery**
+
 https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js 
 
 Use: JavaScript library wrapper, including DOM traversal and manipulation, event handling, and AJAX calls
 
 **Express**
+
 https://expressjs.com/
 
 Use: Web application framework for Node JS.
 
 **Handlebars**
+
 https://github.com/jneen/express-handlebars
 
 Use: HTML templating for Node JS.
 
 **Materialize**
+
 https://materializecss.com/
 
 Use: UI design and styling, including cards, buttons, tables, form, and modals
 
 **MySQL**
+
 https://www.mysql.com/
 
 Use: Backend database.
 
 **Sequelize**
+
 https://sequelize.org/
 
 Use: Promise-based Node.js object-relational mapping (ORM) for MySQL.
 
 **Dotenv**
+
 https://www.npmjs.com/package/dotenv
 
 Use: Stores configuration information in the environment separate from code.
@@ -141,16 +164,19 @@ Use: Stores configuration information in the environment separate from code.
 Use: Data validation.
 
 **Specialized Dataset**
+
 https://www.kaggle.com/starbucks/starbucks-menu 
 
 Use: Starbucks drinks dataset.
 
 **Scrolling Panes UI**
+
 https://medium.com/samsung-internet-dev/horizontally-scrolling-panes-with-clean-html-and-modern-css-7372596932c7
 
 Use: Scrolling horizontal panes for the UI.
 
 **ESLint**
+
 https://www.npmjs.com/package/eslint
 
 Use:  Tool that analyzes programming code for potential errors. 
@@ -171,9 +197,11 @@ Use:  Tool that analyzes programming code for potential errors.
 
 **Schema and Seed Files**
 
-  * \models\schema.sql
-  * \models\seeds.sql
-  * \models\seeds_sequelize.sql
+\models\schema.sql
+
+\models\seeds.sql
+
+\models\seeds_sequelize.sql
 
 ## Requirements
 
