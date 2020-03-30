@@ -15,7 +15,7 @@ module.exports = function (sequelize, Sequelize) {
       allowNull: false
     },
     cust_code: {
-      type: Sequelize.STRING(12),
+      type: Sequelize.STRING(100),
       allowNull: false
     },
     order_name: {

@@ -100,7 +100,7 @@ $(document).ready(function () {
   function handleCreateNewCustomerCallback(status) {
     if (status == "yes") {
       errCheck3 = true; // duplicate found
-      alert("This Email Address already exists in our database. Please login as a returning customer");
+      alert("This email address already exists in our database. Please login as a returning customer.");
     }
     else if (status == "no") {
       alert("Thank you for signing up.");
@@ -136,18 +136,19 @@ $(document).ready(function () {
 
         if (res) {
 
-          // for customer that doesn't exist yet
-          custName = newName;
+          // Clear Customer variables
+          custName = "";
+          custEmail = "";
+          custId = 0;
+
 
           // Clear Local Storage
           localStorage.removeItem('cid')
           localStorage.removeItem('name')
           localStorage.removeItem('oid')
 
-          // Clear Customer variables
-          // custName = "";
-          // custEmail = "";
-          // custId = 0;
+          // for customer that doesn't exist yet
+          custName = newName;
 
           // Pulling New Customer Information from Customers table
           var newEmail = $("#newEmail")
@@ -155,26 +156,26 @@ $(document).ready(function () {
             .trim();
           $.get("/api/customers/" + newEmail, function (data) { })
             .then(function (data) {
-              // console.log("--Results after db search for newEmail match--")
-              // console.log(data);
+              console.log("--Results after db search for newEmail match--")
+              console.log(data);
               if (data !== null) {
                 custName = data.cust_name;
                 custEmail = data.cust_email;
                 custId = data.cid
-                // console.log("---Email address in DB with these values---")
-                // console.log(custName);
-                // console.log(custEmail);
-                // console.log(custId);
+                console.log("---Email address in DB with these values---")
+                console.log(custName);
+                console.log(custEmail);
+                console.log(custId);
 
                 // createOrder();
                 orderName = custName;
-                orderId = 0;
-                createOrder();
-                localStorage.setItem('cid', JSON.stringify(custId));
-                localStorage.setItem('name', JSON.stringify(orderName));
-                localStorage.setItem('oid', JSON.stringify(orderId));
               }
+              createOrder();
+              localStorage.setItem('cid', JSON.stringify(custId));
+              localStorage.setItem('name', JSON.stringify(orderName));
+              localStorage.setItem('oid', JSON.stringify(orderId));
             });
+
           window.location.href = "/article"
         }
       });
@@ -212,10 +213,10 @@ $(document).ready(function () {
 
   // Create New Customer and Login
   $(document).on("click", "#newSubmit", function (event) {
+    // Prevent double-click
+    event.stopImmediatePropagation();
     // Prevent default action
     event.preventDefault();
-    // Prevent double-click
-    event.stopPropagation();
 
     var newName = $("#newName")
       .val()
@@ -256,10 +257,11 @@ $(document).ready(function () {
   // Existing Customer Login
   // ------------------------------------------
   $(document).on("click", "#custSubmit", function (event) {
+    // Prevent double-click
+    event.stopImmediatePropagation();
     // Prevent default action
     event.preventDefault();
-    // Prevent double-click
-    event.stopPropagation();
+
 
     // Clear Local Storage
     localStorage.removeItem('cid')
@@ -276,39 +278,39 @@ $(document).ready(function () {
     var newEmail = $("#formEmail")
       .val()
       .trim();
-    // console.log("--Email address from the form--");
-    // console.log(newEmail);
+    console.log("--Email address from the form--");
+    console.log(newEmail);
 
     if (isValidEmail(newEmail)) {
       errCheck = false;
-      // console.log("--Checking for valid email, no errors found--")
-      // console.log(errCheck);
-      // console.log(newEmail);
+      console.log("--Checking for valid email, no errors found--")
+      console.log(errCheck);
+      console.log(newEmail);
     } else {
       errCheck = true;
-      // console.log("--Checking for valid email, errors found--")
-      // console.log(errCheck);
+      console.log("--Checking for valid email, errors found--")
+      console.log(errCheck);
     }
     if (errCheck === true) {
-      // console.log("--errCheck after email validation with errors--")
-      // console.log(errCheck);
+      console.log("--errCheck after email validation with errors--")
+      console.log(errCheck);
       alert("Please enter a valid email address");
     } else {
-      // console.log("--errCheck after email validation, no errors found--")
-      // console.log(errCheck);
-      // console.log(newEmail);
+      console.log("--errCheck after email validation, no errors found--")
+      console.log(errCheck);
+      console.log(newEmail);
       $.get("/api/customers/" + newEmail, function (data) { })
         .then(function (data) {
-          // console.log("--Results after db search for newEmail match--")
-          // console.log(data);
+          console.log("--Results after db search for newEmail match--")
+          console.log(data);
           if (data !== null) {
             custName = data.cust_name;
             custEmail = data.cust_email;
             custId = data.cid
-            // console.log("---Email address in DB with these values---")
-            // console.log(custName);
-            // console.log(custEmail);
-            // console.log(custId);
+            console.log("---Email address in DB with these values---")
+            console.log(custName);
+            console.log(custEmail);
+            console.log(custId);
           } else {
             alert("Sorry, no account exists for this email address.");
             custId = 0;
@@ -316,19 +318,19 @@ $(document).ready(function () {
           }
 
           if (custId !== 0 && typeof custId != 'undefined') {
-            // alert("CID: " + custId + " Email: " + custEmail + " Name: " + custName);
+            alert("CID: " + custId + " Email: " + custEmail + " Name: " + custName);
 
-            // console.log("--custId in index--");
-            // console.log(custId);
-            // console.log("--custName in index--");
-            // console.log(custName);
-            // console.log("--orderId in index--");
-            // console.log(orderId);
+            console.log("--custId in index--");
+            console.log(custId);
+            console.log("--custName in index--");
+            console.log(custName);
+            console.log("--orderId in index--");
+            console.log(orderId);
 
             // Set orderName = custName variable
             orderName = custName;
-            // console.log("--orderName in index--");
-            // console.log(orderName);
+            console.log("--orderName in index--");
+            console.log(orderName);
 
 
             // Create an Order
@@ -362,10 +364,10 @@ $(document).ready(function () {
   // Guest Login
 
   $("#guestSubmit").on("click", function (event) {
+    // Prevent double-click
+    event.stopImmediatePropagation();
     // Prevent default action
     event.preventDefault();
-    // Prevent double-click
-    event.stopPropagation();
 
     // Clear Customer Variables
     custName = "";
@@ -394,6 +396,7 @@ $(document).ready(function () {
       console.log(guestInput);
     } else {
       errCheck = true;
+      custId = 0;
       console.log("--Checking for valid name, errors found--")
       console.log(errCheck);
     }
@@ -408,11 +411,11 @@ $(document).ready(function () {
     if (custId !== 0) {
       // Set orderName = guestInput variable
       orderName = guestInput;
+
       // Create an Order
       createOrder();
 
       if (orderId !== 0) {
-
         // Navigate to menu.handlebars
         window.location.href = "/article"
       } else {
@@ -429,6 +432,7 @@ $(document).ready(function () {
       localStorage.removeItem('name');
       localStorage.removeItem('oid');
     }
+
   });
 
   // Generate Random Code for Orders
@@ -454,6 +458,8 @@ $(document).ready(function () {
     // Generate a new random number and assign to cust_code
     cust_code = genCode(15);
 
+    console.log("--cust_code");
+    console.log(cust_code);
     // Create a New Order with cust_code
     var newOrder = {
       cid: custId,
@@ -461,13 +467,15 @@ $(document).ready(function () {
       cust_code: cust_code
     };
 
+    console.log("--newOrder---");
+    console.log(newOrder);
+
     $.post("api/orders", newOrder)
       .then(function (req, res) {
       });
 
     // Retrieve order number based on cust_code
     $.get("api/orders/" + cust_code, function (data) { })
-
       .then(function (data) {
         if (data) {
           // Set orderId to returned value
@@ -486,6 +494,11 @@ $(document).ready(function () {
           localStorage.setItem('oid', JSON.stringify(orderId));
 
         } else {
+          console.log("---I HAVE A PROBLEM---")
+          console.log("---data--")
+          console.log(data);
+          console.log("---orderId---")
+          console.log(orderId)
           orderId = 0;
         }
 
@@ -868,6 +881,12 @@ $(document).ready(function () {
         })
     }
     setTimeout(function () {
+      // Clear Local Storage
+      localStorage.removeItem('cid');
+      localStorage.removeItem('name');
+      localStorage.removeItem('oid');
+      localStorage.removeItem('cart');
+      // Navigate to Home page
       window.location.href = "/";
     }, 2500);
 

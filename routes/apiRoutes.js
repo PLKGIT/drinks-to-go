@@ -47,15 +47,20 @@ module.exports = function (app) {
   });
 
   // Orders API Get Route by cust_code
-  app.get("/api/orders/:code", function (req, res) {
+  app.get("/api/orders/:cust_code", function (req, res) {
     db.Order.findOne({
       where: {
-        cust_code: req.params.code
+        cust_code: req.params.cust_code
       }
     }).then(function (data) {
       res.json(data);
+      console.log("---oid retrieved----");
       console.log(data);
+    }).catch(function (err) {
+      res.json(err);
     });
+    console.log("------- no emails found ---------");
+    return null;
   });
 
   // Orders API Post Route with cust_code
