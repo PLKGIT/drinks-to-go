@@ -1,35 +1,28 @@
-# Group 2 | Project No. 2
+# Coffee Express (Group Project)
 
-## Project
-Coffee Express
-
-![](https://res.cloudinary.com/damplk/image/upload/v1585253897/portal/grp_project_02_gilded.png)
-
-## Development Team 
-
-1. Sonal Bhoraniya
-2. Jyochsna Gongal
-3. Pam Kelly
-4. Hebah Memon
-5. Nida Memon
-
-## Project Details
-
-### Description
+## Overview
 Coffee Express is a Web application designed to be implemented at self-serve kiosks in coffee shops to speed up and simplify the order process.  The primary objectives are to:
 * Shorten lines 
 * Remove confusion while ordering
 * Simplify order pickup
 
-Customers can order from one of many iPads in the shop, logs in with their account credentials.  Once logged in, the customer sees a menu of options, including popular drinks. There is also an option to click a button to see a list of their orders.The customer can order from the menu or reorder items from a previous order. For customers without an account, there is are options to order as a Guest and to create an account.
+Customers can order from one of many iPads in the shop, logged in with their account credentials.  Once logged in, the customer sees a menu of options, including popular drinks. There is also an option to click a button to see a list of orders. The customer can order from the menu or reorder items from a previous order. For customers without an account, there is are options to order as a Guest or to create a new account.
 
-During the checkout process, customers can search for and submit a song from Spotify to be played in the coffee shop.  Cofee shop employees control and manage what is played from customer requested song list.
+During the checkout process, customers can search for and submit a song from Spotify to be played in the coffee shop.  Coffee shop employees control and manage what is played from the customer-requested song list.
 
 Coffee Express also includes an "Order Status" component that displays open orders on a big screen that everyone in the coffee shop can view. The screen displays all "pending" and "ready" orders. Once a customer places an order, their name, order number, and drink details are displayed in the “Pending” list on the status board.  When a customer's order is made, their order information moves to the "Ready" section of the screen.  Once the customer picks up the order, an employee will set the order status to "Complete" and the order details will drop from the status board.
 
 Finally, there is an "Employee" page in the app that allows employees to manage orders and song requests as well as view products, customers, and order history.
 
-#### Proposed Future Developments
+![](https://res.cloudinary.com/damplk/image/upload/v1585253897/portal/grp_project_02_gilded.png)
+
+### Customer View
+![](https://res.cloudinary.com/damplk/image/upload/v1587161822/portal/demo_coffee_express_zjrkwh.gif)
+
+### Employee View
+![](https://res.cloudinary.com/damplk/image/upload/v1587163536/portal/demo_coffee_express_employee_mlcky2.gif)
+
+### Proposed Future Developments
   * Text Notifications
   * Payment Handling
   * Mobile App using React
@@ -39,43 +32,11 @@ Finally, there is an "Employee" page in the app that allows employees to manage 
   * Drink Customization
   * UI Refinements
 
-### Project Assets
+## Technology Details
 
-**Application URL**
-https://secret-ocean-08123.herokuapp.com/
-
-**Application File Structure**
-
-\config
-
-\models
-
-\public
-
-\public\assets
-
-\public\assets\css
-
-\public\assets\img
-
-\public\assets\js
-
-\routes
-
-\views
-
-\views\layouts
-
-\views\partials
-
-\views\partials\drinks
-
-\views\partials\articles
-
-### Application Programming Interfaces (APIs) Used
+### Application Programming Interfaces (APIs)
 
 **Node Spotify API**
-
 https://www.npmjs.com/package/node-spotify-api
 
 Use: Used to allow customers to search for and select songs from Spotify to be played in the coffee house.
@@ -203,17 +164,55 @@ Use:  Tool that analyzes programming code for potential errors.
 
 \models\seeds_sequelize.sql
 
-## Requirements
+### Project Assets
 
-The project team is to design and build a full-stack web application using the Model-View-Controller (MVC) paradigm.  The application must use Node, Express, and MySQL and be deployed to Heroku.
+**Application URL**
+https://secret-ocean-08123.herokuapp.com/
 
-### Due
-Wednesday, March 25, 2020
+**Application File Structure**
 
-## Completed Project URLs
-### Github Repository
-[Github Link](https://github.com/PLKGIT/drinks-to-go/) at https://github.com/PLKGIT/drinks-to-go/.
-### Deployed App
+\config
+
+\models
+
+\public
+
+\public\assets
+
+\public\assets\css
+
+\public\assets\img
+
+\public\assets\js
+
+\routes
+
+\views
+
+\views\layouts
+
+\views\partials
+
+\views\partials\drinks
+
+\views\partials\articles
+
+## Development Details
+
+### Requirements
+The project team must design and build a full-stack web application using the Model-View-Controller (MVC) paradigm.  The application must use Node, Express, and MySQL and be deployed to Heroku.
+
+### Development Team 
+1. Sonal Bhoraniya
+2. Jyochsna Gongal
+3. Pam Kelly
+4. Hebah Memon
+5. Nida Memon
+
+### GitHub Repository
+[GitHub](https://github.com/PLKGIT/drinks-to-go/) at https://github.com/PLKGIT/drinks-to-go/.
+
+### Deployed Application
 [Coffee Express](https://secret-ocean-08123.herokuapp.com/) deployed at https://secret-ocean-08123.herokuapp.com/.
 
 Copyright &copy; 2020 | Sonal Bhoraniya, Jyochsna Gongal, Pam Kelly, Hebah Memon, and Nida Memon
