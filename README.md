@@ -18,11 +18,11 @@ Finally, there is an "Employee" page in the app that allows employees to manage 
 
 ### Customer View
 
-https://res.cloudinary.com/damplk/image/upload/v1587161822/portal/demo_coffee_express_zjrkwh.gif
+![](https://res.cloudinary.com/damplk/image/upload/v1587161822/portal/demo_coffee_express_zjrkwh.gif)
 
 ### Employee View
 
-https://res.cloudinary.com/damplk/image/upload/v1587163536/portal/demo_coffee_express_employee_mlcky2.gif
+![](https://res.cloudinary.com/damplk/image/upload/v1587163536/portal/demo_coffee_express_employee_mlcky2.gif)
 
 ### Proposed Future Developments
   * Text Notifications
