@@ -23,7 +23,7 @@ Finally, there is an "Employee" page in the app that allows employees to manage 
 
 ### Employee View
 
-![](views/public/assets/img/demo_coffee_express_employees.gif)
+![](views/public/assets/img/demo_coffee_express_employee.gif)
 
 ### Proposed Future Developments
   * Text Notifications
