@@ -18,11 +18,12 @@ Finally, there is an "Employee" page in the app that allows employees to manage 
 
 ### Customer View
 
-![](assets/img/demo_coffee_express.gif)
+![](views/public/assets/img/demo_coffee_express.gif)
+
 
 ### Employee View
 
-![](assets/img/demo_coffee_express_employees.gif)
+![](views/public/assets/img/demo_coffee_express_employees.gif)
 
 ### Proposed Future Developments
   * Text Notifications
