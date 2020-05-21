@@ -394,6 +394,9 @@ $(document).ready(function () {
       console.log("--Checking for valid name, no errors found--")
       console.log(errCheck);
       console.log(guestInput);
+
+      // Pass custId, custName, and orderId via localstorage
+      localStorage.setItem('name', JSON.stringify(guestInput));
     } else {
       errCheck = true;
       custId = 0;
@@ -411,11 +414,17 @@ $(document).ready(function () {
     if (custId !== 0) {
       // Set orderName = guestInput variable
       orderName = guestInput;
+      custName = guestInput;
 
       // Create an Order
       createOrder();
 
       if (orderId !== 0) {
+
+        localStorage.setItem('cid', JSON.stringify(custId));
+        localStorage.setItem('name', JSON.stringify(orderName));
+        localStorage.setItem('oid', JSON.stringify(orderId));
+
         // Navigate to menu.handlebars
         window.location.href = "/article"
       } else {
