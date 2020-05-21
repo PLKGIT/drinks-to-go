@@ -318,7 +318,7 @@ $(document).ready(function () {
           }
 
           if (custId !== 0 && typeof custId != 'undefined') {
-            alert("CID: " + custId + " Email: " + custEmail + " Name: " + custName);
+            // alert("CID: " + custId + " Email: " + custEmail + " Name: " + custName);
 
             console.log("--custId in index--");
             console.log(custId);
