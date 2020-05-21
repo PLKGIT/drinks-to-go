@@ -16,14 +16,23 @@ Finally, there is an "Employee" page in the app that allows employees to manage 
 
 ![](https://res.cloudinary.com/damplk/image/upload/v1585253897/portal/grp_project_02_gilded.png)
 
-### Customer View
+### Customer Views
 
-![](views/public/assets/img/demo_coffee_express.gif)
+![](public/assets/img/demo_coffee_express.gif);
+![](https://res.cloudinary.com/damplk/image/upload/v1590039566/portal/coffee_express_home1_dnxoou.png);
+![](https://res.cloudinary.com/damplk/image/upload/v1590039566/portal/coffee_express_home2_ijrj6h.png);
+![](https://res.cloudinary.com/damplk/image/upload/v1590039566/portal/coffee_express_customerview1_cyzc2y.png);
+![](https://res.cloudinary.com/damplk/image/upload/v1590039561/portal/coffee_express_customerview2_bnms6h.png);
 
+### Employee Views
 
-### Employee View
-
-![](views/public/assets/img/demo_coffee_express_employee.gif)
+![](public/assets/img/demo_coffee_express_employee.gif)
+![](https://res.cloudinary.com/damplk/image/upload/v1590039570/portal/coffee_express_employee_zx9aod.png);
+![](https://res.cloudinary.com/damplk/image/upload/v1590039565/portal/coffee_express_orderstatus_ah8tmx.png);
+![](https://res.cloudinary.com/damplk/image/upload/v1590039567/portal/coffee_express_orders_e0jryy.png);
+![](https://res.cloudinary.com/damplk/image/upload/v1590039568/portal/coffee_express_products_gbm7pc.png);
+![](https://res.cloudinary.com/damplk/image/upload/v1590039562/portal/coffee_express_customers_qa2ljd.png);
+![](https://res.cloudinary.com/damplk/image/upload/v1590039571/portal/coffee_express_spotify_zimaak.png);
 
 ### Proposed Future Developments
   * Text Notifications
