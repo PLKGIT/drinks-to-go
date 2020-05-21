@@ -16,15 +16,14 @@ Finally, there is an "Employee" page in the app that allows employees to manage 
 
 ![](https://res.cloudinary.com/damplk/image/upload/v1585253897/portal/grp_project_02_gilded.png)
 
-### Customer View
-![](public/assets/img/demo_coffee_express.gif);
+### Customer Views
+![](public/assets/img/demo_coffee_express.gif)
 
 ### Order Status
-![](https://res.cloudinary.com/damplk/image/upload/v1590039565/portal/coffee_express_orderstatus_ah8tmx.png);
+![](https://res.cloudinary.com/damplk/image/upload/v1590039565/portal/coffee_express_orderstatus_ah8tmx.png)
 
-### Employee View
-![](public/assets/img/demo_coffee_express_employee.gif);
-
+### Employee Views
+![](public/assets/img/demo_coffee_express_employee.gif)
 
 ### Proposed Future Developments
   * Text Notifications
@@ -70,7 +69,7 @@ Font Families: Pacifico and Spinnaker
 
 Use: Application architecture pattern.
 
-**Nodejs**
+**Node JS**
 
 https://nodejs.org/en/
 
@@ -86,7 +85,7 @@ https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 
 Use: JavaScript library wrapper, including DOM traversal and manipulation, event handling, and AJAX calls
 
-**Express**
+**Express JS**
 
 https://expressjs.com/
 
