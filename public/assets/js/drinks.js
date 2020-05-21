@@ -995,7 +995,7 @@ $(document).ready(function () {
       song_url: usersURL,
       artist: usersArtist
     };
-    console.log("a piece of hte object is " + newTrack.song_name)
+    console.log("a piece of the object is " + newTrack.song_name)
     console.log("url from newTrack object is " + newTrack.song_url)
     $.post("api/songs", newTrack).then(function (req, res) {
       console.log("req.body is below")
