@@ -193,15 +193,11 @@ $(document).ready(function () {
         callback("no"); // no duplicate email found
       }
     }).then(function (data) {
-      // console.log("------for data-----");
-      // console.log(data)
-      // console.log("------for data-----");
       var emailReceived = data.cust_email;
       custName = data.cust_name;
       custEmail = data.cust_email;
       custId = data.cid;
-      //orderName = custName;
-      // console.log(emailReceived);
+
       if (emailReceived === newEmail) {
         custId = 0;
         callback("yes"); // duplicate email found
@@ -617,10 +613,6 @@ $(document).ready(function () {
       itemSize = data.size;
       itemPrice = data.price;
     }).then(function (data) {
-      // Console Logs for Testing
-      // console.log("--Data--");
-      // console.log(data);
-
       // Create Cart Item
       var newCartItem = {
         oid: orderId,
@@ -633,14 +625,9 @@ $(document).ready(function () {
         price: itemPrice,
         qty: itemQty
       };
-      // console.log("--newCartItem--");
-      // console.log(newCartItem);
 
       // Push OrderItem Object to Cart Array
       cartArray.push(newCartItem);
-
-      // console.log("--cartArray--");
-      // console.log(cartArray);
 
       getCartItems()
     });
@@ -657,19 +644,11 @@ $(document).ready(function () {
 
     // Grab the orderItems table's id from the button
     itemOrderItemId = this.id;
-    // console.log("--orderItemId from Order History");
-    // console.log(this.id);
 
     // Search orderItems table by the itemOrderItemId
     $.get("/api/orderitemsid/" + itemOrderItemId, function (data) { })
       .then(function (data) {
         // Grab product id from orderItems table
-
-        // console.log("--data from search of orderitems table on itemOrderItemId--");
-        // console.log(data);
-        // console.log("--pid--");
-        // console.log(data.pid);
-        // console.log("--itemProdId--");
         itemProdId = data.pid;
 
         $.get("api/products/" + itemProdId, function (data) {
@@ -679,10 +658,6 @@ $(document).ready(function () {
           // Set Item No variable to ItemCounter
           itemNo = itemCounter;
 
-          // console.log("--Data--");
-          // console.log(data);
-          // Set itemProdName, itemSize, and itemPrice from database
-          // console.log("--itemProdName--");
           itemProdName = data.prod_name;
           // console.log("--itemSize--");
           itemSize = data.size;
@@ -707,15 +682,9 @@ $(document).ready(function () {
             price: itemPrice,
             qty: itemQty
           };
-          // console.log("--newCartItem--");
-          // console.log(newCartItem);
 
           // Push OrderItem Object to Cart Array
           cartArray.push(newCartItem);
-
-          // console.log("--cartArray--");
-          // console.log(cartArray);
-
           getCartItems()
         });
       });
@@ -820,9 +789,6 @@ $(document).ready(function () {
 
     var retrievedCart = localStorage.getItem("cart");
     var finalCart = JSON.parse(retrievedCart);
-    // console.log("--Final from Local Storage-");
-    // console.log(finalCart);
-    // console.log(cartArray.length)
 
     $("#itemsOrdered").text("");
 
@@ -1007,16 +973,7 @@ $(document).ready(function () {
   $("#songButton").on("click", function () {
     $("#selectSong").removeClass("hidden");
   })
-
-
-
-  // $("#att").on("click", function() {
-  //   setTimeout(function(){ 
-  //     window.location.href = "/"; }, 2500);
-
-  // })
-
-
+  
   //---------------------------------------------
   // End of drinks.js
   //---------------------------------------------
