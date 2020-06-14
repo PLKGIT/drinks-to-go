@@ -13,7 +13,7 @@ body {
       color: rgb(58, 37, 37);
 }
 
-.footer-copyright {
+/* .footer-copyright {
       position: relative;
       bottom: 0;
       left:0;
@@ -24,8 +24,18 @@ body {
       text-align: center;
       margin-top:-10px;
       clear: both;
-}
-
+} */
+.footer-copyright {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      height: 45px;
+      text-align: center;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+      clear: both;
+    }
 
 #index {
       background: url("../img/smile.jpg") no-repeat center fixed;
