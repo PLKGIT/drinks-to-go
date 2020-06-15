@@ -26,14 +26,15 @@ body {
       clear: both;
 } */
 .footer-copyright {
-      position: fixed;
-      left: 0;
+      position: relative;
       bottom: 0;
+      left:0;
       height: 45px;
       text-align: center;
       width: 100%;
+      padding-top:10px;
       text-align: center;
-      margin-bottom: 10px;
+      margin-top:-10px;
       clear: both;
     }
 

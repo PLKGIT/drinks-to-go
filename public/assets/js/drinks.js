@@ -359,7 +359,8 @@ $(document).ready(function () {
 
   // Guest Login
 
-  $("#guestSubmit").on("click", function (event) {
+  $(document).on("click", "#guestSubmit", function (event) {
+  // $("#guestSubmit").on("click", function (event) {
     // Prevent double-click
     event.stopImmediatePropagation();
     // Prevent default action
@@ -410,7 +411,7 @@ $(document).ready(function () {
     if (custId !== 0) {
       // Set orderName = guestInput variable
       orderName = guestInput;
-      custName = guestInput;
+      // custName = guestInput;
 
       // Create an Order
       createOrder();
