@@ -360,66 +360,60 @@ $(document).ready(function () {
   // Guest Login
 
   $(document).on("click", "#guestSubmit", function (event) {
-  // $("#guestSubmit").on("click", function (event) {
+    // $("#guestSubmit").on("click", function (event) {
     // Prevent double-click
     event.stopImmediatePropagation();
     // Prevent default action
     event.preventDefault();
+
+    // Clear Local Storage
+    localStorage.removeItem('cid');
+    localStorage.removeItem('name');
+    localStorage.removeItem('oid');
 
     // Clear Customer Variables
     custName = "";
     custEmail = "";
     custId = 0;
 
-    // Clear Local Storage
-    localStorage.removeItem('cid')
-    localStorage.removeItem('name')
-    localStorage.removeItem('oid')
-
     // User input from form
     var guestInput = $("#guestName").val().trim();
-
-    console.log("--Guest Input--");
-    console.log(guestInput);
 
     // Validate user input
     if (isValidName(guestInput)) {
       errCheck = false;
+      console.log("--Checking for valid name, no errors found--")
+      console.log(errCheck);
 
       // Set custId to the guest user's cid
       custId = 1;
-      console.log("--Checking for valid name, no errors found--")
-      console.log(errCheck);
-      console.log(guestInput);
 
-      // Pass custId, custName, and orderId via localstorage
-      localStorage.setItem('name', JSON.stringify(guestInput));
     } else {
       errCheck = true;
-      custId = 0;
+
       console.log("--Checking for valid name, errors found--")
       console.log(errCheck);
-    }
-    if (errCheck === true) {
-      console.log("--errCheck after name validation with errors--")
-      console.log(errCheck);
+
       custId = 0;
       alert("Please enter a valid name");
     }
 
     // If no errors, send user to menu page
-    if (custId !== 0) {
-      // Set orderName = guestInput variable
+    if (custId !== 0 && typeof custId !== 'undefined') {
+
+      // Set orderName to the guest's input
       orderName = guestInput;
-      // custName = guestInput;
+
+      console.log("--orderName--");
+      console.log(orderName);
 
       // Create an Order
       createOrder();
 
       if (orderId !== 0) {
-
-        localStorage.setItem('cid', JSON.stringify(custId));
+        // Pass custId and custName via localstorage
         localStorage.setItem('name', JSON.stringify(orderName));
+        localStorage.setItem('cid', JSON.stringify(custId));
         localStorage.setItem('oid', JSON.stringify(orderId));
 
         // Navigate to menu.handlebars
@@ -974,7 +968,7 @@ $(document).ready(function () {
   $("#songButton").on("click", function () {
     $("#selectSong").removeClass("hidden");
   })
-  
+
   //---------------------------------------------
   // End of drinks.js
   //---------------------------------------------
