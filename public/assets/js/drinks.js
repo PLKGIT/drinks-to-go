@@ -467,6 +467,7 @@ $(document).ready(function () {
 
     $.post("api/orders", newOrder)
       .then(function (req, res) {
+        console.log("--Posted NewOrder---");
         console.log(res)
       });
 
@@ -491,9 +492,9 @@ $(document).ready(function () {
 
         } else {
           console.log("---I HAVE A PROBLEM---")
-          console.log("---data--")
+          console.log("---data is null--")
           console.log(data);
-          console.log("---orderId---")
+          console.log("---orderId is null---")
           console.log(orderId)
           orderId = 0;
         }
