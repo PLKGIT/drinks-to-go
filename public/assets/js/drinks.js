@@ -2,10 +2,6 @@
 // * Team JS File
 // ******************************************************************************************************
 
-// Required
-// ------------------------------------------
-// require("dotenv").config();
-
 // Global Variables
 // ------------------------------------------
 // ------------------------------------------
@@ -387,6 +383,8 @@ $(document).ready(function () {
 
       // Set custId to the guest user's cid
       custId = 1;
+      custEmail = "guest@drinkstogo.com";
+      custName = guestInput;
 
     } else {
       errCheck = true;
@@ -411,10 +409,12 @@ $(document).ready(function () {
       createOrder();
 
       if (orderId !== 0) {
-        // Pass custId and custName via localstorage
-        localStorage.setItem('name', JSON.stringify(orderName));
+        // Pass custId, custName, and orderId via localstorage
         localStorage.setItem('cid', JSON.stringify(custId));
+        localStorage.setItem('name', JSON.stringify(orderName));
         localStorage.setItem('oid', JSON.stringify(orderId));
+        // Navigate to menu.handlebars
+        window.location.href = "/article"
 
         // Navigate to menu.handlebars
         window.location.href = "/article"
