@@ -363,11 +363,11 @@ $(document).ready(function () {
     event.preventDefault();
 
     // Clear Local Storage
-    localStorage.removeItem('cid');
-    localStorage.removeItem('name');
-    localStorage.removeItem('oid');
+    localStorage.removeItem('cid')
+    localStorage.removeItem('name')
+    localStorage.removeItem('oid')
 
-    // Clear Customer Variables
+    // Clear Customer variables
     custName = "";
     custEmail = "";
     custId = 0;
@@ -383,8 +383,8 @@ $(document).ready(function () {
 
       // Set custId to the guest user's cid
       custId = 1;
-      custEmail = "guest@drinkstogo.com";
       custName = guestInput;
+      custEmail = "guest@drinkstogo.com";
 
     } else {
       errCheck = true;
@@ -415,15 +415,11 @@ $(document).ready(function () {
         localStorage.setItem('oid', JSON.stringify(orderId));
         // Navigate to menu.handlebars
         window.location.href = "/article"
-
-        // Navigate to menu.handlebars
-        window.location.href = "/article"
       } else {
         alert("There was an issue with login, please try again.")
       }
 
     } else {
-      // Clear customer variables
       custName = "";
       custEmail = "";
       custId = 0;
@@ -432,7 +428,6 @@ $(document).ready(function () {
       localStorage.removeItem('name');
       localStorage.removeItem('oid');
     }
-
   });
 
   // Generate Random Code for Orders
@@ -472,6 +467,7 @@ $(document).ready(function () {
 
     $.post("api/orders", newOrder)
       .then(function (req, res) {
+        console.log(res)
       });
 
     // Retrieve order number based on cust_code
