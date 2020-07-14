@@ -471,36 +471,42 @@ $(document).ready(function () {
         console.log(res)
       });
 
-    // Retrieve order number based on cust_code
-    $.get("api/orders/" + cust_code, function (data) { })
-      .then(function (data) {
-        if (data) {
-          // Set orderId to returned value
-          orderId = data.oid;
-          console.log("---data--")
-          console.log(data);
-          console.log("---oid--")
-          console.log(data.oid);
-          console.log("---orderId--")
-          console.log(orderId);
+      getOrderId();
 
-          // Pass custId, custName, and orderId via localstorage
+  }
 
-          localStorage.setItem('cid', JSON.stringify(custId));
-          localStorage.setItem('name', JSON.stringify(orderName));
-          localStorage.setItem('oid', JSON.stringify(orderId));
 
-        } else {
-          console.log("---I HAVE A PROBLEM---")
-          console.log("---data is null--")
-          console.log(data);
-          console.log("---orderId is null---")
-          console.log(orderId)
-          orderId = 0;
-        }
+  function getOrderId(){
 
-      });
+     // Retrieve order number based on cust_code
+     $.get("api/orders/" + cust_code, function (data) { })
+     .then(function (data) {
+       if (data) {
+         // Set orderId to returned value
+         orderId = data.oid;
+         console.log("---data--")
+         console.log(data);
+         console.log("---oid--")
+         console.log(data.oid);
+         console.log("---orderId--")
+         console.log(orderId);
 
+         // Pass custId, custName, and orderId via localstorage
+
+         localStorage.setItem('cid', JSON.stringify(custId));
+         localStorage.setItem('name', JSON.stringify(orderName));
+         localStorage.setItem('oid', JSON.stringify(orderId));
+
+       } else {
+         console.log("---I HAVE A PROBLEM---")
+         console.log("---data is null--")
+         console.log(data);
+         console.log("---orderId is null---")
+         console.log(orderId)
+         orderId = 0;
+       }
+
+     });
   }
 
   // Customize Header in menu.handlebars
